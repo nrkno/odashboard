@@ -1,0 +1,11 @@
+﻿.azureservicebuswidget {
+  padding: 50px 0 50px 0;
+}
+
+  .azureservicebuswidget p.name {
+    font-size: 3em;
+  }
+
+  .azureservicebuswidget p.count {
+    font-size: 2em;
+  }

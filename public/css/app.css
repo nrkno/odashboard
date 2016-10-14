@@ -1,0 +1,172 @@
+/* app css stylesheet */
+
+@font-face {
+    font-family: "GandhiSans";
+    src: url("./font/GandhiSans-Regular.otf");
+}
+
+@font-face {
+    font-family: "GandhiSans";
+    src: url("./font/GandhiSans-Bold.otf");
+    font-weight: bold;
+}
+
+* {
+    font-family: GandhiSans, Tahoma;
+    color: white;
+}
+
+p, h2 {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #2c3e50;
+}
+
+a {
+  font-style: normal;
+  text-decoration: none;
+}
+
+.contentWrapper {
+    display: block;
+    width: 95%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+}
+
+.dashboardRow {
+    display: block;
+    width: 100%;
+    float: left;
+    overflow: hidden;
+}
+
+    .dashboardRow h2 {
+        margin: 10px;
+        padding: 0;
+        font-size: 2.5em;
+    }
+
+    .dashboardRow p {
+        margin: 10px;
+        padding: 0;
+        font-size: 1.5em;
+    }
+
+    .dashboardRow .rowHeader {
+        width: 4%;
+        float: left;
+        color: white;
+        text-align: center;
+        margin: 0;
+    }
+
+        .dashboardRow .rowHeader h2 {
+            margin: 150px 0 0 0;
+        }
+
+        .dashboardRow .rowHeader h2.rotate {
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+            -webkit-transform-origin: 50% 50%;
+            -moz-transform-origin: 50% 50%;
+            -ms-transform-origin: 50% 50%;
+            -o-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            /* Should be unset in IE9+ I think. */
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        }
+
+ul.rowList {
+    min-height: 240px;
+    width: 96%;
+    margin: 5px 0px;
+    list-style: none;
+    display: block;
+    padding: 0;
+    overflow: auto;
+    overflow: hidden;
+}
+
+li.rowBlock {
+    display: inline-block;
+    width: 20%;
+    min-width: 240px;
+    min-height: 240px;
+    float: left;
+    color: white;
+    background: #395066;
+    text-align: center;
+}
+
+li.rowBlock h2 {
+    margin: 10px;
+    padding: 0;
+    font-size: 2.5em;
+}
+
+.low, .success {
+    background: #27ae60;
+}
+
+.low-mid {
+    background: #f1c40f;
+}
+
+.mid {
+    background: #e67e22;
+}
+
+.high, .failed {
+    background: #c0392b;
+}
+
+.clear-both {
+    clear: left;
+    clear: right;
+}
+
+iframe {
+    border: 0;
+}
+
+
+/* ----------- 1600x1200 ----------- */
+@media screen
+  and (min-width: 1200px)
+  and (max-width: 1600px) {
+
+    li.rowBlock {
+      min-width: 220px;
+      min-height: 220px;
+    }
+
+    li.rowBlock h2 {
+      margin: 8px;
+      font-size: 2em;
+    }
+}
+
+@media screen
+  and (min-width: 0px)
+  and (max-width: 1200px) {
+
+    li.rowBlock {
+      min-width: 210px;
+      min-height: 210px;
+    }
+
+    li.rowBlock h2 {
+      margin: 8px;
+      font-size: 1.5em;
+    }
+}

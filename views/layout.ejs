@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="odashboard">
+    <head>
+        <meta charset="utf-8">
+        <title ng-bind="title"></title>
+
+        <link rel="stylesheet" href="css/app.css"/>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+        <!-- odashboard: plugin css -->
+        <% for(var i=0; i<plugins.length; i++) {%>
+          <link rel="stylesheet" href="plugins/<%= plugins[i] %>/<%= plugins[i] %>.css"/>
+        <% } %>
+
+    </head>
+<body>
+
+<div class="contentWrapper">
+  <div id="wrapper" ng-controller="PluginController">
+      <div class="dashboardRow" ng-repeat="row in rows">
+
+          <div class="rowHeader">
+              <h2 class="rotate">{{row.title}}</h2>
+          </div>
+
+          <ul class="rowList">
+              <li ng-repeat="widget in row.widgets" ng-switch on="widget.plugin" class="rowBlock"
+              style="width: {{widget.width}};
+                     height: {{widget.height}};">
+                  <teamcitydir ng-switch-when='teamcity'></teamcitydir>
+                  <rabbitmqdir ng-switch-when='rabbitmq'></rabbitmqdir>
+                  <simpledir ng-switch-when='simple'></simpledir>
+                  <imagedir ng-switch-when='image'></imagedir>
+                  <iframedir ng-switch-when='iframe'></iframedir>
+                  <azureservicebusdir ng-switch-when='azure-servicebus'></azureservicebusdir>
+                  <chartdir ng-switch-when='chart'></chartdir>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<script src="socket.io/socket.io.js"></script>
+<script src="bundle.js"></script>
+
+</body>
+</html>

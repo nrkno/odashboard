@@ -1,0 +1,32 @@
+{
+  "name": "Odashboard",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "preinstall": "node scripts/preinstall.js",
+    "test:lint": "eslint . --ext .js --ignore-path .gitignore --cache" ,
+    "test": "npm run test:lint --silent && mocha --recursive test/",
+    "build": "webpack --progress",
+    "watch": "webpack --watch"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "chart.js": "^2.3.0",
+    "ejs": "~0.7.1",
+    "express": "^4.14.0",
+    "httpntlm": "^1.6.1",
+    "lodash": "^4.16.4",
+    "moment": "^2.15.1",
+    "request": "~2.53.0",
+    "socket.io": "^1.5.0",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "eslint": "^3.7.1",
+    "eslint-config-google": "^0.6.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6",
+    "webpack": "^1.12.9"
+  }
+}

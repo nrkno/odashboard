@@ -1,0 +1,8 @@
+<a href={{widget.url}} target="_blank">
+  <div class="teamcityWidget">
+      <h2>{{widget.name}}</h2>
+      <p>Started: <span class="buildTime">{{widget.started}}</span></p>
+      <p><span class="duration">Duration: </span><span class="buildDuration">{{widget.duration}} {{widget.percent}}</span></p>
+      <div class="teamcityStatus {{widget.class}}">{{widget.status}}</div>
+  </div>
+</a>

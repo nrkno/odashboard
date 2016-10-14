@@ -1,0 +1,11 @@
+﻿.rabbitwidget {
+    padding: 50px 0 50px 0;
+}
+
+  .rabbitwidget p.name {
+    font-size: 3em;
+  }
+
+  .rabbitwidget p.count {
+    font-size: 2em;
+  }
