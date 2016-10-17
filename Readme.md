@@ -1,4 +1,4 @@
-Odashboard
+Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
 ====
 A configurable dashboard with a simple plugin architecture. Written in nodejs with express, socket.io and angular.
 
