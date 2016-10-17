@@ -6,6 +6,7 @@
     "preinstall": "node scripts/preinstall.js",
     "test:lint": "eslint . --ext .js --ignore-path .gitignore --cache" ,
     "test": "npm run test:lint --silent && mocha --recursive test/",
+    "test-travis": "mocha --recursive test/",
     "build": "webpack --progress",
     "watch": "webpack --watch"
   },
@@ -24,7 +25,6 @@
   },
   "devDependencies": {
     "eslint": "^3.7.1",
-    "eslint-config-google": "^0.6.0",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6",
     "webpack": "^1.12.9"
