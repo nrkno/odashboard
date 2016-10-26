@@ -50,7 +50,7 @@ Widgets are defined in `config/clientconfig.js`. Each widget is defined as a jso
 | width |String| The width of the widget (in px, % or em) | yes (default value: 20%) |
 | height |String| The height of the widget (in px, % or em)| yes (default value: 100%) |
 
-In addition each plugin may have it's own fields. Default values are defined in `widgetDefaults` in `src/config.js`
+In addition each plugin may have it's own fields. Default values are defined in `widgetDefaults` in `config/appconfig.js`
 
 This is an example config for a widget using the Simple-plugin:
 ```
@@ -163,7 +163,7 @@ auth: {
 You can make your own plugins to odashboard. Loading of a plugin is convention based,
 using the *name* as key. In order for the plugin to be loaded correctly you need to follow the naming convention strictly.
 
-Note: The plugin *name* needs to be included in the enabledPlugins array of `src/config.js` to be loaded.
+Note: The plugin *name* needs to be included in the enabledPlugins array of `config/appconfig.js` to be loaded.
 
 A plugin needs to consists of at least the following files:
 

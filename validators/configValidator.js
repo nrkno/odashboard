@@ -10,7 +10,6 @@ function validate(){
     console.log('--' + e.message);
     process.exit();
   }
-
 }
 
 var exports = module.exports = {};

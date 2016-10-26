@@ -2,7 +2,7 @@ var express = require('express');
 var _ = require('lodash');
 var app = express();
 
-var config = require('./src/config');
+var config = require('./config/appconfig');
 var serverconfig = require('./config/serverconfig');
 
 /* Config validation */
@@ -55,15 +55,20 @@ _.each(config.enabledPlugins, function(pluginName) {
   }
 });
 
+function setDefaults(datasource) {
+  if (datasource.timeout == undefined) {
+    datasource.timeout = 1500;
+  }
+  return datasource;
+}
+
 /* Datasource config and validation */
 _.each(serverconfig.datasources, function(datasource) {
   var plugin = activePlugins[datasource.plugin];
   if (plugin === undefined) {
     console.log('Plugin ' + plugin + ' not available for datasource: ' + datasource.id);
   } else {
-    if (datasource.timeout == undefined) {
-      datasource.timeout = 1500;
-    }
+    datasource = setDefaults(datasource);
     plugin.initDatasource(datasource, io);
     if (plugin.validate !== undefined) {
       plugin.validate(datasource);

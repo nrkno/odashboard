@@ -1,5 +1,5 @@
 var app = require('./app');
-var config = require('./config');
+var config = require('../config/appconfig.js');
 var clientConfig = require('../config/clientconfig.js');
 var _ = require('lodash');
 

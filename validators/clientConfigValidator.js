@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var assert = require('assert');
 var clientconfig = require('../config/clientconfig');
-var config = require('../src/config');
+var config = require('../config/appconfig');
 
 var pluginValidators = [];
 
