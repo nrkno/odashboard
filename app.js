@@ -2,7 +2,7 @@ var express = require('express');
 var _ = require('lodash');
 var app = express();
 
-var config = require('./config/appconfig');
+var appConfig = require('./config/appconfig');
 var serverconfig = require('./config/serverconfig');
 
 /* Config validation */
@@ -25,7 +25,7 @@ app.use(express.static('static'));
 
 app.get('/', function(req, res) {
   res.render('layout', {
-    plugins: config.enabledPlugins
+    plugins: appConfig.enabledPlugins
   });
 });
 
@@ -44,7 +44,7 @@ var io = require('socket.io').listen(server);
 
 /* Plugin definitions */
 var activePlugins = [];
-_.each(config.enabledPlugins, function(pluginName) {
+_.each(appConfig.enabledPlugins, function(pluginName) {
   app.use('/plugins/' + pluginName, express.static('src/plugins/' + pluginName + '/public'));
 
   try {
@@ -55,10 +55,13 @@ _.each(config.enabledPlugins, function(pluginName) {
   }
 });
 
-function setDefaults(datasource) {
-  if (datasource.timeout == undefined) {
-    datasource.timeout = 1500;
-  }
+function setDefaults(datasourceDefaults, datasource) {
+  _.each(datasourceDefaults, function (defaultValue, key) {
+    if (datasource[key] === undefined) {
+      datasource[key] = defaultValue;
+    }
+  });
+
   return datasource;
 }
 
@@ -68,7 +71,7 @@ _.each(serverconfig.datasources, function(datasource) {
   if (plugin === undefined) {
     console.log('Plugin ' + plugin + ' not available for datasource: ' + datasource.id);
   } else {
-    datasource = setDefaults(datasource);
+    datasource = setDefaults(appConfig.datasourceDefaults, datasource);
     plugin.initDatasource(datasource, io);
     if (plugin.validate !== undefined) {
       plugin.validate(datasource);
