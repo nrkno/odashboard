@@ -7,6 +7,8 @@ var AzureServiceBusPlugin = (function () {
       plugin: config.plugin,
       datasourceId: config.datasourceId,
       displayName: config.displayName,
+      width: config.width,
+      height: config.height,
       count: 0,
       'class': 'low'
     };

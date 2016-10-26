@@ -1,4 +1,5 @@
 var request = require('request'),
+  util = require('util'),
   crypto = require('crypto'),
   parseString = require('xml2js').parseString;
 

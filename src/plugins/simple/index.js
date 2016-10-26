@@ -25,6 +25,8 @@ var SimplePlugin = (function () {
       fieldName: config.fieldName,
       fieldType: config.fieldType,
       url: config.url,
+      width: config.width,
+      height: config.height,
       value: 0,
       trend: 'stable'
     };

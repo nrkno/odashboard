@@ -11,6 +11,8 @@ var TeamCityPlugin = (function () {
       name: config.name,
       id: config.id,
       url: config.url,
+      width: config.width,
+      height: config.height,
       started: '',
       duration: '0 s',
       percent: '',
@@ -18,7 +20,7 @@ var TeamCityPlugin = (function () {
       'class': 'inProgress'
     };
   };
-
+  
   module.updateWidget = function(build, widget) {
 
     if (build.state == 'running') {

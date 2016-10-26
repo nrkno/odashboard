@@ -6,6 +6,8 @@ var RabbitMQPlugin = (function () {
     return {
       'plugin': 'rabbitmq',
       datasourceId: config.datasourceId,
+      width: config.width,
+      height: config.height,
       url: config.url,
       count: 0,
       'class': 'low'

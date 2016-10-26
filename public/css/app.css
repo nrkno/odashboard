@@ -99,8 +99,7 @@ ul.rowList {
 
 li.rowBlock {
     display: inline-block;
-    width: 20%;
-    min-width: 240px;
+    min-width: 50px;
     min-height: 240px;
     float: left;
     color: white;
