@@ -10,7 +10,7 @@ function refreshDatasource(datasource, io) {
       io.emit(eventId, result.body);
     })
     .catch(function(error) {
-      console.log(error);
+      console.log('Failed fetching data for datasource: %s and url: %s , with error: %s', datasource.id, url, error);
     });
 }
 
