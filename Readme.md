@@ -278,15 +278,15 @@ This is an example validator:
 const assert = require('assert');
 
 function validateDatasource(datasource) {
-  assert(datasource.url != undefined, `Missing url for pluginName datasource with id = ${datasource.id}`)
+  assert(datasource.url !== undefined, `Missing url for pluginName datasource with id = ${datasource.id}`)
 }
 
 function validateWidget(widget) {
-  assert(widget.displayName != undefined,
+  assert(widget.displayName !== undefined,
     `Missing displayName for pluginName widget with datasource id = ${widget.datasourceId}`)
-  assert(widget.fieldName != undefined,
+  assert(widget.fieldName !== undefined,
     `Missing fieldName for pluginName widget with datasource id = ${widget.datasourceId}`)
-  assert(widget.fieldType != undefined,
+  assert(widget.fieldType !== undefined,
     `Missing fieldType for pluginName widget with datasource id = ${widget.datasourceId}`)
 }
 

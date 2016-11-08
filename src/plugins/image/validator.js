@@ -7,13 +7,13 @@ function validateDatasource(datasource) {
 }
 
 function validateWidget(widget) {
-  assert(widget.src != undefined,
+  assert(widget.src !== undefined,
      'Missing src for Image widget');
 
-  assert(widget.width != undefined,
+  assert(widget.width !== undefined,
    util.format('Missing width for Image widget with src = %s', widget.src));
 
-  assert(widget.height != undefined,
+  assert(widget.height !== undefined,
    util.format('Missing height for Image widget with src = %s', widget.src));
 }
 
