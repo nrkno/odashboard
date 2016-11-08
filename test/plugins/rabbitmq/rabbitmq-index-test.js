@@ -23,8 +23,9 @@ describe('RabbitMQ Plugin', function() {
       var widget = RabbitMQPlugin.createQueueWidget(widgetConfig);
       assert(widget.plugin === 'rabbitmq');
       assert(widget.datasourceId === widgetConfig.datasourceId);
-      assert(widget.count != undefined);
-      assert(widget.class != undefined);
+      assert(widget.count !== undefined);
+      assert(widget.class !== undefined);
+      assert(widget.displayName !== undefined, 'Rabbit widget should have displayName defined');
     });
   });
 
