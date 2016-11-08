@@ -5,6 +5,7 @@ var RabbitMQPlugin = (function () {
   module.createQueueWidget = function (config) {
     return {
       'plugin': 'rabbitmq',
+      displayName : config.displayName,
       datasourceId: config.datasourceId,
       width: config.width,
       height: config.height,
