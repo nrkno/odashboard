@@ -1,6 +1,7 @@
 var express = require('express');
 var _ = require('lodash');
 var app = express();
+var favicon = require('serve-favicon');
 
 var appConfig = require('./config/appconfig');
 var serverconfig = require('./config/serverconfig');
@@ -22,6 +23,8 @@ app.use(function(req, res, next) {
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.static('static'));
+app.use(favicon(__dirname + '/public/img/favicon-alt.ico'));
+
 
 app.get('/', function(req, res) {
   res.render('layout', {
