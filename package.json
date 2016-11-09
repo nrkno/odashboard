@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "node scripts/preinstall.js",
-    "test:lint": "eslint . --ext .js --ignore-path .gitignore --cache" ,
+    "test:lint": "eslint . --ext .js --ignore-path .gitignore --cache",
     "test": "npm run test:lint --silent && mocha --recursive test/",
     "test-travis": "mocha --recursive test/",
     "build": "webpack --progress",
@@ -20,6 +20,7 @@
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
     "request": "~2.53.0",
+    "serve-favicon": "^2.3.0",
     "socket.io": "^1.5.0",
     "xml2js": "^0.4.17"
   },
