@@ -36,6 +36,7 @@ app.get('/test', function(req, res) {
   res.send(JSON.stringify({
     astring: 'Hello world' + Math.round(Math.random() * 100),
     number: Math.round(Math.random() * 100),
+    bigNumber: Math.round(Math.random() * 10000),
     boolean: true,
     imgurl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
     piechart: {

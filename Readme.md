@@ -71,23 +71,38 @@ var myWidget = {
     fieldType: "boolean"
  }
 ```
+
+#### Tabs and rows
 To make the widget available you need to add it to a row in the dashboard. A row has an array of widgets. A row is defined like this:
 ```
-var myRow = {
+var myFirstRow = {
     title: "My widgets",
-    widgets: [myWidget]
+    widgets: [myWidget, myOtherWidget]
 }
 ```
 
-The rows in turn need to be included in the dashboardConfig-object which is read by the Angular controller:
+The rows in turn need to be included in the dashboardConfig-object. The rows can be added in two different ways, depending on if you need multiple tabs (pages) in your dashboard or not.
+
+If you only want one page, you can add the rows directly in the `rows`-field.
 ```
 var dashboardConfig = {
     title: "My Dashboard",
-    rows: [myRow]
+    rows: [myRow, mySecondRow]
 };
 ```
 
+If you have so many widgets that you need multiple pages, define an array of row-arrays in the `tabs`-field:
+```
+var dashboardConfig = {
+    title: "My Dashboard",
+    tabs: [
+      [myFirstRow, mySecondRow],
+      [pageTwoRow, pageTwoSecondRow]
+    ]
+};
+```
 
+If both `tabs` and `rows` are present, `tabs` will be used.
 
 ### Setup datasources
 Datasources are defined in `config/serverconfig.js`. Each datasource is defined as a json-object with the following fields:
