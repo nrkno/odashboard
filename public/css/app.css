@@ -36,7 +36,7 @@ a {
     height: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 
 .dashboardRow {
@@ -136,6 +136,11 @@ li.rowBlock h2 {
 
 iframe {
     border: 0;
+}
+
+.tabsNav {
+  float: right;
+  cursor: pointer;
 }
 
 
