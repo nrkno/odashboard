@@ -20,7 +20,7 @@ function getTestWidget(valueField, label, chartOptions, datasetOptions) {
   };
 }
 
-describe('Chart plugin', function() {
+describe('LineChart plugin', function() {
   var chartStub,
     instance,
     sandbox;

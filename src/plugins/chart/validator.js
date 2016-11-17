@@ -19,16 +19,18 @@ function validateWidget(widget) {
   shouldHaveDatasourceId(widget);
 
   assert(widget.width != undefined,
-    util.format('Missing width for Chart widget with datasource id = %s', widget.datasourceId));
+    util.format('Missing width for LineChart widget with datasource id = %s', widget.datasourceId));
 
   assert(widget.height != undefined,
-    util.format('Missing height for Chart widget with datasource id = %s', widget.datasourceId));
+    util.format('Missing height for LineChart widget with datasource id = %s', widget.datasourceId));
 
   assert(widget.chartType != undefined,
-    util.format('Missing chartType for Chart widget with datasource id = %s', widget.datasourceId));
+    util.format('Missing chartType for LineChart widget with datasource id = %s', widget.datasourceId));
 
   if (widget.chartType === 'line') {
     validateLineChart(widget);
+  } else if (widget.chartType === 'pie') {
+    validatePieChart(widget);
   }
 }
 
@@ -41,6 +43,19 @@ function validateLineChart(widget) {
 
   assert(widget.options.timeSeriesLength != undefined,
     util.format('Missing timeSeriesLength for Chart widget with datasource id = %s', widget.datasourceId));
+}
+
+function validatePieChart(widget) {
+  assert(widget.options.valueField != undefined,
+    util.format('Missing valueField for PieChart widget with datasource id = %s', widget.datasourceId));
+
+  if (widget.options.labelField ===  undefined) {
+    assert(widget.options.labels != undefined,
+      util.format('Missing labelField/labels for PieChart widget with datasource id = %s', widget.datasourceId));
+  } else if (widget.options.labels === undefined) {
+    assert(widget.options.labelField != undefined,
+      util.format('Missing labelField/labels for PieChart widget with datasource id = %s', widget.datasourceId));
+  }
 }
 
 var exports = module.exports = {};

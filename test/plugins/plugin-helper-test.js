@@ -28,4 +28,81 @@ describe('Plugin helper', function() {
       assert(_.includes(srcWithSalt, '&salt='), 'srcWithSalt should start with src');
     });
   });
+
+  describe('getValueFromJsonByName', function () {
+    it('should return value from parsed field', function() {
+
+      var exampleJson = {
+        outer: 'hei',
+        inner: {
+          goDeeper: {
+            number: 100,
+            numberTwo: 200
+          }
+        }
+      };
+
+      var outerField = 'outer';
+      var parsedField = pluginHelper.getValueFromJsonByName(exampleJson, outerField);
+      assert(parsedField === 'hei');
+
+      var numberField = 'inner goDeeper number';
+      parsedField = pluginHelper.getValueFromJsonByName(exampleJson, numberField);
+      assert(parsedField === 100);
+
+      var numberFieldTwo = 'inner goDeeper numberTwo';
+      parsedField = pluginHelper.getValueFromJsonByName(exampleJson, numberFieldTwo);
+      assert(parsedField === 200);
+    });
+  });
+
+  describe('getValueFromJsonByNames', function () {
+    it('should return values from parsed field', function() {
+
+      var exampleJson = {
+        outer: 'hei',
+        inner: {
+          goDeeper: {
+            number: 100,
+            numberTwo: 200
+          }
+        }
+      };
+
+      var fields = ['inner goDeeper number', 'inner goDeeper numberTwo'];
+      parsedFields = pluginHelper.getValueFromJsonByNames(exampleJson, fields);
+      assert(parsedFields.constructor === Array);
+      assert(parsedFields[0] == 100);
+      assert(parsedFields[1] === 200);
+    });
+
+    it('should be able to address elements in array', function() {
+      var examplesJson = {
+        test: ['anne', 'per', 'knut']
+      };
+
+      var field = 'test [2]';
+      var value = pluginHelper.getValueFromJsonByNames(examplesJson, field);
+      assert(value == 'knut');
+
+      var examplesJson2 = [
+        {
+          test: 'hei sveis'
+        }
+      ];
+
+      field = '[0] test';
+      value = pluginHelper.getValueFromJsonByNames(examplesJson2, field);
+      assert(value == 'hei sveis');
+    });
+  });
+
+  describe('subtractPixels', function() {
+    it('should subtract pixels', function() {
+      var result = pluginHelper.subtractPixels('320px', 10);
+      assert(result == '310px');
+      result = pluginHelper.subtractPixels('320px', 300);
+      assert(result == '20px');
+    });
+  });
 });

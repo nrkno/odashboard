@@ -2,4 +2,8 @@
     <div ng-switch-when="line">
         <canvas id={{widget.chartId}} width={{widget.width}} height={{widget.height}}></canvas>
     </div>
+    <div ng-switch-when="pie" class="pieChartDiv">
+        <h3>{{widget.displayName}}</h3>
+        <canvas id={{widget.chartId}} width={{widget.canvasWidth}} height={{widget.canvasHeight}}></canvas>
+    </div>
 </div>
