@@ -37,7 +37,11 @@ app.get('/test', function(req, res) {
     astring: 'Hello world' + Math.round(Math.random() * 100),
     number: Math.round(Math.random() * 100),
     boolean: true,
-    imgurl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150'
+    imgurl: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
+    piechart: {
+      dataset: [Math.round(Math.random() * 50), Math.round(Math.random() * 50), Math.round(Math.random() * 50), Math.round(Math.random() * 50)],
+      labels: ['Elephan', 'Mouse', 'Platypus', 'Lol']
+    }
   }));
 });
 

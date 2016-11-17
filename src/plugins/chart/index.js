@@ -1,9 +1,11 @@
 var LineChart = require('./linechart');
+var PieChart = require('./piechart');
 
 var Chart = require('chart.js');
 Chart.defaults.global.defaultFontColor = '#ffffff';
 
 var lineChart = LineChart(Chart);
+var pieChart = PieChart(Chart);
 
 var ChartPlugin = (function () {
 
@@ -14,6 +16,8 @@ var ChartPlugin = (function () {
       var chartMsg = JSON.parse(msg);
       if (widget.chartType === 'line') {
         lineChart.updateLineChart(widget, chartMsg);
+      } else if (widget.chartType === 'pie') {
+        pieChart.updatePieChart(widget, chartMsg);
       }
     } catch (e) {
       console.log(e);
@@ -32,6 +36,8 @@ var ChartPlugin = (function () {
     var widget;
     if (config.chartType === 'line') {
       widget = lineChart.createLineChart(config);
+    } else if (config.chartType === 'pie') {
+      widget = pieChart.createPieChart(config);
     }
     setupListener(widget, socket);
     return widget;

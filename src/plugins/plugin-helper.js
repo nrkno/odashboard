@@ -1,20 +1,53 @@
 var _ = require('lodash');
 
-var PluginHelper = (function() {
 
-  var module = {};
+function addSaltToSrc (src) {
+  var srcWithSalt;
+  if (_.includes(src, '?')) {
+    srcWithSalt = src + '&salt=' + new Date().getTime();
+  } else {
+    srcWithSalt = src + '?salt=' + new Date().getTime();
+  }
+  return srcWithSalt;
+}
 
-  module.addSaltToSrc = function (src) {
-    var srcWithSalt;
-    if (_.includes(src, '?')) {
-      srcWithSalt = src + '&salt=' + new Date().getTime();
-    } else {
-      srcWithSalt = src + '?salt=' + new Date().getTime();
+function getValueFromJsonByName (jsonNode, fieldName) {
+  var nodes = fieldName.split(' ');
+  var reduced = _.reduce(nodes, function (memo, v, key) {
+    if (_.startsWith(v, '[')) {
+      // Array indexing
+
+      v = v.match(/(\d+)/g)[0];
     }
-    return srcWithSalt;
-  };
+    var m = memo[v];
+    return m;
+  }, jsonNode);
+  return reduced;
+}
 
-  return module;
-}());
+function getValueFromJsonByNames (jsonNode, fieldNames) {
+  if (fieldNames === undefined) return undefined;
+  if (fieldNames.constructor === Array) {
+    var fields = _.map(fieldNames, function (fieldName) {
+      return getValueFromJsonByName(jsonNode, fieldName);
+    });
+    return fields;
+  } else {
+    var fieldName = fieldNames;
+    return getValueFromJsonByName(jsonNode, fieldName);
+  }
+}
 
-module.exports = PluginHelper;
+function subtractPixels(heightString, subtrahend) {
+  var regEx = /\d+/g;
+  var numAsString = heightString.match(regEx);
+  var pixels = parseInt(numAsString) - subtrahend;
+  return pixels + 'px';
+}
+
+module.exports = {
+  addSaltToSrc: addSaltToSrc,
+  getValueFromJsonByName: getValueFromJsonByName,
+  getValueFromJsonByNames: getValueFromJsonByNames,
+  subtractPixels: subtractPixels
+};

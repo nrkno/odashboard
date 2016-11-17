@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var moment = require('moment');
+var pluginHelper = require('../plugin-helper');
 
 var LineChart = function (Chart) {
   var numValues = 0;
@@ -26,7 +27,7 @@ var LineChart = function (Chart) {
   };
 
   module.updateLineChart = function(widget, chartMsg) {
-    var value = parsefield(chartMsg, widget.valueField);
+    var value = pluginHelper.getValueFromJsonByName(chartMsg, widget.valueField);
 
     if (widget.chart == null) {
       var newChart = initializeLineChart(widget, value);
@@ -139,18 +140,6 @@ var LineChart = function (Chart) {
       return '';
     }
   }
-
-  function parsefield(jsonNode, fieldName) {
-    var nodes = fieldName.split(' ');
-
-    var reduced = _.reduce(nodes, function (memo, v, key) {
-      var m = memo[v];
-      return m;
-    }, jsonNode);
-
-    return reduced;
-  }
-
 
   return module;
 };
