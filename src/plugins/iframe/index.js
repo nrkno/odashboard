@@ -1,3 +1,4 @@
+var pluginHelper = require('../plugin-helper');
 var IFramePlugin = (function () {
 
   var module = {};
@@ -16,7 +17,7 @@ var IFramePlugin = (function () {
     var widget = this.createIframeWidget(config);
     if (config.updateInterval != undefined && config.updateInterval != -1) {
       setInterval(function() {
-        var srcWithSalt = widget.originalSource + '&salt=' + new Date().getTime();
+        var srcWithSalt = pluginHelper.addSaltToSrc(widget.originalSource);
         widget.src = srcWithSalt;
       }, config.updateInterval);
     }

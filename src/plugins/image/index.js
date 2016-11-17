@@ -1,3 +1,4 @@
+var pluginHelper = require('../plugin-helper');
 var ImagePlugin = (function() {
 
   var module = {};
@@ -16,7 +17,7 @@ var ImagePlugin = (function() {
     var widget = this.createImageWidget(config);
     if (config.updateInterval != -1) {
       setInterval(function() {
-        var srcWithSalt = widget.originalSource + '&salt=' + new Date().getTime();
+        var srcWithSalt = pluginHelper.addSaltToSrc(widget.originalSource);
         widget.src = srcWithSalt;
       }, config.updateInterval);
     }
