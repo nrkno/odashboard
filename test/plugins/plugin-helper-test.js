@@ -95,6 +95,16 @@ describe('Plugin helper', function() {
       value = pluginHelper.getValueFromJsonByNames(examplesJson2, field);
       assert(value == 'hei sveis');
     });
+
+    it('should return last element if given [-1]', function() {
+      var examplesJson = {
+        test: ['anne', 'per', 'knut', 'petter', 'alex']
+      };
+
+      var field = 'test [-1]';
+      var value = pluginHelper.getValueFromJsonByNames(examplesJson, field);
+      assert(value == 'alex');
+    });
   });
 
   describe('subtractPixels', function() {

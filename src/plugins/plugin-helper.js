@@ -16,8 +16,12 @@ function getValueFromJsonByName (jsonNode, fieldName) {
   var reduced = _.reduce(nodes, function (memo, v, key) {
     if (_.startsWith(v, '[')) {
       // Array indexing
-
-      v = v.match(/(\d+)/g)[0];
+      if (v == ['[-1]']) {
+        // If index is -1, return last element in array
+        v = memo.length - 1;
+      } else {
+        v = v.match(/(\d+)/g)[0];
+      }
     }
     var m = memo[v];
     return m;
