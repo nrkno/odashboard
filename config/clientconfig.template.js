@@ -42,9 +42,37 @@ var row2 = {
   }]
 };
 
+var row3 = {
+  title: 'This',
+  widgets: [
+    {
+      plugin: 'simple',
+      datasourceId: 'simple1',
+      displayName: 'A big number on a dashboard',
+      fieldName: 'bigNumber',
+      fieldType: 'number'
+    },
+    {
+      plugin: 'chart',
+      datasourceId: 'chart1',
+      chartType: 'pie',
+      width: '320px',
+      height: '320px',
+      options: {
+        displayName: 'Animals',
+        valueField: 'piechart dataset',
+        labelField: 'piechart labels'
+      }
+    }
+  ]
+};
+
 var dashboardConfig = {
   title: 'Odashboard 1.0',
-  rows: [row1, row2]
+  tabs: [
+    [row1, row2],
+    [row3]
+  ]
 };
 
 module.exports = dashboardConfig;
