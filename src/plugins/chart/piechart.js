@@ -34,13 +34,14 @@ var PieChart = function (Chart) {
       var newChart = initializePieChart(widget, parsedValues, parsedLabels);
       widget.chart = newChart;
     } else {
+      var labels = module.getLabels(parsedLabels, widget.labels);
 
       _.forEach(_.range(parsedValues.length), function (i) {
         widget.chart.config.data.datasets[0].data[i] = parsedValues[i];
       });
 
-      _.forEach(_.range(parsedLabels.length), function (i) {
-        widget.chart.config.data.labels[i] = parsedLabels[i];
+      _.forEach(_.range(labels.length), function (i) {
+        widget.chart.config.data.labels[i] = labels[i];
       });
 
       widget.chart.update();
