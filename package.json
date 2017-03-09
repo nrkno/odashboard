@@ -8,7 +8,8 @@
     "test": "npm run test:lint --silent && mocha --recursive test/",
     "test-travis": "mocha --recursive test/",
     "build": "webpack --progress",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "watch-tests": "mocha --recursive test/ --watch"
   },
   "dependencies": {
     "angular": "^1.5.8",
