@@ -16,7 +16,7 @@ var TeamCityPlugin = (function () {
       started: '',
       duration: '0 s',
       percent: '',
-      status: 'Success',
+      status: 'Pending',
       'class': 'inProgress'
     };
   };
