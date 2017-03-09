@@ -9,7 +9,7 @@ A configurable dashboard with a simple plugin architecture. Written in Node.js w
 
 > npm run build
 
-> nodemon app.js
+> npm start
 
 The application answers on port 3000.
 

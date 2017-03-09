@@ -9,7 +9,8 @@
     "test-travis": "mocha --recursive test/",
     "build": "webpack --progress",
     "watch": "webpack --watch",
-    "watch-tests": "mocha --recursive test/ --watch"
+    "watch-tests": "mocha --recursive test/ --watch",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "eslint": "^3.7.1",
     "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
     "sinon": "^1.17.6",
     "webpack": "^1.12.9"
   }
