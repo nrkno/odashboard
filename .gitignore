@@ -7,3 +7,4 @@ npm-debug*
 static
 config/clientconfig.js
 config/serverconfig.js
+.vscode*
