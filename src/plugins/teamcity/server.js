@@ -26,8 +26,8 @@ function teamCityRequest(datasource, path, locators) {
 function buildLocatorQueryParam(locators){
   if(!locators) return '';
 
-  var locatorString = Object.keys(locators).reduce(function(acc, val){
-    return acc.concat([`${val}:${locators[val]}`]);
+  var locatorString = Object.keys(locators).reduce(function(acc, key){
+    return acc.concat([`${key}:${locators[key]}`]);
   }, []);
   return `locator=${locatorString.join(',')}`;
 }
