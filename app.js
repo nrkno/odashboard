@@ -76,7 +76,7 @@ function setDefaults(datasourceDefaults, datasource) {
 /* Datasource config and validation */
 _.each(serverconfig.datasources, function(datasource) {
   var plugin = activePlugins[datasource.plugin];
-  if (plugin === undefined) {
+  if (plugin === undefined) {                        
     console.log('Plugin ' + plugin + ' not available for datasource: ' + datasource.id);
   } else {
     datasource = setDefaults(appConfig.datasourceDefaults, datasource);
