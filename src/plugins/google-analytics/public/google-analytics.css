@@ -1,0 +1,11 @@
+.googleanalyticswidget {
+  padding: 50px 0 50px 0;
+}
+
+  .googleanalyticswidget p.name {
+    font-size: 3em;
+  }
+
+  .googleanalyticswidget p.count {
+    font-size: 2em;
+  }

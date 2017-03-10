@@ -43,6 +43,7 @@ The current list of available plugins:
 |[TeamCity](src/plugins/teamcity)|Display TeamCity build information|
 |[RabbitMQ](src/plugins/rabbitmq)|Display number of message in a RabbitMQ queue |
 |[Azure Service Bus](src/plugins/azure-servicebus)|Display number of messages on an Azure Service Bus topic subscription|
+|[Google Analytics](google-analytics)|Display real-time data from Google Analytics|
 
 Each plugin is documented in [the plugin folder](src/plugins/)
 
