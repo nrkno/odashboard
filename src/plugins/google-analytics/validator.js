@@ -3,13 +3,13 @@ var assert = require('assert');
 var util = require('util');
 
 function validateDatasource(datasource) {
-  assert(datasource.keyFile != undefined,
+  assert(datasource.keyFile !== undefined,
     util.format('Missing keyFile for Google Analytics datasource with id = %s. Add your key file to ./config/ and reference in the datasource with keyFile: "keyname"', datasource.id));
 
-  assert(datasource.viewId != undefined,
+  assert(datasource.viewId !== undefined,
     util.format('Missing viewId for Google Analytics datasource with id = %s.', datasource.id));    
 
-  assert(datasource.metric != undefined,
+  assert(datasource.metric !== undefined,
     util.format('Missing metric for Google Analytics datasource with id = %s.', datasource.id));   
 
   if (datasource.filters !== undefined) {
@@ -18,7 +18,7 @@ function validateDatasource(datasource) {
   }
 
   if (datasource.dimension !== undefined) {
-    assert(datasource.filters.startsWith('rt:'),
+    assert(datasource.dimension.startsWith('rt:'),
       util.format('Illegal dimensions for Google Analytics datasource with id = %s. Must start rt:', datasource.id));
   }
 }
