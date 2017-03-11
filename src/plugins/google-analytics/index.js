@@ -23,7 +23,7 @@ var GoogleAnalyticsPlugin = (function () {
       return gaData[0][0];
     } else {
       var field = _.find(gaData, function(x, i) { return x[0] == dimensionValue; });
-      if (field != undefined) {
+      if (field) {
         return field[1];
       } else {
         console.log('Unable to find dimensionValue %s in gaData:', dimensionValue);
