@@ -1,12 +1,13 @@
-﻿var httpclient = require('../../../httpclient'),
-  _ = require('lodash');
+﻿var httpclient = require('../../../httpclient');
+var _ = require('lodash');
 
 var exports = module.exports = {};
 
-function teamCityRequest(datasource, url) {
+function teamCityRequest(datasource, path, locators) {
+  var locatorQueryParam = buildLocatorQueryParam(locators);
 
   var gettingTeamCityData = new Promise(function (resolve, reject) {
-    var requrl = datasource.url + 'app/rest/' + url;
+    var requrl = `${datasource.url}app/rest/${path}${locatorQueryParam}`;
     var headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
 
     httpclient.get(requrl, datasource.auth, headers, datasource.timeout)
@@ -20,6 +21,15 @@ function teamCityRequest(datasource, url) {
   });
 
   return gettingTeamCityData;
+}
+
+function buildLocatorQueryParam(locators){
+  if(!locators) return '';
+
+  var locatorString = Object.keys(locators).reduce(function(acc, key){
+    return acc.concat([`${key}:${locators[key]}`]);
+  }, []);
+  return `locator=${locatorString.join(',')}`;
 }
 
 function findLastBuilds(runningBuilds, builds) {
@@ -53,7 +63,7 @@ function requestDetailedBuildData(datasource, builds) {
     Promise.all(detailedBuildRequests).then(function (detailedBuilds) {
       var res = JSON.stringify({
         result: 'success',
-        builds: _.map(detailedBuilds, function (build) { return JSON.parse(build); })
+        builds: detailedBuilds.map(function (build) { return JSON.parse(build); })
       });
       resolve(res);
     });
@@ -61,10 +71,13 @@ function requestDetailedBuildData(datasource, builds) {
 }
 
 function refreshDatasource(datasource, io) {
-  var eventId = datasource.plugin + '.' + datasource.id;
+  var eventId = `${datasource.plugin}.${datasource.id}`;
+  var buildPath = 'builds/?';
+  var runningLocators = Object.assign({running: 'true'}, datasource.locators);
+  var allBuildsLocators = Object.assign({defaultFilter: 'false'}, datasource.locators);
 
-  var gettingRunningBuilds = teamCityRequest(datasource, 'builds?locator=running:true');
-  var gettingBuilds = teamCityRequest(datasource, 'builds');
+  var gettingRunningBuilds = teamCityRequest(datasource, buildPath, runningLocators);
+  var gettingBuilds = teamCityRequest(datasource, buildPath, allBuildsLocators);
 
   Promise.all([gettingRunningBuilds, gettingBuilds]).then(function (results) {
     var runningBuilds = JSON.parse(results[0]);
@@ -85,7 +98,7 @@ function initDatasource(datasource, io) {
   setInterval(function() {
     refreshDatasource(datasource, io);
   }, datasource.updateInterval);
-
 }
+
 exports.name = 'teamcity';
 exports.initDatasource = initDatasource;

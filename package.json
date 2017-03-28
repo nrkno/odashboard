@@ -8,7 +8,9 @@
     "test": "npm run test:lint --silent && mocha --recursive test/",
     "test-travis": "mocha --recursive test/",
     "build": "webpack --progress",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "watch-tests": "mocha --recursive test/ --watch",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -16,6 +18,7 @@
     "chart.js": "^2.3.0",
     "ejs": "~0.7.1",
     "express": "^4.14.0",
+    "googleapis": "^17.1.0",
     "httpntlm": "^1.6.1",
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
@@ -27,6 +30,7 @@
   "devDependencies": {
     "eslint": "^3.7.1",
     "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
     "sinon": "^1.17.6",
     "webpack": "^1.12.9"
   }

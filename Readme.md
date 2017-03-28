@@ -9,7 +9,7 @@ A configurable dashboard with a simple plugin architecture. Written in Node.js w
 
 > npm run build
 
-> nodemon app.js
+> npm start
 
 The application answers on port 3000.
 
@@ -43,6 +43,7 @@ The current list of available plugins:
 |[TeamCity](src/plugins/teamcity)|Display TeamCity build information|
 |[RabbitMQ](src/plugins/rabbitmq)|Display number of message in a RabbitMQ queue |
 |[Azure Service Bus](src/plugins/azure-servicebus)|Display number of messages on an Azure Service Bus topic subscription|
+|[Google Analytics](src/plugins/google-analytics)|Display real-time data from Google Analytics|
 
 Each plugin is documented in [the plugin folder](src/plugins/)
 
