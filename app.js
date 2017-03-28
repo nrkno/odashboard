@@ -53,12 +53,15 @@ var io = require('socket.io').listen(server);
 /* Plugin definitions */
 var activePlugins = [];
 _.each(appConfig.enabledPlugins, function(pluginName) {
+
   app.use('/plugins/' + pluginName, express.static('src/plugins/' + pluginName + '/public'));
 
   try {
-    var plugin = require('./src/plugins/' + pluginName + '/server.js', function() {});
+    var pluginServerPath = './src/plugins/' + pluginName + '/server.js';
+    var plugin = require(pluginServerPath, function() {});
     activePlugins[pluginName] = plugin;
   } catch (e) {
+    console.log('Failed to activate plugin ' + pluginName + '(' + JSON.stringify(e) + ')');
     // continue regardless of error
   }
 });
@@ -76,6 +79,7 @@ function setDefaults(datasourceDefaults, datasource) {
 /* Datasource config and validation */
 _.each(serverconfig.datasources, function(datasource) {
   var plugin = activePlugins[datasource.plugin];
+
   if (plugin === undefined) {
     console.log('Plugin ' + plugin + ' not available for datasource: ' + datasource.id);
   } else {

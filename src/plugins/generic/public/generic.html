@@ -1,0 +1,56 @@
+﻿<div ng-switch on="widget.widgetType">
+  <a href={{widget.url}} target="_blank">
+
+    <!-- simple widget -->
+    <div ng-switch-when="simple"> 
+      <div ng-switch on="widget.fieldType">
+
+        <div ng-switch-when="boolean">
+          <h2>{{widget.displayName}}</h2>
+          <p class="generic-number">Boolean.</p>
+
+          <div ng-switch on="widget.value">
+            <img class="generic-boolean-image" src="./plugins/generic/img/Check_green.png" ng-switch-when="true" />
+            <img class="generic-boolean-image" src="./plugins\generic\img\Wrong_red.png" ng-switch-when="false" />
+            <img class="generic-boolean-image" src="./plugins\generic\img\Wrong_red.png" ng-switch-when="undefined" />
+          </div>
+          <p class="generic-timestamp">{{widget.timestamp}}</p>
+        </div>
+        <div ng-switch-when="number">
+          <p class="generic-number">Number.</p>
+          <h2>{{widget.displayName}}</h2>
+          <p class="generic-number">{{widget.value}}</p>
+          <p class="generic-timestamp">{{widget.timestamp}}</p>
+        </div>
+        <div ng-switch-when="string">
+          <p class="generic-number">String.</p>
+          <h2>{{widget.displayName}}</h2>
+          <p class="generic-string">{{widget.value}}</p>
+          <p class="generic-timestamp">{{widget.timestamp}}</p>
+        </div>
+        <div ng-switch-when="image">
+          <p class="generic-number">Image.</p>
+
+          <img ng-class="generic-image" ng-src="{{trustAsResourceUrl(widget.value)}}">
+          </img>
+          <p class="generic-timestamp">{{widget.timestamp}}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- queue widget -->
+    <div ng-switch-when="queue">
+      <div ng-class="widget.class" class="azureservicebuswidget">
+        <p class="name">{{widget.displayName}}</p>
+        <p class="count">{{widget.count}}</p>
+      </div>
+    </div>
+
+    <!-- default widget -->
+    <div ng-switch-default>
+      <p class="name">Default.</p>
+      <p class="name">{{widget.fieldType}}.</p>
+    </div>
+  </a>
+</div>
