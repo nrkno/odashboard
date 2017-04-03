@@ -6,7 +6,6 @@ A flexible plugin for combining a datasource and a widget. Can be used to displa
 
 The kind of datasource to use with the generic plugin is specified with the source property in the serverconfig. Configuration for the data source is given in the config property, and will vary depending on the particular data source. For instance, if the data source is a JSON endpoint, the config will contain the URL for the endpoint.
 
-
 ```
     plugin: 'generic',
     source: 'json-endpoint',
@@ -15,6 +14,7 @@ The kind of datasource to use with the generic plugin is specified with the sour
     }
 ```
 
+For details about data sources, see [Data sources](../sources).
 
 ## Widget config
 

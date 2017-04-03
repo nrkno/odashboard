@@ -14,6 +14,11 @@ function getDatasource(sourcename) {
     var AzureServiceBusSource = require('../sources/azureservicebus.js');
     return AzureServiceBusSource();
   }
+
+  if (sourcename === 'app-insights') {
+    var AppInsightsSource = require('../sources/appinsights.js');
+    return AppInsightsSource();
+  }
   
   return undefined;  
 }
