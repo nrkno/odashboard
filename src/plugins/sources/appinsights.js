@@ -61,6 +61,7 @@ var AppInsightsSource = function() {
   }
 
   function refresh(datasource, io) {
+
     var eventId = datasource.plugin + '.' + datasource.id;
     var config = datasource.config;
     

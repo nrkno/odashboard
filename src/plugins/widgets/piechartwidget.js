@@ -8,8 +8,8 @@ var PieChartWidget = function (Chart, config) {
 
   var cid =  _.uniqueId('chart_');
   var widget = {
-    plugin: 'chart',
     widgetType: 'chart',
+    plugin: config.plugin,
     chartId: cid,
     datasourceId: config.datasourceId,
     width: config.width,

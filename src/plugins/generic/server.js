@@ -27,9 +27,10 @@ function initDatasource(datasource, io) {
   var source = getDatasource(datasource.source);
 
   if (source === undefined) {
-    console.log('Unable to create a datasource for ' + JSON.stringify(datasource));
+    console.log('Generic server: No datasource defined for sourcename ' + datasource.source + ' (' + JSON.stringify(datasource) + ')');
   }
   else {
+    console.log('Generic server: start datasource ' + datasource.source);
     source.start(datasource, io);
   }
 }

@@ -20,6 +20,11 @@
   color: #7DA0AB !important;
 }
 
+.pieChartDiv h3{
+  margin: 0;
+  padding: 0;
+}
+
 .azureservicebuswidget {
   padding: 50px 0 50px 0;
 }

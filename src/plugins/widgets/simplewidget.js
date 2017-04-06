@@ -1,8 +1,10 @@
+var moment = require('moment');
+
 var SimpleWidget = function(config) {
 
   var widget = {
-    plugin: 'simple',
     widgetType: 'simple',
+    plugin: config.plugin,
     datasourceId: config.datasourceId,
     displayName: config.displayName,
     fieldName: config.fieldName,
@@ -30,16 +32,27 @@ var SimpleWidget = function(config) {
     widget.value = value;
   }
 
+  function handleValueString(value) {
+    widget.value = value;
+  }
+
+  function handleValueTimestamp(value) {
+    var t = moment(value).format('dddd HH:mm:ss');
+    widget.value = t;
+  }
+
   function handleValueDefault(value) {
     widget.value = value;
   }
 
   widget.update = function(value) {
-    
+
     if (widget.fieldType === 'image') {
       handleValueImage(value);
     } else if (widget.fieldType === 'number') {
       handleValueNumber(value);
+    } else if (widget.fieldType === 'timestamp') {
+      handleValueTimestamp(value);
     } else {
       handleValueDefault(value);
     }

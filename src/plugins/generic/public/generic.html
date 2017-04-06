@@ -7,7 +7,6 @@
 
         <div ng-switch-when="boolean">
           <h2>{{widget.displayName}}</h2>
-          <p class="generic-number">Boolean.</p>
 
           <div ng-switch on="widget.value">
             <img class="generic-boolean-image" src="./plugins/generic/img/Check_green.png" ng-switch-when="true" />
@@ -17,23 +16,26 @@
           <p class="generic-timestamp">{{widget.timestamp}}</p>
         </div>
         <div ng-switch-when="number">
-          <p class="generic-number">Number.</p>
           <h2>{{widget.displayName}}</h2>
           <p class="generic-number">{{widget.value}}</p>
           <p class="generic-timestamp">{{widget.timestamp}}</p>
         </div>
-        <div ng-switch-when="string">
-          <p class="generic-number">String.</p>
+        <div ng-switch-when="timestamp">
           <h2>{{widget.displayName}}</h2>
-          <p class="generic-string">{{widget.value}}</p>
-          <p class="generic-timestamp">{{widget.timestamp}}</p>
+          <p>{{widget.value}}</p>
+        </div>        
+        <div ng-switch-when="string">
+          <h2>{{widget.displayName}}</h2>
+          <p>{{widget.value}}</p>
         </div>
         <div ng-switch-when="image">
-          <p class="generic-number">Image.</p>
-
           <img ng-class="generic-image" ng-src="{{trustAsResourceUrl(widget.value)}}">
           </img>
           <p class="generic-timestamp">{{widget.timestamp}}</p>
+        </div>
+        <div ng-switch-default>
+          <h2>{{widget.displayName}}</h2>
+          <p class="name">{{widget.fieldType}}.</p>
         </div>
 
       </div>
@@ -47,9 +49,22 @@
       </div>
     </div>
 
+    <!-- chart widget -->
+    <div ng-switch-when="chart">
+      <div ng-switch on="widget.chartType">
+        <div ng-switch-when="line">
+          <canvas id={{widget.chartId}} width={{widget.width}} height={{widget.height}}></canvas>
+        </div>
+        <div ng-switch-when="pie" class="pieChartDiv">
+          <h3>{{widget.displayName}}</h3>
+          <canvas id={{widget.chartId}} width={{widget.canvasWidth}} height={{widget.canvasHeight}}></canvas>
+        </div>
+      </div>
+    </div>
+
     <!-- default widget -->
     <div ng-switch-default>
-      <p class="name">Default.</p>
+      <p class="name">generic.html</p>
       <p class="name">{{widget.fieldType}}.</p>
     </div>
   </a>
