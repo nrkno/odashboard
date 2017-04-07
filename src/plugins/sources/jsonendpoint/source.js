@@ -1,4 +1,4 @@
-var httpclient = require('../../../httpclient');
+var httpclient = require('../../../../httpclient');
 var assert = require('assert');
 var util = require('util');
 

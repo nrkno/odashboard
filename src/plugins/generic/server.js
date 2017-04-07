@@ -6,17 +6,17 @@ var exports = module.exports = {};
 function getDatasource(sourcename) {
   
   if (sourcename === 'json-endpoint') {
-    var JsonEndpointSource = require('../sources/jsonendpoint.js');
+    var JsonEndpointSource = require('../sources/jsonendpoint/source.js');
     return JsonEndpointSource();
   }
   
   if (sourcename === 'azure-servicebus') {
-    var AzureServiceBusSource = require('../sources/azureservicebus.js');
+    var AzureServiceBusSource = require('../sources/azureservicebus/source.js');
     return AzureServiceBusSource();
   }
 
   if (sourcename === 'app-insights') {
-    var AppInsightsSource = require('../sources/appinsights.js');
+    var AppInsightsSource = require('../sources/appinsights/source.js');
     return AppInsightsSource();
   }
   
