@@ -13,7 +13,6 @@ var LineChartWidget = function (Chart, config) {
     datasourceId: config.datasourceId,
     width: config.width,
     height: config.height,
-    chartType: config.chartType,
     chart: null,
     fieldName: config.fieldName,
     valueField: config.options.valueField,

@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var moment = require('moment');
 
-var DefaultWidget = require('../widgets/default/widget.js');
+var StringWidget = require('../widgets/string/widget.js');
 var NumberWidget = require('../widgets/number/widget.js');
 var CheckmarkWidget = require('../widgets/checkmark/widget.js');
 var TimestampWidget = require('../widgets/timestamp/widget.js');
@@ -37,7 +37,8 @@ var GenericPlugin = (function () {
   module.parseMsg = function(msg, widget) {
     try {
       var obj = JSON.parse(msg);
-      var value = this.parseField(obj, widget.fieldName);
+      var o = widget.transform(obj);
+      var value = this.parseField(o, widget.fieldName);
       widget.update(value);
       widget.timestamp = getFormattedDate();
     } catch (e) {
@@ -59,13 +60,12 @@ var GenericPlugin = (function () {
       return QueueWidget(config);
     }
 
-    if (config.widgetType === 'chart') {
-      if (config.chartType === 'line') {
-        return LineChartWidget(Chart, config);
-      }
-      if (config.chartType === 'pie') {
-        return PieChartWidget(Chart, config);
-      } 
+    if (config.widgetType === 'linechart') {
+      return LineChartWidget(Chart, config);
+    }
+
+    if (config.widgetType === 'piechart') {
+      return PieChartWidget(Chart, config);
     }
 
     if (config.widgetType === 'checkmark') {
@@ -80,11 +80,20 @@ var GenericPlugin = (function () {
       return NumberWidget(config);
     }
 
-    return DefaultWidget(config);
+    return StringWidget(config);
+  }
+
+  function getTransform(config) {
+    if (config.transform === undefined) {
+      return _.identity;
+    }
+
+    return config.transform;
   }
 
   module.createWidget = function (config, socket) {
     var widget = createWidgetInstance(config);
+    widget.transform = getTransform(config);
     setupListener(config, socket, widget);
     return widget;
   };

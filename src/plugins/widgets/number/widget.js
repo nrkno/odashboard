@@ -20,9 +20,27 @@ var NumberWidget = function(config) {
     }
   }
 
+  function getNumber(value) {
+    if (typeof value === 'number' || value instanceof Number) {
+      return value;
+    }
+    
+    return Number(value);
+  }
+
+  function getNumberValue(value) {
+    var num = getNumber(value);
+    if (isNaN(num)) {
+      return 0;
+    }
+
+    return num;
+  }
+
   widget.update = function(value) {
-    widget.trend = getTrend(value);
-    widget.value = value;
+    var val = getNumberValue(value);
+    widget.trend = getTrend(val);
+    widget.value = val;
   };
 
   return widget;

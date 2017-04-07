@@ -20,17 +20,15 @@
       </div>
     </div>
 
-    <!-- chart widget -->
-    <div ng-switch-when="chart">
-      <div ng-switch on="widget.chartType">
-        <div ng-switch-when="line">
-          <canvas id={{widget.chartId}} width={{widget.width}} height={{widget.height}}></canvas>
-        </div>
-        <div ng-switch-when="pie" class="pieChartDiv">
-          <h3>{{widget.displayName}}</h3>
-          <canvas id={{widget.chartId}} width={{widget.canvasWidth}} height={{widget.canvasHeight}}></canvas>
-        </div>
-      </div>
+    <!-- line chart widget -->
+    <div ng-switch-when="linechart">
+      <canvas id={{widget.chartId}} width={{widget.width}} height={{widget.height}}></canvas>
+    </div>
+
+    <!-- pie chart widget -->
+    <div ng-switch-when="piechart" class="pieChartDiv">
+      <h3>{{widget.displayName}}</h3>
+      <canvas id={{widget.chartId}} width={{widget.canvasWidth}} height={{widget.canvasHeight}}></canvas>
     </div>
 
     <!-- timestamp widget -->
@@ -39,13 +37,6 @@
       <p>{{widget.value}}</p>
     </div>        
     
-    <!-- image widget -->
-    <div ng-switch-when="image">
-      <img ng-class="generic-image" ng-src="{{trustAsResourceUrl(widget.value)}}">
-      </img>
-      <p class="generic-timestamp">{{widget.timestamp}}</p>
-    </div>
-
     <!-- number widget -->
     <div ng-switch-when="number">
       <h2>{{widget.displayName}}</h2>

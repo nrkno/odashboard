@@ -16,7 +16,6 @@ var PieChartWidget = function (Chart, config) {
     height: config.height,
     canvasWidth: config.width,
     canvasHeight: pluginHelper.subtractPixels(config.height, 25), //subtract some pixels to allow room for title
-    chartType: config.chartType,
     chart: null,
     fieldName: config.fieldName,
     displayName: config.options.displayName,
