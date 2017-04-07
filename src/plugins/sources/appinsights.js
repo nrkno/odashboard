@@ -65,8 +65,10 @@ var AppInsightsSource = function() {
     var eventId = datasource.plugin + '.' + datasource.id;
     var config = datasource.config;
     
+    var uri = createUri(config);
+
     request({
-      uri: createUri(config),
+      uri: uri,
       headers: {
         'x-api-key': config.apikey
       },

@@ -30,7 +30,6 @@ function initDatasource(datasource, io) {
     console.log('Generic server: No datasource defined for sourcename ' + datasource.source + ' (' + JSON.stringify(datasource) + ')');
   }
   else {
-    console.log('Generic server: start datasource ' + datasource.source);
     source.start(datasource, io);
   }
 }

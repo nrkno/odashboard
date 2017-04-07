@@ -1,10 +1,13 @@
 var _ = require('lodash');
 var moment = require('moment');
 
-var SimpleWidget = require('../widgets/simplewidget.js');
-var QueueWidget = require('../widgets/queuewidget.js');
-var LineChartWidget = require('../widgets/linechartwidget.js');
-var PieChartWidget = require('../widgets/piechartwidget.js');
+var DefaultWidget = require('../widgets/default/widget.js');
+var NumberWidget = require('../widgets/number/widget.js');
+var CheckmarkWidget = require('../widgets/checkmark/widget.js');
+var TimestampWidget = require('../widgets/timestamp/widget.js');
+var QueueWidget = require('../widgets/queue/widget.js');
+var LineChartWidget = require('../widgets/linechart/widget.js');
+var PieChartWidget = require('../widgets/piechart/widget.js');
 
 var GenericPlugin = (function () {
 
@@ -65,7 +68,19 @@ var GenericPlugin = (function () {
       } 
     }
 
-    return SimpleWidget(config);
+    if (config.widgetType === 'checkmark') {
+      return CheckmarkWidget(config);
+    }
+
+    if (config.widgetType === 'timestamp') {
+      return TimestampWidget(config);
+    }
+
+    if (config.widgetType === 'number') {
+      return NumberWidget(config);
+    }
+
+    return DefaultWidget(config);
   }
 
   module.createWidget = function (config, socket) {
