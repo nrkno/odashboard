@@ -8,7 +8,6 @@ The plugin currently supports these widgets:
 * [String](string)
 * [Number](number)
 * [Timestamp](timestamp)
-* [Image](image)
 * [Queue](queue)
 * [Pie chart](piechart)
 * [Line chart](linechart)

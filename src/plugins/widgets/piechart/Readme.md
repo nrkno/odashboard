@@ -1,6 +1,6 @@
 # Pie Chart widget.
 
-The Pie Chart widget can be used to draw line charts for your data. The Line Chart widget is built with [ChartJs](http://www.chartjs.org/).
+The Pie Chart widget can be used to draw line charts for your data. The Pie Chart widget is built with [ChartJs](http://www.chartjs.org/).
 
 The widget config has the following mandatory fields:
 

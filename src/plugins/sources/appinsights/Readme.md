@@ -1,6 +1,6 @@
 # Application Insights REST API datasource
 
-To specify an Application Insights REST API datasource, use 'app-insights' for the 'source' property in your server configuration. Use the 'config' property to specify appid, apikey, endpoint, HTTP method and parameters as appropriate. 
+To specify an Application Insights REST API datasource, use 'app-insights' for the *source* property in your server configuration. Use the *config* property to specify appid, apikey, endpoint, HTTP method and parameters as appropriate. 
 
 The endpoint property must be one of the supported endpoints specified by the Application Insights REST API:
 

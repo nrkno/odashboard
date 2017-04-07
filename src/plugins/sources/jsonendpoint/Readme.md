@@ -1,6 +1,6 @@
 # JSON endpoint datasource.
 
-To specify a JSON endpoint datasource, use 'json-endpoint' for the 'source' property in your server configuration. In the 'config' property, include the url to the JSON endpoint. 
+To specify a JSON endpoint datasource, use 'json-endpoint' for the *source* property in your server configuration. In the *config* property, include the url to the JSON endpoint. 
 
 ```
 {
