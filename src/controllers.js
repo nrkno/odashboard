@@ -36,19 +36,29 @@ var myController = app.controller('PluginController', function($rootScope, $scop
 var pluginModules = {};
 
 config.enabledPlugins.forEach(function (pluginName) {
-  addAppDirective(pluginName);
-  requireModule(pluginName);
+  try {
+    addAppDirective(pluginName);
+    requireModule(pluginName);
+  }
+  catch (err) {
+    console.log('Failed to load module for plugin ' + pluginName + '(' + JSON.stringify(err) + ')');
+  }
 });
 
 function addAppDirective(pluginName) {
-  var directiveName = pluginName.replace('-', '') + 'dir';
+  try {
+    var directiveName = pluginName.replace('-', '') + 'dir';
 
-  app.directive(directiveName, function () {
-    return {
-      restrict: 'E',
-      templateUrl: 'plugins/'+pluginName+'/'+pluginName+'.html'
-    };
-  });
+    app.directive(directiveName, function () {
+      return {
+        restrict: 'E',
+        templateUrl: 'plugins/'+pluginName+'/'+pluginName+'.html'
+      };
+    });
+  }
+  catch (err) {
+    console.log('Failed to add app directive for plugin ' + pluginName + '(' + JSON.stringify(err) + ')');
+  }
 }
 
 function requireModule(pluginName) {

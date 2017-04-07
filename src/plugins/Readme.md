@@ -12,3 +12,4 @@
 |[RabbitMQ](rabbitmq)|Display number of message in a RabbitMQ queue |
 |[Azure Service Bus](azure-servicebus)|Display number of messages on an Azure Service Bus topic subscription|
 |[Google Analytics](google-analytics)|Display real-time data from Google Analytics|
+|[Generic](generic)|Generic plugin for combining data sources and widgets|

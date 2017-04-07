@@ -1,0 +1,61 @@
+﻿<div ng-switch on="widget.widgetType">
+  <a href={{widget.url}} target="_blank">
+
+    <!-- checkmark widget -->
+    <div ng-switch-when="checkmark">
+      <h2>{{widget.displayName}}</h2>
+      <div ng-switch on="widget.value">
+        <img class="generic-boolean-image" src="./plugins/generic/img/Check_green.png" ng-switch-when="true" />
+        <img class="generic-boolean-image" src="./plugins\generic\img\Wrong_red.png" ng-switch-when="false" />
+        <img class="generic-boolean-image" src="./plugins\generic\img\Wrong_red.png" ng-switch-when="undefined" />
+      </div>
+      <p class="generic-timestamp">{{widget.timestamp}}</p>
+    </div>
+
+    <!-- queue widget -->
+    <div ng-switch-when="queue">
+      <div ng-class="widget.class" class="azureservicebuswidget">
+        <p class="name">{{widget.displayName}}</p>
+        <p class="count">{{widget.count}}</p>
+      </div>
+    </div>
+
+    <!-- line chart widget -->
+    <div ng-switch-when="linechart">
+      <canvas id={{widget.chartId}} width={{widget.width}} height={{widget.height}}></canvas>
+    </div>
+
+    <!-- pie chart widget -->
+    <div ng-switch-when="piechart" class="pieChartDiv">
+      <h3>{{widget.displayName}}</h3>
+      <canvas id={{widget.chartId}} width={{widget.canvasWidth}} height={{widget.canvasHeight}}></canvas>
+    </div>
+
+    <!-- timestamp widget -->
+    <div ng-switch-when="timestamp">
+      <h2>{{widget.displayName}}</h2>
+      <p>{{widget.value}}</p>
+    </div>        
+    
+    <!-- number widget -->
+    <div ng-switch-when="number">
+      <h2>{{widget.displayName}}</h2>
+      <p class="generic-number">{{widget.value}}</p>
+      <p class="generic-timestamp">{{widget.timestamp}}</p>
+    </div>
+
+    <!-- default widget -->
+    <div ng-switch-when="default">
+      <h2>{{widget.displayName}}</h2>
+      <p class="generic-number">{{widget.value}}</p>
+      <p class="generic-timestamp">{{widget.timestamp}}</p>
+    </div>
+
+    <!-- no match -->
+    <div ng-switch-default>
+      <p class="name">generic.html</p>
+      <p class="name">{{widget.widgetType}}.</p>
+      <p class="name">{{widget.fieldType}}.</p>
+    </div>
+  </a>
+</div>

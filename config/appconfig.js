@@ -10,6 +10,6 @@ var datasourceDefaults = {
 module.exports = {
   datasourceDefaults: datasourceDefaults,
   widgetDefaults: widgetDefaults,
-  enabledPlugins: ['teamcity', 'rabbitmq', 'simple', 'iframe', 'azure-servicebus', 'image', 'chart', 'google-analytics'],
+  enabledPlugins: ['teamcity', 'rabbitmq', 'simple', 'iframe', 'azure-servicebus', 'image', 'chart', 'google-analytics', 'generic'],
   tabCycleInterval: 7000
 };
