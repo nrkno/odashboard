@@ -15,4 +15,4 @@ To specify a JSON endpoint datasource, use 'json-endpoint' for the 'source' prop
 }
 ```
 
-See also [data sources](../sources).
+See also [data sources](../).

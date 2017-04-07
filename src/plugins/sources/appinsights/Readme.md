@@ -49,4 +49,4 @@ The data source produces a JSON object similar to this:
 }
 ```
 
-See also [data sources](../sources).
+See also [data sources](../).

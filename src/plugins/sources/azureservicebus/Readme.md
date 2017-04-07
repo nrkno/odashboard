@@ -19,4 +19,4 @@ To specify a Azure Service Bus datasource, use 'azure-servicebus' for the 'sourc
 }
 ```
 
-See also [data sources](../sources).
+See also [data sources](../).
