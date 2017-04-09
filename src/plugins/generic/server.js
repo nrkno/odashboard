@@ -1,5 +1,6 @@
 var httpclient = require('../../../httpclient');
 var validator = require('./validator');
+var _ = require('lodash');
 
 var exports = module.exports = {};
 
@@ -23,6 +24,27 @@ function getDatasource(sourcename) {
   return undefined;  
 }
 
+function getTransform(transform) {
+  if (transform && typeof(transform) === 'function') {
+    return transform;
+  }
+
+  return _.identity;
+}
+
+function start(source, datasource, io) {
+  source.validate(datasource);
+  var eventId = datasource.plugin + '.' + datasource.id;
+  var transform = getTransform(datasource.transform);
+  setInterval(function() {
+    source.refresh(datasource, function(value) {
+      var v = transform(value);
+      var msg = JSON.stringify(v);
+      io.emit(eventId, msg);
+    });
+  }, datasource.updateInterval);
+}
+
 function initDatasource(datasource, io) {
   var source = getDatasource(datasource.source);
 
@@ -30,7 +52,7 @@ function initDatasource(datasource, io) {
     console.log('Generic server: No datasource defined for sourcename ' + datasource.source + ' (' + JSON.stringify(datasource) + ')');
   }
   else {
-    source.start(datasource, io);
+    start(source, datasource, io);
   }
 }
 

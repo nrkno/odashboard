@@ -23,15 +23,14 @@ var AzureServiceBusSource = function() {
     return token;
   };
 
-  function validate(datasource) {
+  source.validate = function(datasource) {
     assert(datasource.config.topic != undefined,
       util.format('Missing topic for Azure Service Bus datasource with id = %s', datasource.datasourceId));
     assert(datasource.config.subscription != undefined,
       util.format('Missing subscription for Azure Service Bus datasource with id = %s', datasource.datasourceId));
-  }
+  };
 
-  function refresh(datasource, io) {
-    var eventId = datasource.plugin + '.' + datasource.id;
+  source.refresh = function(datasource, callback) {
     var config = datasource.config;
 
     var uri = 'https://' + config.namespace + '.servicebus.windows.net/' + config.topic + '/Subscriptions/' + config.subscription;
@@ -71,12 +70,12 @@ var AzureServiceBusSource = function() {
         var messageCountString = result.entry.content[0].SubscriptionDescription[0].MessageCount[0];
         var messageCount = parseInt(messageCountString);
 
-        io.emit(eventId, JSON.stringify({
-          messageCount: messageCount
-        }));
+        if (callback && typeof(callback) === 'function') {
+          callback({ messageCount: messageCount });
+        }
       });
     });
-  }
+  };
 
   source.start = function(datasource, io) {
     validate(datasource);

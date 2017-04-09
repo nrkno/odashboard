@@ -6,30 +6,27 @@ var JsonEndpointSource = function() {
 
   var source = {};
 
-  function validate(datasource) {
+  source.validate = function(datasource) {
     assert(datasource.source === 'json-endpoint',
       util.format('Datasource.source should be \'json-endpoint\' for datasource with id = %s.\n%s', datasource.id, JSON.stringify(datasource)));
     assert(datasource.config.url !== undefined,
       util.format('Datasource.config.url is missing for datasource with id = %s.\n%s', datasource.id, JSON.stringify(datasource)));
-  }
+  };
 
-  function refresh(datasource, io) {
+  source.refresh = function(datasource, callback) {
     var eventId = datasource.plugin + '.' + datasource.id;
     httpclient.get(datasource.config.url, datasource.auth, {}, datasource.timeout)
       .then(function (result) {
-        io.emit(eventId, result.body);
+        if (callback && typeof(callback) === 'function') {
+          callback(JSON.parse(result.body));
+        }
       })
       .catch(function (error) {
         console.log(util.format('JsonEndpointSource error %s : %s', datasource.id, error));
-        io.emit(eventId, undefined);
+        if (callback && typeof(callback) === 'function') {
+          callback(undefined);
+        }
       });
-  }
-
-  source.start = function(datasource, io) {
-    validate(datasource);
-    setInterval(function() {
-      refresh(datasource, io);
-    }, datasource.updateInterval);
   };
 
   return source;
