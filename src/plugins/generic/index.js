@@ -83,17 +83,17 @@ var GenericPlugin = (function () {
     return StringWidget(config);
   }
 
-  function getTransform(config) {
-    if (config.transform === undefined) {
-      return _.identity;
+  function getTransform(transform) {
+    if (transform && typeof(transform) === 'function') {
+      return transform;
     }
 
-    return config.transform;
+    return _.identity;
   }
 
   module.createWidget = function (config, socket) {
     var widget = createWidgetInstance(config);
-    widget.transform = getTransform(config);
+    widget.transform = getTransform(config.transform);
     setupListener(config, socket, widget);
     return widget;
   };

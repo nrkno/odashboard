@@ -7,7 +7,7 @@ var AppInsightsSource = function() {
 
   var source = {};
 
-  function validate(datasource) {
+  source.validate = function(datasource) {
     assert(datasource.source === 'app-insights',
       util.format('Datasource.source should be \'app-insights\' for datasource with id = %s.\n%s', datasource.id, JSON.stringify(datasource)));
     assert(datasource.config.endpoint !== undefined,
@@ -18,7 +18,7 @@ var AppInsightsSource = function() {
       util.format('Datasource.config.appid is missing for datasource with id = %s.\n%s', datasource.id, JSON.stringify(datasource)));
     assert(datasource.config.apikey !== undefined,
       util.format('Datasource.config.apikey is missing for datasource with id = %s.\n%s', datasource.id, JSON.stringify(datasource)));
-  }
+  };
 
   function createUri(config) {
 
@@ -60,9 +60,8 @@ var AppInsightsSource = function() {
     };
   }
 
-  function refresh(datasource, io) {
+  source.refresh = function(datasource, callback) {
 
-    var eventId = datasource.plugin + '.' + datasource.id;
     var config = datasource.config;
     
     var uri = createUri(config);
@@ -86,17 +85,12 @@ var AppInsightsSource = function() {
         return;
       }
 
-      var msg = JSON.stringify(parse(body));
+      var val = parse(body);
 
-      io.emit(eventId, msg);
+      if (callback && typeof(callback) === 'function') {
+        callback(val);
+      }
     });
-  }
-
-  source.start = function(datasource, io) {
-    validate(datasource);
-    setInterval(function() {
-      refresh(datasource, io);
-    }, datasource.updateInterval);
   };
 
   return source;
