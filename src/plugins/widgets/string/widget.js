@@ -7,6 +7,8 @@ var StringWidget = function(config) {
     displayName: config.displayName,
     fieldName: config.fieldName,
     value: '',
+    width: config.width,
+    height: config.height    
   };
 
   function getStringValue(value) {

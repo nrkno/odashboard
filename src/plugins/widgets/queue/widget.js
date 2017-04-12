@@ -7,7 +7,9 @@ var QueueWidget = function(config) {
     widgetType: config.widgetType,
     fieldName: config.fieldName,
     count: 0,
-    'class': 'low'
+    'class': 'low',
+    width: config.width,
+    height: config.height
   };
 
   function readCount(value) {

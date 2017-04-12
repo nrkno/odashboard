@@ -8,10 +8,6 @@
   font-size: 2.5em !important;
 }
 
-.generic-image {
-  width: 20%;
-}
-
 .generic-boolean-image {
   width: 30%;
 }
@@ -30,9 +26,10 @@
 }
 
   .azureservicebuswidget p.name {
-    font-size: 1.5em;
+    font-size: 3em;
   }
 
   .azureservicebuswidget p.count {
     font-size: 2em;
   }
+
