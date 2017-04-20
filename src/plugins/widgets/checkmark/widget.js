@@ -7,6 +7,8 @@ var CheckmarkWidget = function(config) {
     displayName: config.displayName,
     fieldName: config.fieldName,
     value: undefined,
+    width: config.width,
+    height: config.height
   };
 
   widget.update = function(value) {

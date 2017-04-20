@@ -7,7 +7,9 @@ var NumberWidget = function(config) {
     displayName: config.displayName,
     fieldName: config.fieldName,
     value: 0,
-    trend: 'stable'
+    trend: 'stable',
+    width: config.width,
+    height: config.height    
   };
 
   function getTrend(value) {
