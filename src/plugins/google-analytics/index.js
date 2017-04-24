@@ -18,7 +18,6 @@ var GoogleAnalyticsPlugin = (function () {
   };
 
   function getValue (gaData, dimensionValue) {
-    console.log(gaData);
     if (dimensionValue == undefined) {
       return gaData[0][0];
     } else {
