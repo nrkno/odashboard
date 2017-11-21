@@ -22,7 +22,6 @@ var TeamCityPlugin = (function () {
   };
   
   module.updateWidget = function(build, widget) {
-
     if (build.state == 'running') {
       widget.status = 'In progress';
       widget.class = 'inProgress';
@@ -33,9 +32,12 @@ var TeamCityPlugin = (function () {
       if (build.status == 'FAILURE') {
         widget.status = 'Failed';
         widget.class = 'failed';
+      } else if (build.status == 'UNKNOWN' && build.statusText == 'Canceled'){
+        widget.status = 'Canceled';
+        widget.class = 'failed';
       } else {
         widget.status = 'Success';
-        widget.class = 'success';
+        widget.class = 'success';        
       }
     }
 
