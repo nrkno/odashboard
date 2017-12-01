@@ -10,10 +10,10 @@ var app = angular.module('odashboard', [
 app.config(['$routeProvider',
   function ($routeProvider) {
     $routeProvider.
-        when('/overview', {
-          templateUrl: 'partials/Overview.html'
-        }).
-        otherwise({
-          redirectTo: '/overview'
-        });
+      when('/overview', {
+        templateUrl: 'partials/Overview.html'
+      }).
+      otherwise({
+        redirectTo: '/overview'
+      });
   }]);

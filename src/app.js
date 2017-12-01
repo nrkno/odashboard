@@ -5,12 +5,12 @@ var app = angular.module('odashboard', [require('angular-route')]);
 app.config(['$routeProvider',
   function ($routeProvider) {
     $routeProvider.
-        when('/overview', {
-          templateUrl: 'partials/Overview.html'
-        }).
-        otherwise({
-          redirectTo: '/overview'
-        });
+      when('/overview', {
+        templateUrl: 'partials/Overview.html'
+      }).
+      otherwise({
+        redirectTo: '/overview'
+      });
   }]);
 
 app.factory('socket', ['$rootScope', function ($rootScope) {
