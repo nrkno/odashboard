@@ -8,6 +8,11 @@ var myController = app.controller('PluginController', function($rootScope, $scop
   var transformedConfig = transformConfig(clientConfig);
   $scope.tabs = parseRows(clientConfig, $interval, $http, socket);
 
+  if (clientConfig.snow) {
+    var snowNode = document.createElement('div');
+    snowNode.setAttribute('id', 'snow');
+    document.body.appendChild(snowNode);
+  }
   // Tab handling
   var tabCycle;
   $scope.isCycling = false;
