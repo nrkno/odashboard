@@ -96,7 +96,7 @@ function parseRows(clientConfig, $interval, $http, socket) {
       _.each(row.widgets, function(widget) {
         var plugin = pluginModules[widget.plugin];
         if (plugin !== undefined)
-            {
+        {
           var newWidget = plugin.createWidget(widget, socket);
           widgets.push(newWidget);
         }

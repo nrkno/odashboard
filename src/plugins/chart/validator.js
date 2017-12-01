@@ -8,7 +8,7 @@ function validateDatasource(datasource) {
 
 function shouldHaveDatasourceId(widget) {
   assert(widget.datasourceId != undefined,
-     util.format('DatasourceId not defined for datasource with id %s', widget.plugin));
+    util.format('DatasourceId not defined for datasource with id %s', widget.plugin));
 
   if (_.find(widget.datasourceId) == undefined) {
     console.log(util.format('Warning: Unknown datasource %s in client config', widget.datasourceId));

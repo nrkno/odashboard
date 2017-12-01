@@ -72,7 +72,7 @@ var TeamCityPlugin = (function () {
     if (date)
       return date.format('DD-MMM HH:mm:s');
     else
-            return '.';
+      return '.';
   };
 
   function parseMsg(msg, listenEvent, widget) {
@@ -86,7 +86,7 @@ var TeamCityPlugin = (function () {
     });
 
     if (buildfound === false) {
-          //console.log("Build " + widget.id + " not found in datasource");
+      //console.log("Build " + widget.id + " not found in datasource");
     }
   }
 

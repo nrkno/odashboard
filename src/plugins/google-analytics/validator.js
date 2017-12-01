@@ -14,7 +14,7 @@ function validateDatasource(datasource) {
 
   if (datasource.filters !== undefined) {
     assert(datasource.filters.startsWith('rt:'), 
-    util.format('Illegal filters for Google Analytics datasource with id = %s. Must start with rt:', datasource.id));
+      util.format('Illegal filters for Google Analytics datasource with id = %s. Must start with rt:', datasource.id));
   }
 
   if (datasource.dimension !== undefined) {
@@ -25,7 +25,7 @@ function validateDatasource(datasource) {
 
 function shouldHaveDatasourceId(widget) {
   assert(widget.datasourceId != undefined,
-     util.format('DatasourceId not defined for datasource with id %s', widget.plugin));
+    util.format('DatasourceId not defined for datasource with id %s', widget.plugin));
 
   if (_.find(widget.datasourceId) == undefined) {
     console.log(util.format('Warning: Unknown datasource %s in client config', widget.datasourceId));
