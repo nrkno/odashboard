@@ -32,7 +32,7 @@ var TeamCityPlugin = (function () {
       if (build.status == 'FAILURE') {
         widget.status = 'Failed';
         widget.class = 'failed';
-      } else if (build.status == 'UNKNOWN' && build.statusText == 'Canceled'){
+      } else if (build.status == 'UNKNOWN' && build.statusText.indexOf('Cancel') !== -1){
         widget.status = 'Canceled';
         widget.class = 'failed';
       } else {
