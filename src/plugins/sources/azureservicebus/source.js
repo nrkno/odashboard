@@ -77,13 +77,6 @@ var AzureServiceBusSource = function() {
     });
   };
 
-  source.start = function(datasource, io) {
-    validate(datasource);
-    setInterval(function() {
-      refresh(datasource, io);
-    }, datasource.updateInterval);
-  };
-
   return source;
 };
 

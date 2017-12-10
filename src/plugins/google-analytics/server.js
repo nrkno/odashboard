@@ -69,7 +69,7 @@ function validate(datasource) {
   validator.validateDatasource(datasource);
 }
 
-exports.name = 'simple';
+exports.name = 'google-analytics';
 exports.initDatasource = initDatasource;
 exports.validate = validate;
 
