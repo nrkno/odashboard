@@ -25,7 +25,6 @@ var LineChartWidget = function (Chart, config) {
   };
 
   widget.update = function(value) {
-    
     if (widget.chart == null) {
       var newChart = initializeLineChart(value);
       widget.chart = newChart;

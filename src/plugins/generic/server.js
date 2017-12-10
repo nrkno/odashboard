@@ -25,6 +25,11 @@ function getDatasource(sourcename) {
     var AppInsightsSource = require('../sources/appinsights/source.js');
     return AppInsightsSource();
   }
+
+  if (sourcename === 'google-analytics') {
+    var GoogleAnalyticsSource = require('../sources/google-analytics/source.js');
+    return GoogleAnalyticsSource();
+  }
   
   return undefined;  
 }
@@ -39,6 +44,9 @@ function getTransform(transform) {
 
 function start(source, datasource, io) {
   source.validate(datasource);
+  if (source.start !== undefined) {
+    source.start(datasource);
+  }
   var eventId = datasource.plugin + '.' + datasource.id;
   var transform = getTransform(datasource.transform);
   setInterval(function() {
