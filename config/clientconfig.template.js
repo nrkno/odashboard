@@ -1,42 +1,42 @@
 var row1 = {
-  title: 'MyRow',
+  title: 'Row1',
   widgets: [
     {
-      plugin: 'simple',
-      datasourceId: 'simple1',
+      plugin: 'generic',
+      widgetType: 'number',
+      datasourceId: '1',
       displayName: 'A number on a dashboard',
-      fieldName: 'number',
-      fieldType: 'number'
+      fieldName: 'number'
     },
     {
-      plugin: 'chart',
-      datasourceId: 'chart1',
-      chartType: 'line',
+      plugin: 'generic',
+      widgetType: 'linechart',
+      datasourceId: '1',
       width: '420px',
       height: '210px',
+      fieldName: 'number',
       options: {
         chartLabel: 'Numbers',
-        valueField: 'number',
         timeSeriesLength: 30
       }
     },
     {
-      plugin: 'simple',
+      plugin: 'generic',
+      widgetType: 'checkmark',
       datasourceId: 'mannen',
       displayName: 'Har mannen falt?',
-      fieldName: 'falt_ned',
-      fieldType: 'boolean'
+      fieldName: 'falt_ned'
     }
   ]
 };
 
 var row2 = {
-  title: 'This',
+  title: 'Iframe',
   widgets: [{
     plugin: 'iframe',
     datasourceId: '',
     displayName: 'title',
-    src: 'http://dn.ht/picklecat/',
+    src: 'http://demos.littleworkshop.fr/infinitown',
     width: 600,
     height: 400
   }]
@@ -46,16 +46,16 @@ var row3 = {
   title: 'This',
   widgets: [
     {
-      plugin: 'simple',
-      datasourceId: 'simple1',
+      plugin: 'generic',
+      datasourceId: '1',
+      widgetType: 'number',
       displayName: 'A big number on a dashboard',
-      fieldName: 'bigNumber',
-      fieldType: 'number'
+      fieldName: 'bigNumber'
     },
     {
-      plugin: 'chart',
-      datasourceId: 'chart1',
-      chartType: 'pie',
+      plugin: 'generic',
+      datasourceId: '1',
+      widgetType: 'piechart',
       width: '320px',
       height: '320px',
       options: {
