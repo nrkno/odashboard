@@ -17,10 +17,10 @@ The options object has the following fields:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
+| displayName     |String|Title for this chart|   no |
 | valueField     |String|Field in json from which datapoints are parsed from. Can be a single string to extract an array from the json result, or an array of strings to refer to a group of different values in the json result.|   no |
 | labelField     |String|Field in json from which labels are parsed from. Can be skipped if you define `labels` instead. |   yes |
 | labels     |Array|Array of labels. Use this if the labels can not be parsed from the json result. If both `labelField` and `labels` is defined, `labels` will be used. |   yes |
-| displayName     |String|Title for this chart|   no |
 | chartOptions     |Object|A [ChartJs option](http://www.chartjs.org/docs/#doughnut-pie-chart-chart-options) object for all your special needs. Overwrites all default options.  |   yes |
 | datasetOptions     |Object|A [ChartJs line dataset option object](http://www.chartjs.org/docs/#doughnut-pie-chart-dataset-structure) object for all your special needs. Overwrites all default options.   |   yes |
 

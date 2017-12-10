@@ -21,7 +21,6 @@ var GenericPlugin = (function () {
     var nodes = fieldName.split(' ');
 
     var reduced = _.reduce(nodes, function (memo, v, key) {
-      key;
       var m = memo[v];
       return m;
     }, jsonNode);

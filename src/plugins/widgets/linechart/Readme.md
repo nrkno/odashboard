@@ -11,13 +11,13 @@ The widget config has the following mandatory fields:
 | datasourceId     |String|The id of the datasource|   no |
 | width |String| The width of the widget (in px) | no |
 | height |String| The height of the widget (in px)| no |
+| fieldName |String| Field in json from which datapoints are parsed from| no |
 | options |Object| Line chart specific options | no |
 
 The options object has the following fields:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
-| valueField     |String|Field in json from which datapoints are parsed from |   no |
 | chartLabel     |String|Title for this chart|   no |
 | timeSeriesLength     |Number|How many datapoints should be drawn in chart. The line chart will be a sliding window over `#timeSeriesLength` latest values  |   no |
 | yMin     |Number|	User defined minimum number for the yAxes scale.  |  yes |
@@ -34,9 +34,9 @@ This is an example of widget config for a line chart:
     datasourceId: "myChartDatasource",
     width: "420px",
     height: "210px",
+    fieldName: "number",
     options: {
       chartLabel: "My data",
-      valueField: "number", // use whitespace
       timeSeriesLength: 30
     }
 }
