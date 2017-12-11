@@ -1,8 +1,8 @@
 var StringWidget = function(config) {
 
   var widget = {
-    widgetType: config.widgetType,
-    plugin: config.plugin,
+    plugin: 'generic',
+    widgetType: 'string',
     datasourceId: config.datasourceId,
     displayName: config.displayName,
     fieldName: config.fieldName,

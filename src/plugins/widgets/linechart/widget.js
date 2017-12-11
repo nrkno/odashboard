@@ -7,8 +7,8 @@ var LineChartWidget = function (Chart, config) {
 
   var cid =  _.uniqueId('chart_');
   var widget = {
-    widgetType: config.widgetType,
-    plugin: config.plugin,
+    plugin: 'generic',
+    widgetType: 'linechart',
     chartId: cid,
     datasourceId: config.datasourceId,
     width: config.width,

@@ -5,10 +5,10 @@ var QueueWidget = function(config) {
   const defaultMidThreshold = 500;
 
   var widget = {
-    plugin: config.plugin,
+    plugin: 'generic',
+    widgetType: 'queue',
     datasourceId: config.datasourceId,
     displayName: config.displayName,
-    widgetType: config.widgetType,
     fieldName: config.fieldName,
     count: 0,
     'class': 'low',
