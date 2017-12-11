@@ -1,12 +1,12 @@
 var CheckmarkWidget = function(config) {
 
   var widget = {
-    widgetType: config.widgetType,
-    plugin: config.plugin,
+    plugin: 'generic',
+    widgetType: 'checkmark',
     datasourceId: config.datasourceId,
     displayName: config.displayName,
     fieldName: config.fieldName,
-    value: undefined,
+    value: false,
     width: config.width,
     height: config.height
   };

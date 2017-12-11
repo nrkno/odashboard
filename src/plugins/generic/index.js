@@ -54,17 +54,17 @@ var GenericPlugin = (function () {
     });
   }
   
-  function createWidgetInstance(config) {
+  module.createWidgetInstance = function (config, chart) {
     if (config.widgetType === 'queue') {
       return QueueWidget(config);
     }
 
     if (config.widgetType === 'linechart') {
-      return LineChartWidget(Chart, config);
+      return LineChartWidget(chart, config);
     }
 
     if (config.widgetType === 'piechart') {
-      return PieChartWidget(Chart, config);
+      return PieChartWidget(chart, config);
     }
 
     if (config.widgetType === 'checkmark') {
@@ -91,7 +91,7 @@ var GenericPlugin = (function () {
   }
 
   module.createWidget = function (config, socket) {
-    var widget = createWidgetInstance(config);
+    var widget = this.createWidgetInstance(config, Chart);
     widget.transform = getTransform(config.transform);
     setupListener(config, socket, widget);
     return widget;
