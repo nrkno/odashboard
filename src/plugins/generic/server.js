@@ -16,6 +16,11 @@ function getDatasource(sourcename) {
     return AzureServiceBusSource();
   }
 
+  if (sourcename === 'rabbitmq') {
+    var RabbitMqSource = require('../sources/rabbitmq/source.js');
+    return RabbitMqSource();
+  }
+
   if (sourcename === 'app-insights') {
     var AppInsightsSource = require('../sources/appinsights/source.js');
     return AppInsightsSource();
