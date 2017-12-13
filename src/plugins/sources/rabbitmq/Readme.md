@@ -3,7 +3,7 @@ RabbitMQ datasource
 The RabbitMQ datasource provides the message count from RabbitMQ queues. The datasource use Basic Auth to authenticate a user.
 
 ## Config
-+Set source to `rabbitmq`. Add the following proporties:
+Set source to `rabbitmq`. Add the following proporties:
 
 | Config property | Description |
 |--------|-------------|
