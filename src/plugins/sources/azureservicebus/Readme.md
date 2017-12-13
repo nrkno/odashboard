@@ -4,7 +4,7 @@ Use the Azure Service Bus datasource to monitor the number of messages on a serv
 
 
 ## Config
-Set source to `azure-servicebus`. Add the follow proporties:
+Set source to `azure-servicebus`. Add the following proporties:
 
 | Config property | Description |
 |--------|-------------|
