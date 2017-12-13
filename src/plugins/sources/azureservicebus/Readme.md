@@ -1,7 +1,21 @@
 # Azure Service Bus datasource
 
-To specify a Azure Service Bus datasource, use 'azure-servicebus' for the *source* property in your server configuration. In the *config* property, you must include topic, subscription, and namespace, as well as the SAS key name and key. 
+Use the Azure Service Bus datasource to monitor the number of messages on a service bus subscription. 
 
+
+## Config
+Set source to `azure-servicebus`. Add the follow proporties:
+
+| Config property | Description |
+|--------|-------------|
+|namespace|Name of the service bus namespace|
+|topic|Name of the topic|
+|subscription|Name of the subscription|
+|sasKeyName|Name of the sasKey|
+|sasKey|Your key|
+
+
+## Example 
 ```
 {
   id: 'MyAzureServiceBus',
@@ -20,3 +34,5 @@ To specify a Azure Service Bus datasource, use 'azure-servicebus' for the *sourc
 ```
 
 See also [data sources](../).
+
+
