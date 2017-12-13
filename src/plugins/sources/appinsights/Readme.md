@@ -9,7 +9,7 @@ Set source to `app-insights`. Add the following proporties:
 |--------|-------------|
 |appid|Your App ID|
 |apikey|Your API key|
-|method|Usually`'GET`|
+|method|Usually`GET`|
 |endpoint|The endpoint property must be one of the supported endpoints specified by the Application Insights REST API|
 |parameters|Object of url parameters, as supported by `endpoint`|
 
