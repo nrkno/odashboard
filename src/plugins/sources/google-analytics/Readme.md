@@ -1,35 +1,8 @@
 # Google Analytics Realtime datasource
-A datasource used to retrive realtime Google Analytics data. See [Realtime API doc](https://developers.google.com/analytics/devguides/reporting/realtime/v3/reference/) for reference.
-
-To specify a Google Analytics datasource, use 'google-analytics' for the `source` property in your server configuration. Use the `config` property to specify keyfile, viewId, metric, dimension, and filter.
-
-An example datasource that returns active users:
-
-```
-  {
-    id: 'ga',
-    plugin: 'generic',
-    source: 'google-analytics',
-    updateInterval: 5000,
-    timeout: 1500,
-    config: {
-      keyFile: 'my-analytics-key-g40242323f61.json',
-      viewId: 'ga:50133933',
-      metric: 'rt:activeUsers'
-    }
-  }
-```
-
-The datasource will return a JSON-object on this format:
-
-```
-{
-  'rt:activeUsers' : '24990'
-}
-```
+A datasource used to retrieve realtime Google Analytics data. See [Realtime API doc](https://developers.google.com/analytics/devguides/reporting/realtime/v3/reference/) for reference.
 
 # Datasource config
-The Google Analytics datasource config uses the following fields:
+Set source to `google-analytics`. Add the following config proporties:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
@@ -93,6 +66,32 @@ Add a valid keyfile to the odashvoard config-directory in order to authorize wit
 * Select "User Management", either at account- or property-level.
 * Add Service account ID that you just created.
 
+# Example 
+
+An example datasource that returns active users:
+
+```
+  {
+    id: 'ga',
+    plugin: 'generic',
+    source: 'google-analytics',
+    updateInterval: 5000,
+    timeout: 1500,
+    config: {
+      keyFile: 'my-analytics-key-g40242323f61.json',
+      viewId: 'ga:50133933',
+      metric: 'rt:activeUsers'
+    }
+  }
+```
+
+The datasource will return a JSON-object on this format:
+
+```
+{
+  'rt:activeUsers' : '24990'
+}
+```
 
 # How to use with generic widgets
 

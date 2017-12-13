@@ -1,9 +1,18 @@
 RabbitMQ datasource
 ====
-The RabbitMQ datasource provides the message count from RabbitMq queues. The datasource use Basic Auth to authenticate a user.
+The RabbitMQ datasource provides the message count from RabbitMQ queues. The datasource use Basic Auth to authenticate a user.
 
-## Datasource config
-To configure a connection with a RabbitMQ-server you need to add a new datasource to the list of datasources in serverconfig.js. You need one datasource per queue.
+## Config
+Set source to `rabbitmq`. Add the following config proporties:
+
+| Config property | Description |
+|--------|-------------|
+|url|Url of RabbitMQ server|
+|queueName|Name of the queue to monitor|
+|auth|Authorization params|
+
+## Example
+
 ```
 {
   id: 'rabbitmqsource',
