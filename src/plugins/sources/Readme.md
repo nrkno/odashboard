@@ -10,4 +10,20 @@ Currently, the plugin works with the following data sources:
 * [Google Analytics](google-analytics)
 * [Application Insights REST API](appinsights)
 
-You need to specify the type of data source in the *source* property, and to provide data source-specific information in the *config* property.
+## Config
+For each generic datasource you need to specify the *source* property, and to provide data source-specific information in the *config* property. 
+
+## JSON endpoint example
+
+```
+{
+  id: 'MyJsonEndpoint',
+  plugin: 'generic',
+  updateInterval: 10000,
+  timeout: 8000,
+  source: 'json-endpoint',
+  config: {
+    url: 'http://localhost:8100/json/'
+  }
+}
+```
