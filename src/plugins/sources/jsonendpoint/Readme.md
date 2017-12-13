@@ -1,7 +1,17 @@
 # JSON endpoint datasource.
 
-To specify a JSON endpoint datasource, use 'json-endpoint' for the *source* property in your server configuration. In the *config* property, include the url to the JSON endpoint. 
+Use a JSON endpoint to retrieve JSON-data from urls. 
 
+
+## Config
+Set source to `json-endpoint`
+
+| Property | Description |
+|--------|-------------|
+|url|url of endpoint|
+
+
+## Example 
 ```
 {
   id: 'MyJsonEndpoint',
