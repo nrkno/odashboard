@@ -2,7 +2,7 @@
 A datasource used to retrieve realtime Google Analytics data. See [Realtime API doc](https://developers.google.com/analytics/devguides/reporting/realtime/v3/reference/) for reference.
 
 # Datasource config
-+Set source to `google-analytics`. Add the following config proporties:
+Set source to `google-analytics`. Add the following config proporties:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
