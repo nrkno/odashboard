@@ -1,6 +1,5 @@
 
-﻿Available plugins
-====
+# Plugins
 
 | Plugin | Description |
 |--------|-------------|
@@ -8,10 +7,13 @@
 |[IFrame](iframe)|Embed an external web resource in an iframe|
 |[TeamCity](teamcity)|Display TeamCity build information|
 
+A plugin is a combination of a datasource and one or more widgets. A datasource is only compatible with widgets from the same plugin. The generic plugin has a lot of datasources and a lot of widgets that play well together. The TeamCity-plugin only have one datasource and one widget. The Iframe plugin is only a widget.
+
 # Create your own plugins
 
-You can make your own plugins to odashboard. Loading of a plugin is convention based,
-using the *name* as key. In order for the plugin to be loaded correctly you need to follow the naming convention strictly.
+*If you only need to support a new kind of data, implementing a [new generic datasource](sources) might be a better choice.*
+
+Implementing a new plugin is easy. Loading of a plugin is convention based, using the *name* as key. In order for the plugin to be loaded correctly you need to follow the naming convention strictly.
 
 Note: The plugin *name* needs to be included in the enabledPlugins array of `config/appconfig.js` to be loaded.
 
