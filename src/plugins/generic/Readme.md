@@ -1,6 +1,33 @@
 # Generic plugin
 
-A flexible plugin for combining a datasource and a widget. It can be used to display a variety of values from a variety of sources. Obviously the data served by the datasource must be made to fit the data expected by the widget.
+A flexible plugin for combining a generic datasource and a widget. It can be used to display a variety of values from a variety of sources. The data served by the datasource must be made to fit the data expected by the widget.
+
+* Details about all datasources can be found [here](../sources).
+* Details about all widgets  can be found [here](../widgets).
+
+## Available widgets and sources
+The generic plugin makes it possible to use a wide range of widgets with a set of different datasources. The availabe widgets are:
+
+| Widget type | Description |
+|-------------|-------------|
+| [String](src/plugins/widgets/string) | Show a string |
+| [Number](src/plugins/widgets/number) | Show a number |
+| [Timestamp](src/plugins/widgets/timestamp) | Show a timestamp | 
+| [Checkmark](src/plugins/widgets/checkmark) | Show a checkmark | 
+| [Queue](src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
+| [Pie chart](src/plugins/widgets/piechart) | Draws a pie chart |
+| [Line chart](src/plugins/widgets/linechart) | Draws a pie chart |
+
+The widgets can display data from the following datasources:
+
+| Datasource type | Description |
+|-------------|-------------|
+| [JSON Endpoint](src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
+| [Application insights](src/plugins/sources/appinsights)| Info from app insights | 
+| [Azure service bus](src/plugins/soures/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [Google analytics](src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
+| [RabbitMQ](src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
+
 
 ## Datasource config
 
@@ -14,7 +41,7 @@ The kind of datasource to use with the generic plugin is specified with the sour
   }
 ```
 
-For details about data sources, see [data sources](../sources).
+
 
 ## Widget config
 
@@ -26,5 +53,3 @@ The kind of widget to use with the generic plugin is specified with the *widgetT
   displayName: 'Something',
   fieldName: 'foo'
 ```
-
-For details about widgets, see [widgets](../widgets).

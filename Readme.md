@@ -16,12 +16,6 @@ The application answers on port 3000.
 How it may look:
 ![Example](public/img/screenshot01.PNG?raw=true "An example dashboard")
 
-## Why another dashboard?
-
-Odashboard origins from a hackathon at NRK. We wanted to display build information from TeamCity together with queue information from RabbitMQ on a big screen in our office. Instead of looking to existing open source dashboards like Dashing, we wanted to get some experience with Node.js, and thus Odashboard was born. At first it was a hard coded mess, but over time it evolved to the plugin oriented configurable application it is today. And then we thought other people might enjoy it as much as we do, so we open sourced it.
-
-The strength of Odashboard is that you can get your dashboard up and running in minutes, and all you need to do is edit some config files. Try it out!
-
 ## How to initialize odashboard
 
 To configure your dashboard you need to edit two files:
@@ -32,23 +26,40 @@ To configure your dashboard you need to edit two files:
 Most widgets need a compatible datasource to run, but some (like the iframe-plugin) only need you to define a widget.
 
 ## Plugins
-The current list of available plugins:
+Below you find current list of available plugins. The generic plugin lets you combine different sources with different plugins. 
 
 | Plugin | Description |
 |--------|-------------|
-|[Simple](src/plugins/simple)|Display strings, numbers, booleans and images from Json Rest API endpoints|
-|[Chart](src/plugins/chart)|Draw charts from data in Json Rest API endpoints|
-|[Image](src/plugins/image)|Show image from url|
+|[Generic](src/plugins/generic)|Generic plugin for combining data sources and widgets. This might be all you need! |
+|[TeamCity](src/plugins/teamcity)|Display TeamCity build information
 |[IFrame](src/plugins/iframe)|Embed an external web resource in an iframe|
-|[TeamCity](src/plugins/teamcity)|Display TeamCity build information|
-|[RabbitMQ](src/plugins/rabbitmq)|Display number of message in a RabbitMQ queue |
-|[Azure Service Bus](src/plugins/azure-servicebus)|Display number of messages on an Azure Service Bus topic subscription|
-|[Google Analytics](src/plugins/google-analytics)|Display real-time data from Google Analytics|
-|[Generic](src/plugins/generic)|Generic plugin for combining data sources and widgets|
+
+### Generic plugin
+The generic plugin makes it possible to use a wide range of widgets with a set of different datasources. The availabe widgets are:
+
+| Widget type | Description |
+|-------------|-------------|
+| [String](src/plugins/widgets/string) | Show a string |
+| [Number](src/plugins/widgets/number) | Show a number |
+| [Timestamp](src/plugins/widgets/timestamp) | Show a timestamp | 
+| [Checkmark](src/plugins/widgets/checkmark) | Show a checkmark | 
+| [Queue](src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
+| [Pie chart](src/plugins/widgets/piechart) | Draws a pie chart |
+| [Line chart](src/plugins/widgets/linechart) | Draws a pie chart |
+
+The widgets can display data from the following datasources:
+
+| Datasource type | Description |
+|-------------|-------------|
+| [JSON Endpoint](src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
+| [Application insights](src/plugins/sources/appinsights)| Info from app insights | 
+| [Azure service bus](src/plugins/soures/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [Google analytics](src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
+| [RabbitMQ](src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
 Each plugin is documented in [the plugin folder](src/plugins/)
 
-### How to setup widgets
+## How to setup widgets
 Widgets are defined in `config/clientconfig.js`. Each widget is defined as a json-object with the following fields:
 
 | Fields        |Type| Description           | Optional  |
@@ -61,52 +72,20 @@ Widgets are defined in `config/clientconfig.js`. Each widget is defined as a jso
 
 In addition each plugin may have it's own fields. Default values are defined in `widgetDefaults` in `config/appconfig.js`
 
-This is an example config for a widget using the Simple-plugin:
+This is an example config for a number widget using the Generic-plugin:
 ```
 var myWidget = {
-    plugin: "simple"
+    plugin: "generic"
     datasourceId: "myDataSource1",
     url: "http://moreinfoaboutmywidget.com",
     // Plugin specific fields
-    displayName: "Look ma, a widget",
+    widgetType: "number",
+    displayName: "Look ma, a number",
     fieldName: "field",
-    fieldType: "boolean"
  }
 ```
 
-#### Tabs and rows
-To make the widget available you need to add it to a row in the dashboard. A row has an array of widgets. A row is defined like this:
-```
-var myFirstRow = {
-    title: "My widgets",
-    widgets: [myWidget, myOtherWidget]
-}
-```
-
-The rows in turn need to be included in the dashboardConfig-object. The rows can be added in two different ways, depending on if you need multiple tabs (pages) in your dashboard or not.
-
-If you only want one page, you can add the rows directly in the `rows`-field.
-```
-var dashboardConfig = {
-    title: "My Dashboard",
-    rows: [myRow, mySecondRow]
-};
-```
-
-If you have so many widgets that you need multiple pages, define an array of row-arrays in the `tabs`-field:
-```
-var dashboardConfig = {
-    title: "My Dashboard",
-    tabs: [
-      [myFirstRow, mySecondRow],
-      [pageTwoRow, pageTwoSecondRow]
-    ]
-};
-```
-
-If both `tabs` and `rows` are present, `tabs` will be used.
-
-### Setup datasources
+## How to setup datasources
 Datasources are defined in `config/serverconfig.js`. Each datasource is defined as a json-object with the following fields:
 
 | Fields        |Type| Description           | Optional  |
@@ -121,14 +100,17 @@ A datasource has an id, a plugin, and an updateInterval. In addition each plugin
 
 ```
 {
-    id: "myDataSource1",
-    plugin: "simple",
+    id: 'myDataSource1',
+    plugin: 'generic',
     updateInterval: 6000,
     timeout: 2500,
     auth: undefined,
 
     // Plugin specific fields
-    url: "http://myhost.com/myapi/test"
+    source: 'json-endpoint',
+    config: {
+      url: "http://myhost.com/myapi/test"
+    } 
 }
 
 ```
@@ -181,140 +163,41 @@ auth: {
 }
 
 ```
+## Tabs and rows
 
-# Create your own plugins
-
-You can make your own plugins to odashboard. Loading of a plugin is convention based,
-using the *name* as key. In order for the plugin to be loaded correctly you need to follow the naming convention strictly.
-
-Note: The plugin *name* needs to be included in the enabledPlugins array of `config/appconfig.js` to be loaded.
-
-A plugin needs to consists of at least the following files:
+To make the widget available you need to add it to a row in the dashboard. A row has an array of widgets. A row is defined like this:
 
 ```
-src/plugins/name/index.js
-src/plugins/name/public/name.html
-src/plugins/name/public/name.css
-
-```
-
-`ìndex.js` is where you define the behavior of your client side widget. `name.html` defines
-how to draw the widget to the dashboard with the style from `name.css`
-
-The following files are optional, but strongly encouraged:
-
-```
-src/plugins/name/server.js
-src/plugins/name/validator.js
-```
-
-`server.js` defines your serverbased logic. `validator.js` will be called on startup
-to ensure all datasources and widgets related to your plugin are properly configured.
-
-## Client side requirements
-`index.js` must implement `createWidget`, which returns a widget. `createWidget` should also listen for socket.io events, and write the changes to the current widget.
-
-This is a template for index.js for a plugin:
-
-```
-
-var PluginName = (function () {
-
-    var module = {};
-
-    function createNewPluginNameWidget(name, config) {
-        return {
-            plugin: "plugin-name",
-            datasourceId: config.datasourceId,
-            displayName: config.displayName,
-            name: name,
-            myValue: 0,
-            someConfigValue: config.value
-        };
-    }
-
-    function setupListener(widgetConfig, socket) {
-       var listenEvent = widgetConfig.plugin + "." + widgetConfig.datasourceId;
-       console.log("listening for " + listenEvent)
-        socket.on(listenEvent, function (msg) {
-          widget.myValue = msg;
-        });
-    };
-
-    module.createWidget = function (widgetConfig, socket) {
-        var widget = createNewPluginNameWidget(widgetConfig.displayName, widget);
-        setupListener(widget, socket)
-        return widget;
-    };
-
-    return module;
-
-}());
-
-module.exports = PluginName;
-
-```
-
-## Server side requirements
-`server.js` must implement a function `initDatasource` which setups the event emiter for a datasource. The function should implement an interval using the `datasource.updateInterval`, get the updated data it needs, and emit it in an event.
-
-This is a template server.js for a plugin:
-
-```
-var exports = module.exports = {};
-
-function initDatasource(datasource, io) {
-  setInterval(function() {
-    var eventId = datasource.plugin + "." + datasource.id;
-
-    // Here you refresh your data, and send it to the clients.
-
-    io.emit(eventId, "My data")
-  }, datasource.updateInterval);
+var myFirstRow = {
+    title: "My widgets",
+    widgets: [myWidget, myOtherWidget]
 }
-
-exports.name = "plugin-name";
-exports.initDatasource = initDatasource;
-
 ```
 
-There is a custom httpclient defined in httpclient.js which we encourage you to use for http requests. This supports Basic and NTLM authentication and also wraps a normal http request without authentication.
+The rows in turn need to be included in the dashboardConfig-object. The rows can be added in two different ways, depending on if you need multiple tabs (pages) in your dashboard or not.
 
-The client can be used from any server side plugin by using require like so:
+If you only want one page, you can add the rows directly in the `rows`-field.
 ```
-httpclient = require('../../../httpclient');
-httpclient.get(datasource, callback);
+var dashboardConfig = {
+    title: "My Dashboard",
+    rows: [myRow, mySecondRow]
+};
 ```
 
-## Validator
-
-Create a file named validator.js to validate datasources and widget related to your plugin.
-The module needs to export two functions: `validateDatasource` and `validateWidget`. Both
-will be called upon startup of the application for all datasources and widgets which
-use your plugin.
-
-In the two functions you should implement assertions to ensure all plugin specific fields are setup correctly.
-
-This is an example validator:
-
-
+If you have so many widgets that you need multiple pages, define an array of row-arrays in the `tabs`-field:
 ```
-const assert = require('assert');
-
-function validateDatasource(datasource) {
-  assert(datasource.url !== undefined, `Missing url for pluginName datasource with id = ${datasource.id}`)
-}
-
-function validateWidget(widget) {
-  assert(widget.displayName !== undefined,
-    `Missing displayName for pluginName widget with datasource id = ${widget.datasourceId}`)
-  assert(widget.fieldName !== undefined,
-    `Missing fieldName for pluginName widget with datasource id = ${widget.datasourceId}`)
-  assert(widget.fieldType !== undefined,
-    `Missing fieldType for pluginName widget with datasource id = ${widget.datasourceId}`)
-}
-
-var exports = module.exports = {};
-exports.validateDatasource = validateDatasource;
-exports.validateWidget = validateWidget;
+var dashboardConfig = {
+    title: "My Dashboard",
+    tabs: [
+      [myFirstRow, mySecondRow],
+      [pageTwoRow, pageTwoSecondRow]
+    ]
+};
 ```
+
+If both `tabs` and `rows` are present, `tabs` will be used.
+## Why another dashboard?
+
+Odashboard origins from a hackathon at NRK. We wanted to display build information from TeamCity together with queue information from RabbitMQ on a big screen in our office. Instead of looking to existing open source dashboards like Dashing, we wanted to get some experience with Node.js, and thus Odashboard was born. At first it was a hard coded mess, but over time it evolved to the plugin oriented configurable application it is today. And then we thought other people might enjoy it as much as we do, so we open sourced it.
+
+The strength of Odashboard is that you can get your dashboard up and running in minutes, and all you need to do is edit some config files. Try it out!
