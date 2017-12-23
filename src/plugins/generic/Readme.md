@@ -10,23 +10,23 @@ The generic plugin makes it possible to use a wide range of widgets with a set o
 
 | Widget type | Description |
 |-------------|-------------|
-| [String](src/plugins/widgets/string) | Show a string |
-| [Number](src/plugins/widgets/number) | Show a number |
-| [Timestamp](src/plugins/widgets/timestamp) | Show a timestamp | 
-| [Checkmark](src/plugins/widgets/checkmark) | Show a checkmark | 
-| [Queue](src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
-| [Pie chart](src/plugins/widgets/piechart) | Draw a pie chart |
-| [Line chart](src/plugins/widgets/linechart) | Draw a line chart |
+| [String](../widgets/string) | Show a string |
+| [Number](../widgets/number) | Show a number |
+| [Timestamp](../widgets/timestamp) | Show a timestamp | 
+| [Checkmark](../widgets/checkmark) | Show a checkmark | 
+| [Queue](../widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
+| [Pie chart](../widgets/piechart) | Draw a pie chart |
+| [Line chart](../widgets/linechart) | Draw a line chart |
 
 The widgets can display data from the following datasources:
 
 | Datasource type | Description |
 |-------------|-------------|
-| [JSON Endpoint](src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
-| [Application insights](src/plugins/sources/appinsights)| Returns data from app insights | 
-| [Azure service bus](src/plugins/soures/azureservicebus) | Returns number of messages on an Azure service bus topic |
-| [Google analytics](src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
-| [RabbitMQ](src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
+| [JSON Endpoint](../sources/json-endpoint) | Returns JSON formatted data from an url |
+| [Application insights](../sources/appinsights)| Returns data from app insights | 
+| [Azure service bus](../soures/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [Google analytics](../sources/google-analytics)| Returns real time data from Google Analytics| 
+| [RabbitMQ](../sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
 
 ## Datasource config
