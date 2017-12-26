@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var moment = require('moment');
+var pluginHelper = require('../../plugin-helper');
 
 var LineChartWidget = function (Chart, config) {
 
@@ -15,7 +16,6 @@ var LineChartWidget = function (Chart, config) {
     height: config.height,
     chart: null,
     fieldName: config.fieldName,
-    valueField: config.options.valueField,
     chartLabel: config.options.chartLabel,
     timeSeriesLength: config.options.timeSeriesLength,
     yMin: config.options.yMin,
@@ -45,18 +45,16 @@ var LineChartWidget = function (Chart, config) {
   };
 
   function initializeLineChart(value) {
-    var canvas = document.getElementById(widget.chartId);
-
-    var ctx = canvas.getContext('2d');
-
+    var ctx = pluginHelper.get2Dcontext(widget.chartId);
+    
     var inititalLabels = _.times(widget.timeSeriesLength-1, function() { return ''; });
     inititalLabels.push(getLabel());
 
     var inititalValues = _.times(widget.timeSeriesLength-1, function() { return 0; });
     inititalValues.push(value);
 
-    var dataset = getDataset(inititalValues);
-    var chartOptions = getChartOptions();
+    var dataset = widget.getDataset(inititalValues);
+    var chartOptions = widget.getChartOptions();
 
     var newChart = new Chart(ctx, {
       type: 'line',
@@ -69,7 +67,7 @@ var LineChartWidget = function (Chart, config) {
     return newChart;
   }
 
-  function getDataset(inititalValues) {
+  widget.getDataset = function(inititalValues) {
 
     var defaultDatasetOptions = {
       backgroundColor: 'rgba(220,220,220,0.2)',
@@ -87,9 +85,9 @@ var LineChartWidget = function (Chart, config) {
     dataset.label = widget.chartLabel;
     dataset.data = inititalValues;
     return dataset;
-  }
+  };
 
-  function getChartOptions() {
+  widget.getChartOptions = function () {
 
     var defaultLineChartOptions = {
       title: {
@@ -128,7 +126,7 @@ var LineChartWidget = function (Chart, config) {
     }
 
     return chartOptions;
-  }
+  };
 
   function getLabel() {
     if (numValues++ % 5 == 0) {
