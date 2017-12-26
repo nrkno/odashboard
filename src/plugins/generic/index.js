@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var moment = require('moment');
+var Chart = require('chart.js');
 
 var StringWidget = require('../widgets/string/widget.js');
 var NumberWidget = require('../widgets/number/widget.js');

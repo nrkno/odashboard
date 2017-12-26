@@ -49,9 +49,16 @@ function subtractPixels(heightString, subtrahend) {
   return pixels + 'px';
 }
 
+function get2Dcontext(id) {
+  var canvas = document.getElementById(id);
+  var ctx = canvas.getContext('2d');
+  return ctx;
+}
+
 module.exports = {
   addSaltToSrc: addSaltToSrc,
   getValueFromJsonByName: getValueFromJsonByName,
   getValueFromJsonByNames: getValueFromJsonByNames,
-  subtractPixels: subtractPixels
+  subtractPixels: subtractPixels,
+  get2Dcontext: get2Dcontext
 };

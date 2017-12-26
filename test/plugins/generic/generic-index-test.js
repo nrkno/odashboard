@@ -1,7 +1,8 @@
 var assert = require('assert');
+var Chart = require('chart.js');
 var GenericPlugin = require('../../../src/plugins/generic/index');
 
-describe('Google Analytics Plugin', function() {
+describe('Generic Plugin', function() {
   
   describe('createWidgetInstance', function() {
     
@@ -120,18 +121,18 @@ describe('Google Analytics Plugin', function() {
         datasourceId: 'myChartDatasource',
         width: '320px',
         height: '320px',
+        fieldName: 'info history animalFrequency',
         options: {
           displayName: 'Animal Frequency',
-          valueField: 'info history animalFrequency',
           labelField: 'info history animalNames'
         }
       };
       
-      var widget = GenericPlugin.createWidgetInstance(config, undefined);
+      var widget = GenericPlugin.createWidgetInstance(config, Chart);
       assert(widget.widgetType === 'linechart');
       assert(widget.plugin === 'generic');
       assert(widget.datasourceId === config.datasourceId);
-      assert(widget.valueField === config.options.valueField);
+      assert(widget.fieldName === config.fieldName);
       assert(widget.update !== undefined);      
     });
 

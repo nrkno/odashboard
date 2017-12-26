@@ -2,6 +2,7 @@ var assert = require('assert');
 var sinon = require('sinon');
 
 var LineChart = require('../../../src/plugins/chart/linechart');
+var Chart = require('chart.js');
 
 function getTestWidget(valueField, label, chartOptions, datasetOptions) {
   return {
@@ -20,7 +21,7 @@ function getTestWidget(valueField, label, chartOptions, datasetOptions) {
   };
 }
 
-describe('LineChart plugin', function() {
+describe('LineChart widget', function() {
   var chartStub,
     instance,
     sandbox;
