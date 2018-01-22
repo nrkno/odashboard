@@ -28,7 +28,7 @@ When you specify a dimension, each distinct value of the dimension will be retur
   {
     config: {
       keyFile: 'my-analytics-key-f40562323f65.json',
-      viewId: 'ga:50133933',
+      viewId: 'ga:XXXXX',
       metric: 'rt:activeUsers',
       dimensions: 'rt:deviceCategory'
     }
@@ -48,7 +48,7 @@ The datasource will then return this:
 You can filter on both metrics and dimensions. A comma-separated list of dimension or metric filters to be applied to real-time data.
 
 ### Keyfile / Authorization
-Add a valid keyfile to the odashvoard config-directory in order to authorize with the real-time api. If you don't hva a key file, follow the instructions below:
+Add a valid keyfile to the odashboard config-directory in order to authorize with the real-time api. If you don't hva a key file, follow the instructions below:
 
 #### Create service account and optain JSON key file
 * Open [https://console.developers.google.com](https://console.developers.google.com), and select a project.
@@ -79,7 +79,7 @@ An example datasource that returns active users:
     timeout: 1500,
     config: {
       keyFile: 'my-analytics-key-g40242323f61.json',
-      viewId: 'ga:50133933',
+      viewId: 'ga:XXXXX',
       metric: 'rt:activeUsers'
     }
   }
@@ -232,7 +232,7 @@ Widget:
 {
   plugin: 'generic',
   widgetType: 'number',
-  datasourceId: 'ga ',
+  datasourceId: 'ga',
   displayName: 'Total events from France',
   fieldName: 'rt:totalEvents:France'
 }
@@ -266,7 +266,7 @@ Widget:
 {
   plugin: 'generic',
   widgetType: 'number',
-  datasourceId: 'ga ',
+  datasourceId: 'ga',
   displayName: 'Desktop users from France',
   fieldName: 'rt:activeUsers:DESKTOP:France'
 }
