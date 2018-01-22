@@ -45,6 +45,13 @@
     </div>
 
     <!-- default widget -->
+    <div ng-switch-when="string">
+      <h2>{{widget.displayName}}</h2>
+      <p class="generic-number">{{widget.value}}</p>
+      <p class="generic-timestamp">{{widget.timestamp}}</p>
+    </div>
+
+    <!-- default widget -->
     <div ng-switch-when="default">
       <h2>{{widget.displayName}}</h2>
       <p class="generic-number">{{widget.value}}</p>
