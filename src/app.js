@@ -6,7 +6,7 @@ app.config(['$routeProvider',
   function ($routeProvider) {
     $routeProvider.
       when('/overview', {
-        templateUrl: 'partials/Overview.html'
+        template: ''
       }).
       otherwise({
         redirectTo: '/overview'

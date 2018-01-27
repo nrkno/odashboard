@@ -67,7 +67,7 @@ var row3 = {
   ]
 };
 
-var dashboardConfig = {
+var widgetConfig = {
   title: 'Odashboard 1.0',
   tabs: [
     [row1, row2],
@@ -75,4 +75,4 @@ var dashboardConfig = {
   ]
 };
 
-module.exports = dashboardConfig;
+module.exports = widgetConfig;

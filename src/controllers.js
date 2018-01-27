@@ -1,39 +1,47 @@
 var app = require('./app');
 var config = require('../config/appconfig.js');
-var clientConfig = require('../config/clientconfig.js');
 var _ = require('lodash');
 
 var myController = app.controller('PluginController', function($rootScope, $scope, $interval, $timeout, $http, $location, $sce, socket) {
-  $rootScope.title = clientConfig.title;
-  var transformedConfig = transformConfig(clientConfig);
-  $scope.tabs = parseRows(clientConfig, $interval, $http, socket);
+  
+  $http({
+    method: 'GET',
+    url: '/config/widgetconfig.js'
+  }).then(function successCallback(response) {
+    var widgetConfig = response.data;
+    $rootScope.title = widgetConfig.title;
+    var transformedConfig = transformConfig(widgetConfig);
+    $scope.tabs = parseRows(widgetConfig, $interval, $http, socket);
+    $scope.hasTabs = function () { return $scope.tabs.length > 1; };
+    if (widgetConfig.snow) {
+      var snowNode = document.createElement('div');
+      snowNode.setAttribute('id', 'snow');
+      document.body.appendChild(snowNode);
+    }
 
-  if (clientConfig.snow) {
-    var snowNode = document.createElement('div');
-    snowNode.setAttribute('id', 'snow');
-    document.body.appendChild(snowNode);
-  }
-  // Tab handling
-  var tabCycle;
-  $scope.isCycling = false;
-  $scope.tabIndex = 0;
-  $scope.hasTabs = function () { return $scope.tabs.length > 1; };
-  console.log($scope.hasTabs());
-  $scope.nextTab = function () { $scope.tabIndex = ($scope.tabIndex + 1) % $scope.tabs.length; };
-  $scope.prevTab = function () { $scope.tabIndex = ($scope.tabIndex - 1) % $scope.tabs.length; };
-  $scope.pauseTabCycle = function () {
-    if (!angular.isDefined(tabCycle)) return;
-    $interval.cancel(tabCycle);
+    // Tab handling
+    var tabCycle;
     $scope.isCycling = false;
-    tabCycle = undefined;
-  };
-  $scope.startTabCycle = function () {
-    if (angular.isDefined(tabCycle)) return;
-    $scope.isCycling = true;
-    tabCycle = $interval(function() {
-      $scope.nextTab();
-    }, config.tabCycleInterval);
-  };
+    $scope.tabIndex = 0;
+    $scope.hasTabs = function () { return $scope.tabs.length > 1; };
+    $scope.nextTab = function () { $scope.tabIndex = ($scope.tabIndex + 1) % $scope.tabs.length; };
+    $scope.prevTab = function () { $scope.tabIndex = ($scope.tabIndex - 1) % $scope.tabs.length; };
+    $scope.pauseTabCycle = function () {
+      if (!angular.isDefined(tabCycle)) return;
+      $interval.cancel(tabCycle);
+      $scope.isCycling = false;
+      tabCycle = undefined;
+    };
+    $scope.startTabCycle = function () {
+      if (angular.isDefined(tabCycle)) return;
+      $scope.isCycling = true;
+      tabCycle = $interval(function() {
+        $scope.nextTab();
+      }, config.tabCycleInterval);
+    };    
+  }, function errorCallback(response) {
+    console.log('Could not find widget config');
+  });
 
   $scope.trustAsResourceUrl = $sce.trustAsResourceUrl;
 });
@@ -70,14 +78,14 @@ function requireModule(pluginName) {
   pluginModules[pluginName] = require('./plugins/' + pluginName + '/index') ;
 }
 
-function transformConfig(clientConfig) {
+function transformConfig(widgetConfig) {
 
   // Backwards compatibility with old
-  if (clientConfig.tabs == undefined && clientConfig.rows != undefined) {
-    clientConfig.tabs = [clientConfig.rows];
+  if (widgetConfig.tabs == undefined && widgetConfig.rows != undefined) {
+    widgetConfig.tabs = [widgetConfig.rows];
   }
 
-  _.each(clientConfig.tabs, function (tab) {
+  _.each(widgetConfig.tabs, function (tab) {
     _.each(tab, function (row) {
       _.each(row.widgets, function(widget) {
         _.each(config.widgetDefaults, function (defaultValue, key) {
@@ -89,12 +97,12 @@ function transformConfig(clientConfig) {
     });
   });
 
-  return clientConfig;
+  return widgetConfig;
 }
 
-function parseRows(clientConfig, $interval, $http, socket) {
+function parseRows(widgetConfig, $interval, $http, socket) {
   var tabs = [];
-  _.each(clientConfig.tabs, function (tab) {
+  _.each(widgetConfig.tabs, function (tab) {
     var rows = [];
     _.each(tab, function (row) {
       var widgets = [];
