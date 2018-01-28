@@ -81,7 +81,7 @@ var GenericPlugin = (function () {
     }
 
     return StringWidget(config);
-  }
+  };
 
   function getTransform(transform) {
     if (transform && typeof(transform) === 'function') {
