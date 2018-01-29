@@ -1,6 +1,7 @@
 ﻿var httpclient = require('../../../httpclient');
 var _ = require('lodash');
 var util = require('util');
+var moment = require('moment');
 
 var exports = module.exports = {};
 
@@ -87,12 +88,53 @@ function refreshDatasource(datasource, io) {
 
     requestDetailedBuildData(datasource, lastBuilds)
       .then(function (data) {
-        io.emit(eventId, data);
+        var odashboardBuildMsg = transformToOdashoardBuildMsg(data);
+        io.emit(eventId, JSON.stringify(odashboardBuildMsg));
       })
       .catch(function (error) {
         console.log(error);
       });
   });
+}
+
+function transformToOdashoardBuildMsg(data) {
+  var jsonData = JSON.parse(data);
+  var odashboardBuildMsg = {};
+  odashboardBuildMsg.builds = _.map(jsonData.builds, function(build) {
+    var percent, status, duration;
+    if (build.state === 'running') {
+      percent = build['running-info'].percentageComplete;
+      status = 'running';
+      duration = moment.duration({
+        seconds: build['running-info'].elapsedSeconds
+      }).toISOString();
+    } else {
+      if (build.status == 'FAILURE') {
+        status = 'failed';
+      } else if (build.status == 'UNKNOWN' && build.statusText.indexOf('Cancel') !== -1) {
+        status = 'canceled';
+      } else {
+        status = 'success';
+      }
+      percent = 0;
+      var start = moment(build.startDate, 'YYYYMMDDTHHmmss');
+      var end = moment(build.finishDate, 'YYYYMMDDTHHmmss');
+      var diff = moment.duration(end.diff(start));
+      duration = diff.toISOString();
+      console.log(duration);
+    }
+    
+    var odashboardBuild = {
+      buildTypeId: build.buildTypeId,
+      state: status,
+      startDate: build.startDate,
+      finishDate: build.finishDate,
+      duration: duration,
+      percent: percent
+    };
+    return odashboardBuild;
+  });
+  return odashboardBuildMsg;
 }
 
 function initDatasource(datasource, io) {
