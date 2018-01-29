@@ -25,41 +25,31 @@ var TeamCityPlugin = (function () {
     if (build.state == 'running') {
       widget.status = 'In progress';
       widget.class = 'inProgress';
-      widget.percent = '(' + build['running-info'].percentageComplete + '%)';
+      widget.percent = '(' + build.percent + '%)';
     } else {
       widget.percent = '';
-
-      if (build.status == 'FAILURE') {
+      if (build.state == 'failed') {
         widget.status = 'Failed';
-        widget.class = 'failed';
-      } else if (build.status == 'UNKNOWN' && build.statusText.indexOf('Cancel') !== -1){
+        widget.class = 'failed';        
+      } else if (build.status == 'canceled') {
         widget.status = 'Canceled';
         widget.class = 'failed';
       } else {
         widget.status = 'Success';
-        widget.class = 'success';        
+        widget.class = 'success';         
       }
     }
 
     widget.started = this.getDateString(build.startDate);
-    widget.duration = this.getDurationString(build);
+    widget.duration = this.getDurationString(build.duration);
   };
 
-  module.getDurationString = function(build) {
-    var duration;
-
-    if (build.state == 'running') {
-      duration = moment.duration(build['running-info'].elapsedSeconds, 'seconds');
-    } else {
-      var start = moment(build.startDate, 'YYYYMMDDTHHmmss');
-      var end = moment(build.finishDate, 'YYYYMMDDTHHmmss');
-      duration = moment.duration(end.diff(start));
-    }
-
+  module.getDurationString = function(durationString) {
+    var duration = moment.duration(durationString);
     var hours = duration.hours();
     var minutes = duration.minutes();
     var seconds = duration.seconds();
-
+    
     if (hours > 0) {
       return hours + 'h ' + minutes + ' min ' + seconds + ' s';
     } else {

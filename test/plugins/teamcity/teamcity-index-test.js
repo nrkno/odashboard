@@ -91,7 +91,7 @@ describe('TeamCity Plugin', function() {
       var id = 'MyBuild';
       var widget = getTestWidget(name, id);
       TeamCityPlugin.updateWidget(failedBuild, widget);
-      var expectedDuration = '5 min 19 s';
+      var expectedDuration = '2 min 10 s';
       var expectedStarted = '13-Oct 15:45:51';
       assert(widget.duration === expectedDuration);
       assert(widget.started === expectedStarted);
@@ -123,14 +123,14 @@ describe('TeamCity Plugin', function() {
     });
 
     it('should return correct duration string for running builds', function() {
-      var expectedDurationString = '1 min 16 s';
-      var durationString = TeamCityPlugin.getDurationString(runningBuild);
+      var expectedDurationString = '1 min 46 s';
+      var durationString = TeamCityPlugin.getDurationString(runningBuild.duration);
       assert(durationString === expectedDurationString);
     });
 
     it('should return correct duration string for successfull builds', function() {
-      var expectedDurationString = '28 min 8 s';
-      var durationString = TeamCityPlugin.getDurationString(successfullBuild);
+      var expectedDurationString = '30 min 10 s';
+      var durationString = TeamCityPlugin.getDurationString(successfullBuild.duration);      
       assert(durationString === expectedDurationString);
     });
   });
