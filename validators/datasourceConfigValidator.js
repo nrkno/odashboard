@@ -1,13 +1,12 @@
 var _ = require('lodash');
 var assert = require('assert');
 var util = require('util');
-var serverconfig = require('../config/serverconfig');
 
-function validateServerConfig() {
-  console.log('Validating server config');
-  assert(serverconfig.datasources != undefined, 'No datasources');
+function validateDatasourceConfig(datasourceConfig) {
+  console.log('Validating datasource config');
+  assert(datasourceConfig.datasources != undefined, 'No datasources');
 
-  _.each(serverconfig.datasources, function (datasource) {
+  _.each(datasourceConfig.datasources, function (datasource) {
     shouldHaveId(datasource);
     shouldHavePlugin(datasource);
     shouldHaveUpdateInterval(datasource);
@@ -16,7 +15,7 @@ function validateServerConfig() {
       authValidator(datasource);
     }
   });
-  console.log('Server config ok');
+  console.log('Datasource config ok');
 }
 
 function shouldHaveId(datasource) {
@@ -52,4 +51,4 @@ function authValidator(datasource) {
 }
 
 var exports = module.exports = {};
-exports.validateServerConfig = validateServerConfig;
+exports.validateDatasourceConfig = validateDatasourceConfig;

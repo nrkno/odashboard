@@ -2,13 +2,29 @@ var express = require('express');
 var _ = require('lodash');
 var app = express();
 var favicon = require('serve-favicon');
-
 var appConfig = require('./config/appconfig');
-var serverconfig = require('./config/serverconfig');
 
-/* Config validation */
+var parser = require('./argumentparser');
+var args = parser.parseArgs();
+
+/* Load config and validate */
+var datasourceconfig;
+try {
+  datasourceconfig = require(args.datasourceconfig);
+} catch (e) {
+  console.log('Datasource config not found: ' + args.datasourceconfig);
+  process.exit(1);
+}
+
+var widgetconfig;
+try {
+  widgetconfig = require(args.widgetconfig);
+} catch (e) {
+  console.log('Widget config not found: ' + args.widgetconfig);
+  process.exit(1);
+}
 var configValidator = require('./validators/configValidator');
-configValidator.validate();
+configValidator.validate(appConfig, widgetconfig, datasourceconfig);
 
 /* Setup express and socket.io */
 console.log('Starting application');
@@ -23,6 +39,9 @@ app.use(function(req, res, next) {
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.static('static'));
+app.get('/config/widgetconfig.js', function(req, res) {
+  res.send(JSON.stringify(widgetconfig)); 
+});
 app.use(favicon(__dirname + '/public/img/favicon-alt.ico'));
 
 
@@ -46,8 +65,8 @@ app.get('/test', function(req, res) {
   }));
 });
 
-console.log('Listening at port 3000');
-var server = app.listen(process.env.PORT || 3000);
+console.log('Listening at port ' + (process.env.PORT || args.port));
+var server = app.listen(process.env.PORT || args.port);
 var io = require('socket.io').listen(server);
 
 /* Plugin definitions */
@@ -77,7 +96,7 @@ function setDefaults(datasourceDefaults, datasource) {
 }
 
 /* Datasource config and validation */
-_.each(serverconfig.datasources, function(datasource) {
+_.each(datasourceconfig.datasources, function(datasource) {
   var plugin = activePlugins[datasource.plugin];
 
   if (plugin === undefined) {

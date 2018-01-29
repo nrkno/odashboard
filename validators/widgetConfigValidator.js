@@ -1,26 +1,26 @@
 var _ = require('lodash');
 var assert = require('assert');
-var clientconfig = require('../config/clientconfig');
-var config = require('../config/appconfig');
 
 var pluginValidators = [];
 
-function validateClientConfig() {
-  loadPluginValidators(config.enabledPlugins);
-  shouldHaveTabsOrRows(clientconfig);
-  console.log('Validating widgets in client config');
+function validateWidgetConfig(appConfig, widgetConfig) {
+  loadPluginValidators(appConfig.enabledPlugins);
+  shouldHaveTabsOrRows(widgetConfig);
+  console.log('Validating widgets in widget config');
 
-  if (clientconfig.tabs) {
-    _.each(clientconfig.tabs, function (tab) {
+  if (widgetConfig.tabs) {
+    _.each(widgetConfig.tabs, function (tab) {
       _.each(tab, function (row) {
         validateRow(row);
       });
     });
   } else {
-    _.each(clientconfig.rows, function (row) {
+    _.each(widgetConfig.rows, function (row) {
       validateRow(row);
     });
   }
+
+  console.log('Widget config ok');
 }
 
 function loadPluginValidators(enabledPlugins) {
@@ -54,14 +54,14 @@ function shouldHavePlugin(widget) {
     'Plugin not defined for datasource with datsourceId %s', widget.datasourceId);
 }
 
-function shouldHaveTabsOrRows(clientConfig) {
-  if (clientConfig.tabs === undefined) {
-    console.log('Warning: clientconfig.tabs not defined. Assuming clientconfig.rows as only tab.');
-    assert(clientConfig.rows != undefined, 'Critical error. No rows or tabs in client config.');
-  } else if (clientConfig.tabs) {
-    assert(clientConfig.tabs.constructor === Array, 'Tabs is not an array of rows.');
+function shouldHaveTabsOrRows(widgetConfig) {
+  if (widgetConfig.tabs === undefined) {
+    console.log('Warning: widgetConfig.tabs not defined. Assuming widgetConfig.rows as only tab.');
+    assert(widgetConfig.rows != undefined, 'Critical error. No rows or tabs in client config.');
+  } else if (widgetConfig.tabs) {
+    assert(widgetConfig.tabs.constructor === Array, 'Tabs is not an array of rows.');
   }
 }
 
 var exports = module.exports = {};
-exports.validateClientConfig = validateClientConfig;
+exports.validateWidgetConfig = validateWidgetConfig;
