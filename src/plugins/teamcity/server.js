@@ -121,16 +121,20 @@ function transformToOdashoardBuildMsg(data) {
       var end = moment(build.finishDate, 'YYYYMMDDTHHmmss');
       var diff = moment.duration(end.diff(start));
       duration = diff.toISOString();
-      console.log(duration);
     }
     
+    var lastCommiter = '';
+    if (build.lastChanges && build.lastChanges.change) {
+      lastCommiter = build.lastChanges.change[0].username;
+    }
     var odashboardBuild = {
       buildTypeId: build.buildTypeId,
       state: status,
       startDate: build.startDate,
       finishDate: build.finishDate,
       duration: duration,
-      percent: percent
+      percent: percent,
+      lastCommiter: lastCommiter
     };
     return odashboardBuild;
   });
