@@ -3,6 +3,7 @@ var _ = require('lodash');
 var app = express();
 var favicon = require('serve-favicon');
 var appConfig = require('./config/appconfig');
+var path = require('path');
 
 var parser = require('./argumentparser');
 var args = parser.parseArgs();
@@ -10,17 +11,17 @@ var args = parser.parseArgs();
 /* Load config and validate */
 var datasourceconfig;
 try {
-  datasourceconfig = require(args.datasourceconfig);
+  datasourceconfig = require(path.resolve(args.datasourceconfig));
 } catch (e) {
-  console.log('Datasource config not found: ' + args.datasourceconfig);
+  console.log('Datasource config not found: ' + path.resolve(args.datasourceconfig));
   process.exit(1);
 }
 
 var widgetconfig;
 try {
-  widgetconfig = require(args.widgetconfig);
+  widgetconfig = require(path.resolve(args.widgetconfig));
 } catch (e) {
-  console.log('Widget config not found: ' + args.widgetconfig);
+  console.log('Widget config not found: ' + path.resolve(args.widgetconfig));
   process.exit(1);
 }
 var configValidator = require('./validators/configValidator');
@@ -114,3 +115,4 @@ io.on('connection', function() {
   console.log('A dashboard connected');
   console.log('Number of connected clients: ' + io.engine.clientsCount);
 });
+

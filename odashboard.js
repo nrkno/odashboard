@@ -10,7 +10,7 @@ var parser = new ArgumentParser({
 parser.addArgument(
   ['--widgetconfig'],
   {
-    required: false,
+    required: true,
     defaultValue: './config/clientconfig.js',
     metavar: '<path to widget config>'
   }
@@ -19,7 +19,7 @@ parser.addArgument(
 parser.addArgument(
   ['--datasourceconfig'],
   {
-    required: false,
+    required: true,
     defaultValue: './config/serverconfig.js',
     metavar: '<path to datasource config>'
   }
@@ -34,4 +34,6 @@ parser.addArgument(
   }
 );
 
-module.exports = parser;
+parser.parseArgs();
+
+require('./app');
