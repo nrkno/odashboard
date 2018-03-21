@@ -53,7 +53,7 @@ The widgets can display data from the following datasources:
 |-------------|-------------|
 | [JSON Endpoint](src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
 | [Application insights](src/plugins/sources/appinsights)| Info from app insights | 
-| [Azure service bus](src/plugins/soures/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [Azure service bus](src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
 | [Google analytics](src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
 | [RabbitMQ](src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
