@@ -24,16 +24,28 @@ var AzureServiceBusSource = function() {
   };
 
   source.validate = function(datasource) {
-    assert(datasource.config.topic != undefined,
-      util.format('Missing topic for Azure Service Bus datasource with id = %s', datasource.datasourceId));
-    assert(datasource.config.subscription != undefined,
-      util.format('Missing subscription for Azure Service Bus datasource with id = %s', datasource.datasourceId));
+    if(datasource.config.queue){
+      assert(datasource.config.topic == undefined,
+        util.format('Conflicting properties: "queue" and "topic" are mutually exclusive, but has been defined for Azure Service Bus datasource with id = %s', datasource.datasourceId));
+      assert(datasource.config.subscription == undefined,
+        util.format('Conflicting properties: "queue" and "subscription" are mutually exclusive, but has been defined for Azure Service Bus datasource with id = %s', datasource.datasourceId));
+    } else if(datasource.config.topic || datasource.config.subscription) {
+      assert(datasource.config.topic != undefined,
+        util.format('Missing topic for Azure Service Bus datasource with id = %s', datasource.datasourceId));
+      assert(datasource.config.subscription != undefined,
+        util.format('Missing subscription for Azure Service Bus datasource with id = %s', datasource.datasourceId));
+    } else {
+      assert(false,
+        util.format('Missing topic/subscription or queue for Azure Service Bus datasource with id = %s', datasource.datasourceId));
+    }
   };
 
   source.refresh = function(datasource, callback) {
     var config = datasource.config;
 
-    var uri = 'https://' + config.namespace + '.servicebus.windows.net/' + config.topic + '/Subscriptions/' + config.subscription;
+    var baseUri = 'https://' + config.namespace + '.servicebus.windows.net/';
+    var entityPath = config.queue ? config.queue : config.topic + '/Subscriptions/' + config.subscription;
+    var uri = baseUri + entityPath;
 
     var token = getToken(uri, config.sasKeyName, config.sasKey);
 
@@ -67,7 +79,8 @@ var AzureServiceBusSource = function() {
           return;
         }
 
-        var messageCountString = result.entry.content[0].SubscriptionDescription[0].MessageCount[0];
+        var content = result.entry.content[0];
+        var messageCountString = content.QueueDescription ? content.QueueDescription[0].MessageCount[0] : content.SubscriptionDescription[0].MessageCount[0];
         var messageCount = parseInt(messageCountString);
 
         if (callback && typeof(callback) === 'function') {
