@@ -45,7 +45,7 @@ The generic plugin makes it possible to use a wide range of widgets with a set o
 | [Checkmark](src/plugins/widgets/checkmark) | Show a checkmark | 
 | [Queue](src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
 | [Pie chart](src/plugins/widgets/piechart) | Draws a pie chart |
-| [Line chart](src/plugins/widgets/linechart) | Draws a pie chart |
+| [Line chart](src/plugins/widgets/linechart) | Draws a line chart |
 
 The widgets can display data from the following datasources:
 
