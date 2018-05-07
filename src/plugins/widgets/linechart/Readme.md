@@ -43,4 +43,22 @@ This is an example of widget config for a line chart:
 }
 ```
 
+Example with gradient border color:
+```
+{
+  plugin: 'generic',
+  widgetType: 'linechart',
+  datasourceId: '1',
+  width: '420px',
+  height: '210px',
+  fieldName: 'number',
+  options: {
+    chartLabel: 'Fancy colors',
+    timeSeriesLength: 30,
+    borderColorGradientStops: ['lightgreen', 'orange', 'red'] // hex colors also ok
+  }
+}
+```
+![image](https://user-images.githubusercontent.com/658586/39693260-bd2907ac-51e3-11e8-9d81-17a5744a5e50.png)
+
 See also [widgets](../).
