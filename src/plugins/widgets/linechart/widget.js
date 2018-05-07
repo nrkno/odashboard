@@ -95,11 +95,18 @@ var LineChartWidget = function (Chart, config) {
 
   widget.getDataset = function(inititalValues) {
 
-    var dataset = _.extend({
+    var defaultDatasetOptions = {
       backgroundColor: 'rgba(220,220,220,0.2)',
       borderColor: '#27ae60',
       pointRadius: 0
-    }, widget.datasetOptions || {});
+    };
+
+    var dataset;
+    if (widget.datasetOptions) {
+      dataset = widget.datasetOptions;
+    } else {
+      dataset = _.cloneDeep(defaultDatasetOptions);
+    }
 
     dataset.label = widget.chartLabel;
     dataset.data = inititalValues;
