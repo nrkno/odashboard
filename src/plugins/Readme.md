@@ -92,13 +92,16 @@ This is a template server.js for a plugin:
 var exports = module.exports = {};
 
 function initDatasource(datasource, io) {
-  setInterval(function() {
+  function refresh() {
     var eventId = datasource.plugin + "." + datasource.id;
 
     // Here you refresh your data, and send it to the clients.
 
     io.emit(eventId, "My data")
-  }, datasource.updateInterval);
+  }
+  // set interval and fetch initial data
+  setInterval(refresh, datasource.updateInterval);
+  refresh();
 }
 
 exports.name = "plugin-name";

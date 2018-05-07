@@ -19,10 +19,11 @@ function initDatasource(datasource, io) {
     null
   );
 
-  refreshDatasource(datasource, io);
-  setInterval(function() {
+  function refresh() {
     refreshDatasource(datasource, io);
-  }, datasource.updateInterval);
+  }
+  setInterval(refresh, datasource.updateInterval);
+  refresh();
 }
 
 function gaRequest(viewId, metrics, filters, dimensions) {

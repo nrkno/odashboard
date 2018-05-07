@@ -15,9 +15,11 @@ function refreshDatasource(datasource, io) {
 }
 
 function initDatasource(datasource, io) {
-  setInterval(function() {
+  function refresh() {
     refreshDatasource(datasource, io);
-  }, datasource.updateInterval);
+  }
+  setInterval(refresh, datasource.updateInterval);
+  refresh();
 }
 
 exports.name = 'rabbitmq';
