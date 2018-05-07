@@ -27,7 +27,7 @@ var getToken = function(uri, sasKeyName, sasKey) {
 
 function initDatasource(datasource, io) {
 
-  setInterval(function() {
+  function refresh() {
     var eventId = datasource.plugin + '.' + datasource.id;
 
     var uri = 'https://' + datasource.namespace +
@@ -74,7 +74,9 @@ function initDatasource(datasource, io) {
       });
     });
 
-  }, datasource.updateInterval);
+  }
+  setInterval(refresh, datasource.updateInterval);
+  refresh();
 }
 
 exports.name = 'azure-servicebus';

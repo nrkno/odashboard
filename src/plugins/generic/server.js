@@ -49,13 +49,15 @@ function start(source, datasource, io) {
   }
   var eventId = datasource.plugin + '.' + datasource.id;
   var transform = getTransform(datasource.transform);
-  setInterval(function() {
+  function refresh() {
     source.refresh(datasource, function(value) {
       var v = transform(value);
       var msg = JSON.stringify(v);
       io.emit(eventId, msg);
     });
-  }, datasource.updateInterval);
+  }
+  setInterval(refresh, datasource.updateInterval);
+  refresh();
 }
 
 function initDatasource(datasource, io) {
