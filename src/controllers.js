@@ -38,7 +38,11 @@ var myController = app.controller('PluginController', function($rootScope, $scop
       tabCycle = $interval(function() {
         $scope.nextTab();
       }, config.tabCycleInterval);
-    };    
+    };
+
+    if(config.tabCycleAutoStart) {
+      $scope.startTabCycle();
+    }
   }, function errorCallback(response) {
     console.log('Could not find widget config');
   });
