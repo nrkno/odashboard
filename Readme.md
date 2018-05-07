@@ -196,6 +196,14 @@ var dashboardConfig = {
 ```
 
 If both `tabs` and `rows` are present, `tabs` will be used.
+
+### Tab cycling
+
+In `config/appconfig.js` you'll find 2 settings
+ * `tabCycleAutoStart: boolean` - control if cycle is started automatically or not
+ * `tabCycleInterval: number` - control the time to spend on each tab (milliseconds)
+
+
 ## Why another dashboard?
 
 Odashboard origins from a hackathon at NRK. We wanted to display build information from TeamCity together with queue information from RabbitMQ on a big screen in our office. Instead of looking to existing open source dashboards like Dashing, we wanted to get some experience with Node.js, and thus Odashboard was born. At first it was a hard coded mess, but over time it evolved to the plugin oriented configurable application it is today. And then we thought other people might enjoy it as much as we do, so we open sourced it.
