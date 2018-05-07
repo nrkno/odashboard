@@ -21,8 +21,30 @@ var LineChartWidget = function (Chart, config) {
     yMin: config.options.yMin,
     yMax: config.options.yMax,
     chartOptions: config.options.chartOptions,
-    datasetOptions: config.options.datasetOptions
+    datasetOptions: config.options.datasetOptions,
+    borderColorGradientStops: config.options.borderColorGradientStops
   };
+
+  function updateBorderGradient() {
+    const borderColorGradientStops = widget.borderColorGradientStops;
+    const chart = widget.chart;
+    
+    if(!borderColorGradientStops || !chart) {
+      return;
+    }
+      
+    // create gradient over chart area
+    const area = chart.chartArea;
+    const gradientStroke = chart.ctx.createLinearGradient(0, area.bottom, 0, area.top);
+    // add defined color stops
+    const length = borderColorGradientStops.length;
+    borderColorGradientStops.forEach((color, idx) => {
+      const stop = 1/(length-1)*idx;
+      gradientStroke.addColorStop(stop, color);
+    });
+
+    chart.data.datasets[0].borderColor = gradientStroke;
+  }
 
   widget.update = function(value) {
     if (widget.chart == null) {
@@ -39,6 +61,10 @@ var LineChartWidget = function (Chart, config) {
         labels.shift();
         data.shift();
       }
+
+      // can only apply gradient when
+      // chart area has already been calculated
+      updateBorderGradient();
 
       widget.chart.update();
     }
@@ -69,18 +95,11 @@ var LineChartWidget = function (Chart, config) {
 
   widget.getDataset = function(inititalValues) {
 
-    var defaultDatasetOptions = {
+    var dataset = _.extend({
       backgroundColor: 'rgba(220,220,220,0.2)',
       borderColor: '#27ae60',
       pointRadius: 0
-    };
-
-    var dataset;
-    if (widget.datasetOptions) {
-      dataset = widget.datasetOptions;
-    } else {
-      dataset = _.cloneDeep(defaultDatasetOptions);
-    }
+    }, widget.datasetOptions || {});
 
     dataset.label = widget.chartLabel;
     dataset.data = inititalValues;
