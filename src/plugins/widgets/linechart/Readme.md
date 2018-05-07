@@ -23,7 +23,8 @@ The options object has the following fields:
 | yMin     |Number|	User defined minimum number for the yAxes scale.  |  yes |
 | yMax     |Number|	User defined maximum number for the yAxes scale.  | yes |
 | chartOptions     |Object|A [ChartJs option](http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options) object for all your special needs. Overwrites all default options.  |   yes |
-| datasetOptions     |Object|A [ChartJs line dataset option object](http://www.chartjs.org/docs/#line-chart-dataset-structure) object for all your special needs. Overwrites all default options.   |   yes |
+| datasetOptions     |Object|A [ChartJs line dataset option object](http://www.chartjs.org/docs/#line-chart-dataset-structure) object for all your special needs. Overwrites the default options.   |   yes |
+| borderColorGradientStops | string[] | hex color stops for [gradient line fill](https://blog.vanila.io/chart-js-tutorial-how-to-make-gradient-line-chart-af145e5c92f9). (Overwrites `datasetOptions.backgroundColor`) | yes |
 
 This is an example of widget config for a line chart:
 
@@ -41,5 +42,23 @@ This is an example of widget config for a line chart:
     }
 }
 ```
+
+Example with gradient border color:
+```
+{
+  plugin: 'generic',
+  widgetType: 'linechart',
+  datasourceId: '1',
+  width: '420px',
+  height: '210px',
+  fieldName: 'number',
+  options: {
+    chartLabel: 'Fancy colors',
+    timeSeriesLength: 30,
+    borderColorGradientStops: ['lightgreen', 'orange', 'red'] // hex colors also ok
+  }
+}
+```
+![image](https://user-images.githubusercontent.com/658586/39693260-bd2907ac-51e3-11e8-9d81-17a5744a5e50.png)
 
 See also [widgets](../).
