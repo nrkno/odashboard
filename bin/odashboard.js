@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 // verify arguments
-require('../argumentparser')(true);
+require('../argumentparser')();
 // start app
 require('../app');

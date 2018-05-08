@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var appConfig = require('./config/appconfig');
 var path = require('path');
 
-var args = require('./argumentparser')(false);
+var args = require('./argumentparser')();
 
 /* Load config and validate */
 var datasourceconfig;
