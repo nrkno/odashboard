@@ -3,26 +3,13 @@
 
 A configurable dashboard with a simple plugin architecture. Written in Node.js with Express, Socket.io and Angular.
 
-## Get started
+## Getting started
 
-> npm install
-
-> npm run test
-
-> npm run build
-
-> npm start
-
-The application answers on port 3000.
-
-How it may look:
-![Example](./public/img/screenshot01.PNG?raw=true "An example dashboard")
-
-## Installing Odashboard as a dependency
+### Installing Odashboard as a dependency
 
 Odashboard can be installed from `npm` as a dependency.
 
-In this scenario you only need to create configuration files files for your *widgets* and *data sources*.
+In this scenario you only need to fiddle with configuration files for your *widgets* and *data sources*.
 
 **Example usage**
 In your folder `my-dashboard/`
@@ -31,30 +18,48 @@ In your folder `my-dashboard/`
 npm i @nrk/odashboard -S
 ```
 
-Add required config files:
+Create configuration files:
 ```
 my-dashboard/
 ├── config/
 │   ├── widgets.js
-│   └── data.js
+│   └── dataSources.js
 └── package.json
 ```
 
 Add `npm` script to `package.json` start dashboard
 ```json
 {
-	"scripts": {
-		"start": "odashboard -w config/widgets.js -d config/data.js"
-	}
+  "scripts": {
+    "start": "odashboard"
+  }
 }
 ```
 
 **Command line arguments**
+
+You can pass arguments to `odashboard` to override default options
+
  * [`-w`, `--widgetconfig`] - path to config file
  * [`-d`, `--datasourceconfig`] - path to config file
  * [`-p`, `--port`] - port to run on
 
-## Forking and using odashboard
+### Forking and using odashboard
+
+```bash
+> npm install
+
+> npm run test
+
+> npm run build
+
+> npm start
+```
+
+The application answers on port 3000.
+
+How it may look:
+![Example](./public/img/screenshot01.PNG?raw=true "An example dashboard")
 
 For some use cases, having access to all code and plugins might be better than installing as a dependency.
 
