@@ -1,5 +1,5 @@
 {
-  "name": "Odashboard",
+  "name": "odashboard",
   "version": "0.0.1",
   "private": true,
   "bin": "bin/odashboard.js",
