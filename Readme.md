@@ -3,6 +3,8 @@
 
 A configurable dashboard with a simple plugin architecture. Written in Node.js with Express, Socket.io and Angular.
 
+## Get started
+
 > npm install
 
 > npm run test
@@ -16,7 +18,45 @@ The application answers on port 3000.
 How it may look:
 ![Example](./public/img/screenshot01.PNG?raw=true "An example dashboard")
 
-## How to initialize odashboard
+## Installing Odashboard as a dependency
+
+Odashboard can be installed from `npm` as a dependency.
+
+In this scenario you only need to create configuration files files for your *widgets* and *data sources*.
+
+**Example usage**
+In your folder `my-dashboard/`
+
+```
+npm i @nrk/odashboard -S
+```
+
+Add required config files:
+```
+my-dashboard/
+├── config/
+│   ├── widgets.js
+│   └── data.js
+└── package.json
+```
+
+Add `npm` script to `package.json` start dashboard
+```json
+{
+	"scripts": {
+		"start": "odashboard -w config/widgets.js -d config/data.js"
+	}
+}
+```
+
+**Command line arguments**
+ * [`-w`, `--widgetconfig`] - path to config file
+ * [`-d`, `--datasourceconfig`] - path to config file
+ * [`-p`, `--port`] - port to run on
+
+## Forking and using odashboard
+
+For some use cases, having access to all code and plugins might be better than installing as a dependency.
 
 To configure your dashboard you need to edit two files:
 
