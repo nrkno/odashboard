@@ -1,4 +1,4 @@
-![logo](./public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard") Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
+![Odashboard][logo] Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
 ===
 
 A configurable dashboard with a simple plugin architecture. Written in Node.js with Express, Socket.io and Angular.
@@ -59,7 +59,7 @@ You can pass arguments to `odashboard` to override default options
 The application answers on port 3000.
 
 How it may look:
-![Example](./public/img/screenshot01.PNG?raw=true "An example dashboard")
+![Example][screenshot]
 
 For some use cases, having access to all code and plugins might be better than installing as a dependency.
 
@@ -254,3 +254,7 @@ In `config/appconfig.js` you'll find 2 settings
 Odashboard origins from a hackathon at NRK. We wanted to display build information from TeamCity together with queue information from RabbitMQ on a big screen in our office. Instead of looking to existing open source dashboards like Dashing, we wanted to get some experience with Node.js, and thus Odashboard was born. At first it was a hard coded mess, but over time it evolved to the plugin oriented configurable application it is today. And then we thought other people might enjoy it as much as we do, so we open sourced it.
 
 The strength of Odashboard is that you can get your dashboard up and running in minutes, and all you need to do is edit some config files. Try it out!
+
+
+[logo]: https://github.com/nrkno/odashboard/blob/master/public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard"
+[screenshot]: https://github.com/nrkno/odashboard/blob/master/public/img/screenshot01.PNG?raw=true "An example dashboard"
