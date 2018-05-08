@@ -1,0 +1,7 @@
+node_modules/
+src/
+test/
+.travis.yml
+.npmignore
+webpack.config.js
+*.tgz
