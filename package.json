@@ -4,7 +4,7 @@
   "description": "Configurable dashboard with simple plugin architecture",
   "author": "NRK <opensource@nrk.no> (https://www.nrk.no/)",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "bin": {
     "odashboard": "bin/odashboard.js"
@@ -17,7 +17,9 @@
     "build": "webpack --progress",
     "watch": "webpack --watch",
     "watch-tests": "mocha --recursive test/ --watch",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prepublish": "npm run build",
+    "release": "np"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -39,6 +41,7 @@
     "eslint": "^4.12.1",
     "mocha": "^4.0.1",
     "nodemon": "^1.11.0",
+    "np": "^2.20.1",
     "sinon": "^4.1.2",
     "webpack": "^3.9.1"
   },
