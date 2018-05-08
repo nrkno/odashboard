@@ -79,11 +79,11 @@ _.each(appConfig.enabledPlugins, function(pluginName) {
   app.use('/plugins/' + pluginName, express.static(path.join(__dirname, 'src/plugins/', pluginName, '/public')));
 
   try {
-    var pluginServerPath = './src/plugins/' + pluginName + '/server.js';
-    var plugin = require(pluginServerPath, function() {});
+    var pluginServerPath = path.join(__dirname, './src/plugins/', pluginName, '/server.js');
+    var plugin = require(pluginServerPath);
     activePlugins[pluginName] = plugin;
   } catch (e) {
-    console.log('Failed to activate plugin ' + pluginName + '(' + JSON.stringify(e) + ')');
+    console.log('Failed to activate plugin ' + pluginName + '(' + JSON.stringify(e) + ')\n\t' + pluginServerPath);
     // continue regardless of error
   }
 });
