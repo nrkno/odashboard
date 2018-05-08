@@ -2,7 +2,7 @@
   "name": "Odashboard",
   "version": "0.0.1",
   "private": true,
-  "bin": "odashboard.js",
+  "bin": "bin/odashboard.js",
   "scripts": {
     "preinstall": "node scripts/preinstall.js",
     "test:lint": "eslint . --ext .js --ignore-path .gitignore --cache",
