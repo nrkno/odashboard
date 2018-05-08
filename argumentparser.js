@@ -2,10 +2,9 @@ var ArgumentParser = require('argparse').ArgumentParser;
 
 
 /**
- * @param {boolean=} requireConfig
  * @returns {{ widgetconfig: string, datasourceconfig: string, port?: number }}
  */
-module.exports = function (requireConfig = false) {
+module.exports = function () {
   var parser = new ArgumentParser({
     addHelp: true,
     description: 'Odashboard',
@@ -15,8 +14,8 @@ module.exports = function (requireConfig = false) {
   parser.addArgument(
     ['-w', '--widgetconfig'],
     {
-      required: requireConfig,
-      defaultValue: './config/clientconfig.js',
+      required: false,
+      defaultValue: './config/widgets.js',
       metavar: '<path to widget config>'
     }
   );
@@ -24,8 +23,8 @@ module.exports = function (requireConfig = false) {
   parser.addArgument(
     ['-d', '--datasourceconfig'],
     {
-      required: requireConfig,
-      defaultValue: './config/serverconfig.js',
+      required: false,
+      defaultValue: './config/dataSources.js',
       metavar: '<path to datasource config>'
     }
   );
