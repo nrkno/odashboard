@@ -12,7 +12,7 @@ var datasourceconfig;
 try {
   datasourceconfig = require(path.resolve(args.datasourceconfig));
 } catch (e) {
-  console.log('Datasource config not found: ' + path.resolve(args.datasourceconfig));
+  console.log('Data sources config not found: ' + path.resolve(args.datasourceconfig));
   process.exit(1);
 }
 
