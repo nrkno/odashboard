@@ -1,4 +1,4 @@
-![Example](public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard") Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
+![Example](./public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard") Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
 ===
 
 A configurable dashboard with a simple plugin architecture. Written in Node.js with Express, Socket.io and Angular.
@@ -14,7 +14,7 @@ A configurable dashboard with a simple plugin architecture. Written in Node.js w
 The application answers on port 3000.
 
 How it may look:
-![Example](public/img/screenshot01.PNG?raw=true "An example dashboard")
+![Example](./public/img/screenshot01.PNG?raw=true "An example dashboard")
 
 ## How to initialize odashboard
 
@@ -30,34 +30,34 @@ Below you find current list of available plugins. The generic plugin lets you co
 
 | Plugin | Description |
 |--------|-------------|
-|[Generic](src/plugins/generic)|Generic plugin for combining data sources and widgets. This might be all you need! |
-|[TeamCity](src/plugins/teamcity)|Display TeamCity build information
-|[IFrame](src/plugins/iframe)|Embed an external web resource in an iframe|
+|[Generic](./src/plugins/generic)|Generic plugin for combining data sources and widgets. This might be all you need! |
+|[TeamCity](./src/plugins/teamcity)|Display TeamCity build information
+|[IFrame](./src/plugins/iframe)|Embed an external web resource in an iframe|
 
 ### Generic plugin
 The generic plugin makes it possible to use a wide range of widgets with a set of different datasources. The availabe widgets are:
 
 | Widget type | Description |
 |-------------|-------------|
-| [String](src/plugins/widgets/string) | Show a string |
-| [Number](src/plugins/widgets/number) | Show a number |
-| [Timestamp](src/plugins/widgets/timestamp) | Show a timestamp | 
-| [Checkmark](src/plugins/widgets/checkmark) | Show a checkmark | 
-| [Queue](src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
-| [Pie chart](src/plugins/widgets/piechart) | Draws a pie chart |
-| [Line chart](src/plugins/widgets/linechart) | Draws a line chart |
+| [String](./src/plugins/widgets/string) | Show a string |
+| [Number](./src/plugins/widgets/number) | Show a number |
+| [Timestamp](./src/plugins/widgets/timestamp) | Show a timestamp | 
+| [Checkmark](./src/plugins/widgets/checkmark) | Show a checkmark | 
+| [Queue](./src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
+| [Pie chart](./src/plugins/widgets/piechart) | Draws a pie chart |
+| [Line chart](./src/plugins/widgets/linechart) | Draws a line chart |
 
 The widgets can display data from the following datasources:
 
 | Datasource type | Description |
 |-------------|-------------|
-| [JSON Endpoint](src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
-| [Application insights](src/plugins/sources/appinsights)| Info from app insights | 
-| [Azure service bus](src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
-| [Google analytics](src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
-| [RabbitMQ](src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
+| [JSON Endpoint](./src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
+| [Application insights](./src/plugins/sources/appinsights)| Info from app insights | 
+| [Azure service bus](./src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [Google analytics](./src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
+| [RabbitMQ](./src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
-Each plugin is documented in [the plugin folder](src/plugins/)
+Each plugin is documented in [the plugin folder](./src/plugins/)
 
 ## How to setup widgets
 Widgets are defined in `config/clientconfig.js`. Each widget is defined as a json-object with the following fields:
