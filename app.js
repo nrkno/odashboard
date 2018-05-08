@@ -38,12 +38,13 @@ app.use(function(req, res, next) {
 });
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(express.static('static'));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static')));
 app.get('/config/widgetconfig.js', function(req, res) {
   res.send(JSON.stringify(widgetconfig)); 
 });
-app.use(favicon(__dirname + '/public/img/favicon-alt.ico'));
+app.use(favicon(path.join(__dirname, '/public/img/favicon-alt.ico')));
 
 
 app.get('/', function(req, res) {
@@ -66,15 +67,16 @@ app.get('/test', function(req, res) {
   }));
 });
 
-console.log('Listening at port ' + (process.env.PORT || args.port));
-var server = app.listen(process.env.PORT || args.port);
+var PORT = process.env.PORT || args.port;
+console.log('Listening at port ' + PORT);
+var server = app.listen(PORT);
 var io = require('socket.io').listen(server);
 
 /* Plugin definitions */
 var activePlugins = [];
 _.each(appConfig.enabledPlugins, function(pluginName) {
 
-  app.use('/plugins/' + pluginName, express.static('src/plugins/' + pluginName + '/public'));
+  app.use('/plugins/' + pluginName, express.static(path.join(__dirname, 'src/plugins/', pluginName, '/public')));
 
   try {
     var pluginServerPath = './src/plugins/' + pluginName + '/server.js';
