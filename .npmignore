@@ -1,0 +1,11 @@
+node_modules/
+src/*.js
+test/
+.travis.yml
+.npmignore
+webpack.config.js
+*.tgz
+config/*.*
+!config/appconfig.js
+!config/dataSources.template.js
+!config/widgets.template.js

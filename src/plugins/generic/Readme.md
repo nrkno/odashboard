@@ -31,7 +31,7 @@ The widgets can display data from the following datasources:
 
 ## Datasource config
 
-The kind of datasource to use with the generic plugin is specified with the source property in the serverconfig. Configuration for the data source is given in the config property, and will vary depending on the particular data source. For instance, if the data source is a JSON endpoint, the *config* will contain the URL for the endpoint.
+The kind of datasource to use with the generic plugin is specified with the source property in the *dataSourcesConfig*. Configuration for the data source is given in the config property, and will vary depending on the particular data source. For instance, if the data source is a JSON endpoint, the *config* will contain the URL for the endpoint.
 
 ```
   plugin: 'generic',
@@ -45,7 +45,7 @@ The kind of datasource to use with the generic plugin is specified with the sour
 
 ## Widget config
 
-For all generic widgets you need to specify the kind of widget to use with the *widgetType* property in the clientconfig. The remaining fields are widget-specific.
+For all generic widgets you need to specify the kind of widget to use with the *widgetType* property in the *widgetConfig*. The remaining fields are widget-specific.
 
 ```
   plugin: 'generic',

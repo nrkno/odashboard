@@ -5,15 +5,14 @@ var favicon = require('serve-favicon');
 var appConfig = require('./config/appconfig');
 var path = require('path');
 
-var parser = require('./argumentparser');
-var args = parser.parseArgs();
+var args = require('./argumentparser')();
 
 /* Load config and validate */
 var datasourceconfig;
 try {
   datasourceconfig = require(path.resolve(args.datasourceconfig));
 } catch (e) {
-  console.log('Datasource config not found: ' + path.resolve(args.datasourceconfig));
+  console.log('Data sources config not found: ' + path.resolve(args.datasourceconfig));
   process.exit(1);
 }
 
@@ -38,12 +37,13 @@ app.use(function(req, res, next) {
 });
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(express.static('static'));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static')));
 app.get('/config/widgetconfig.js', function(req, res) {
   res.send(JSON.stringify(widgetconfig)); 
 });
-app.use(favicon(__dirname + '/public/img/favicon-alt.ico'));
+app.use(favicon(path.join(__dirname, '/public/img/favicon-alt.ico')));
 
 
 app.get('/', function(req, res) {
@@ -66,22 +66,23 @@ app.get('/test', function(req, res) {
   }));
 });
 
-console.log('Listening at port ' + (process.env.PORT || args.port));
-var server = app.listen(process.env.PORT || args.port);
+var PORT = process.env.PORT || args.port;
+console.log('Listening at port ' + PORT);
+var server = app.listen(PORT);
 var io = require('socket.io').listen(server);
 
 /* Plugin definitions */
 var activePlugins = [];
 _.each(appConfig.enabledPlugins, function(pluginName) {
 
-  app.use('/plugins/' + pluginName, express.static('src/plugins/' + pluginName + '/public'));
+  app.use('/plugins/' + pluginName, express.static(path.join(__dirname, 'src/plugins/', pluginName, '/public')));
 
   try {
-    var pluginServerPath = './src/plugins/' + pluginName + '/server.js';
-    var plugin = require(pluginServerPath, function() {});
+    var pluginServerPath = path.join(__dirname, './src/plugins/', pluginName, '/server.js');
+    var plugin = require(pluginServerPath);
     activePlugins[pluginName] = plugin;
   } catch (e) {
-    console.log('Failed to activate plugin ' + pluginName + '(' + JSON.stringify(e) + ')');
+    console.log('Failed to activate plugin ' + pluginName + '(' + JSON.stringify(e) + ')\n\t' + pluginServerPath);
     // continue regardless of error
   }
 });

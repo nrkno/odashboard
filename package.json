@@ -1,8 +1,13 @@
 {
-  "name": "Odashboard",
-  "version": "0.0.1",
-  "private": true,
-  "bin": "odashboard.js",
+  "name": "@nrk/odashboard",
+  "homepage": "https://github.com/nrkno/odashboard",
+  "description": "Configurable dashboard with simple plugin architecture",
+  "author": "NRK <opensource@nrk.no> (https://www.nrk.no/)",
+  "license": "MIT",
+  "version": "0.0.3",
+  "bin": {
+    "odashboard": "bin/odashboard.js"
+  },
   "scripts": {
     "preinstall": "node scripts/preinstall.js",
     "test:lint": "eslint . --ext .js --ignore-path .gitignore --cache",
@@ -11,7 +16,9 @@
     "build": "webpack --progress",
     "watch": "webpack --watch",
     "watch-tests": "mocha --recursive test/ --watch",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prepublish": "npm run build",
+    "release": "np"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -33,7 +40,20 @@
     "eslint": "^4.12.1",
     "mocha": "^4.0.1",
     "nodemon": "^1.11.0",
+    "np": "^2.20.1",
     "sinon": "^4.1.2",
     "webpack": "^3.9.1"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrkno/odashboard.git"
+  },
+  "keywords": [
+    "dashboard",
+    "realtime"
+  ],
+  "bugs": {
+    "url": "https://github.com/nrkno/odashboard/issues"
   }
 }

@@ -1,8 +1,52 @@
-![Example](public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard") Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
+![Odashboard][logo] Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
 ===
 
 A configurable dashboard with a simple plugin architecture. Written in Node.js with Express, Socket.io and Angular.
 
+## Getting started
+
+### Installing Odashboard as a dependency
+
+Odashboard can be installed from `npm` as a dependency.
+
+**Example usage**
+In your folder `my-dashboard/`
+
+```
+npm i @nrk/odashboard -S
+```
+
+Create configuration files:
+```
+my-dashboard/
+├── config/
+│   ├── widgets.js
+│   └── dataSources.js
+└── package.json
+```
+
+> Check out config examples of [`dataSources`](./config/widgets.template.js) and [`widgets`](./config/dataSources.template.js)
+
+Add `npm` script to `package.json` start dashboard
+```json
+{
+  "scripts": {
+    "start": "odashboard"
+  }
+}
+```
+
+**Command line arguments**
+
+You can pass arguments to `odashboard` to override default options
+
+ * [`-w`, `--widgetconfig`] - path to config file
+ * [`-d`, `--datasourceconfig`] - path to config file
+ * [`-p`, `--port`] - port to run on
+
+### Forking and using odashboard
+
+```bash
 > npm install
 
 > npm run test
@@ -10,18 +54,19 @@ A configurable dashboard with a simple plugin architecture. Written in Node.js w
 > npm run build
 
 > npm start
+```
 
 The application answers on port 3000.
 
 How it may look:
-![Example](public/img/screenshot01.PNG?raw=true "An example dashboard")
+![Example][screenshot]
 
-## How to initialize odashboard
+For some use cases, having access to all code and plugins might be better than installing as a dependency.
 
 To configure your dashboard you need to edit two files:
 
-* In `config/clientconfig.js` you define your widgets and their properties.
-* In `config/serverconfig.js` you define the datasources to your widgets.
+* In `config/widgets.js` you define your widgets and their properties.
+* In `config/dataSources.js` you define the datasources to your widgets.
 
 Most widgets need a compatible datasource to run, but some (like the iframe-plugin) only need you to define a widget.
 
@@ -30,37 +75,37 @@ Below you find current list of available plugins. The generic plugin lets you co
 
 | Plugin | Description |
 |--------|-------------|
-|[Generic](src/plugins/generic)|Generic plugin for combining data sources and widgets. This might be all you need! |
-|[TeamCity](src/plugins/teamcity)|Display TeamCity build information
-|[IFrame](src/plugins/iframe)|Embed an external web resource in an iframe|
+|[Generic](./src/plugins/generic)|Generic plugin for combining data sources and widgets. This might be all you need! |
+|[TeamCity](./src/plugins/teamcity)|Display TeamCity build information
+|[IFrame](./src/plugins/iframe)|Embed an external web resource in an iframe|
 
 ### Generic plugin
 The generic plugin makes it possible to use a wide range of widgets with a set of different datasources. The availabe widgets are:
 
 | Widget type | Description |
 |-------------|-------------|
-| [String](src/plugins/widgets/string) | Show a string |
-| [Number](src/plugins/widgets/number) | Show a number |
-| [Timestamp](src/plugins/widgets/timestamp) | Show a timestamp | 
-| [Checkmark](src/plugins/widgets/checkmark) | Show a checkmark | 
-| [Queue](src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
-| [Pie chart](src/plugins/widgets/piechart) | Draws a pie chart |
-| [Line chart](src/plugins/widgets/linechart) | Draws a line chart |
+| [String](./src/plugins/widgets/string) | Show a string |
+| [Number](./src/plugins/widgets/number) | Show a number |
+| [Timestamp](./src/plugins/widgets/timestamp) | Show a timestamp | 
+| [Checkmark](./src/plugins/widgets/checkmark) | Show a checkmark | 
+| [Queue](./src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
+| [Pie chart](./src/plugins/widgets/piechart) | Draws a pie chart |
+| [Line chart](./src/plugins/widgets/linechart) | Draws a line chart |
 
 The widgets can display data from the following datasources:
 
 | Datasource type | Description |
 |-------------|-------------|
-| [JSON Endpoint](src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
-| [Application insights](src/plugins/sources/appinsights)| Info from app insights | 
-| [Azure service bus](src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
-| [Google analytics](src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
-| [RabbitMQ](src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
+| [JSON Endpoint](./src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
+| [Application insights](./src/plugins/sources/appinsights)| Info from app insights | 
+| [Azure service bus](./src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [Google analytics](./src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
+| [RabbitMQ](./src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
-Each plugin is documented in [the plugin folder](src/plugins/)
+Each plugin is documented in [the plugin folder](./src/plugins/)
 
 ## How to setup widgets
-Widgets are defined in `config/clientconfig.js`. Each widget is defined as a json-object with the following fields:
+Widgets are defined in `config/widgets.js`. Each widget is defined as a json-object with the following fields:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
@@ -86,7 +131,7 @@ var myWidget = {
 ```
 
 ## How to setup datasources
-Datasources are defined in `config/serverconfig.js`. Each datasource is defined as a json-object with the following fields:
+Datasources are defined in `config/dataSources.js`. Each datasource is defined as a json-object with the following fields:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
@@ -209,3 +254,7 @@ In `config/appconfig.js` you'll find 2 settings
 Odashboard origins from a hackathon at NRK. We wanted to display build information from TeamCity together with queue information from RabbitMQ on a big screen in our office. Instead of looking to existing open source dashboards like Dashing, we wanted to get some experience with Node.js, and thus Odashboard was born. At first it was a hard coded mess, but over time it evolved to the plugin oriented configurable application it is today. And then we thought other people might enjoy it as much as we do, so we open sourced it.
 
 The strength of Odashboard is that you can get your dashboard up and running in minutes, and all you need to do is edit some config files. Try it out!
+
+
+[logo]: https://github.com/nrkno/odashboard/blob/master/public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard"
+[screenshot]: https://github.com/nrkno/odashboard/blob/master/public/img/screenshot01.PNG?raw=true "An example dashboard"
