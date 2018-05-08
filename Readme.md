@@ -1,4 +1,4 @@
-![Example](./public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard") Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
+![logo](./public/img/odashboard-logo-alt-128x92.png?raw=true "Odashboard") Odashboard [![Build Status](https://travis-ci.org/nrkno/odashboard.svg?branch=master)](https://travis-ci.org/nrkno/odashboard)
 ===
 
 A configurable dashboard with a simple plugin architecture. Written in Node.js with Express, Socket.io and Angular.
@@ -8,8 +8,6 @@ A configurable dashboard with a simple plugin architecture. Written in Node.js w
 ### Installing Odashboard as a dependency
 
 Odashboard can be installed from `npm` as a dependency.
-
-In this scenario you only need to fiddle with configuration files for your *widgets* and *data sources*.
 
 **Example usage**
 In your folder `my-dashboard/`
@@ -26,6 +24,8 @@ my-dashboard/
 │   └── dataSources.js
 └── package.json
 ```
+
+> Check out config examples of [`dataSources`](./config/widgets.template.js) and [`widgets`](./config/dataSources.template.js)
 
 Add `npm` script to `package.json` start dashboard
 ```json
@@ -65,8 +65,8 @@ For some use cases, having access to all code and plugins might be better than i
 
 To configure your dashboard you need to edit two files:
 
-* In `config/clientconfig.js` you define your widgets and their properties.
-* In `config/serverconfig.js` you define the datasources to your widgets.
+* In `config/widgets.js` you define your widgets and their properties.
+* In `config/dataSources.js` you define the datasources to your widgets.
 
 Most widgets need a compatible datasource to run, but some (like the iframe-plugin) only need you to define a widget.
 
@@ -105,7 +105,7 @@ The widgets can display data from the following datasources:
 Each plugin is documented in [the plugin folder](./src/plugins/)
 
 ## How to setup widgets
-Widgets are defined in `config/clientconfig.js`. Each widget is defined as a json-object with the following fields:
+Widgets are defined in `config/widgets.js`. Each widget is defined as a json-object with the following fields:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
@@ -131,7 +131,7 @@ var myWidget = {
 ```
 
 ## How to setup datasources
-Datasources are defined in `config/serverconfig.js`. Each datasource is defined as a json-object with the following fields:
+Datasources are defined in `config/dataSources.js`. Each datasource is defined as a json-object with the following fields:
 
 | Fields        |Type| Description           | Optional  |
 | ------------- |---|:-------------:| -----:|
