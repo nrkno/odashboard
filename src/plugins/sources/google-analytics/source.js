@@ -1,7 +1,8 @@
-var util = require('util'),
-  assert = require('assert'),
-  google = require('googleapis'),
-  _ = require('lodash');
+var path = require('path');
+var util = require('util');
+var assert = require('assert');
+var google = require('googleapis');
+var _ = require('lodash');
 
 var analytics = google.analytics('v3');
 var authClient;
@@ -34,7 +35,11 @@ var GoogleAnalyticsSource = function() {
   };
 
   source.start = function(datasource) {
-    var key = require('../../../../config/' + datasource.config.keyFile);
+    
+    var key = typeof datasource.config.keyFile === 'string'
+      ? require(path.join(process.cwd(), 'config', datasource.config.keyFile))
+      : datasource.config.keyFile;
+    
     authClient = new google.auth.JWT(
       key.client_email,
       null,
