@@ -1,6 +1,7 @@
 var google = require('googleapis');
 var _ = require('lodash');
 var util = require('util');
+var path = require('path');
 
 var analytics = google.analytics('v3');
 var validator = require('./validator');
@@ -10,7 +11,11 @@ var authClient;
 
 function initDatasource(datasource, io) {
 
-  var key = require('../../../config/' + datasource.keyFile);
+  // keyFile can be string or actual object
+  var key = typeof datasource.keyFile === 'string'
+    ? require(path.join(process.cwd(), 'config', datasource.keyFile))
+    : datasource.keyFile;
+  
   authClient = new google.auth.JWT(
     key.client_email,
     null,
