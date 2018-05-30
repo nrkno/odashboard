@@ -30,6 +30,11 @@ function getDatasource(sourcename) {
     var GoogleAnalyticsSource = require('../sources/google-analytics/source.js');
     return GoogleAnalyticsSource();
   }
+
+  if (sourcename === 'teamcity') {
+    var TeamCitySource = require('../sources/teamcity/source.js');
+    return TeamCitySource();
+  }
   
   return undefined;  
 }

@@ -9,6 +9,7 @@ var TimestampWidget = require('../widgets/timestamp/widget.js');
 var QueueWidget = require('../widgets/queue/widget.js');
 var LineChartWidget = require('../widgets/linechart/widget.js');
 var PieChartWidget = require('../widgets/piechart/widget.js');
+var BuildWidget = require('../widgets/build/widget.js');
 
 var GenericPlugin = (function () {
 
@@ -78,6 +79,10 @@ var GenericPlugin = (function () {
 
     if (config.widgetType === 'number') {
       return NumberWidget(config);
+    }
+
+    if (config.widgetType === 'build') {
+      return BuildWidget(config);
     }
 
     return StringWidget(config);
