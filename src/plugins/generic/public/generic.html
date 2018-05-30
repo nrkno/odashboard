@@ -44,7 +44,19 @@
       <p class="generic-timestamp">{{widget.timestamp}}</p>
     </div>
 
-    <!-- default widget -->
+    <!-- build widget -->
+    <div ng-switch-when="build">
+      <a href={{widget.url}} target="_blank">
+        <div class="buildWidget">
+            <h2>{{widget.name}}</h2>
+            <p>Started: <span class="buildTime">{{widget.started}}</span></p>
+            <p><span class="duration">Duration: </span><span class="buildDuration">{{widget.duration}} {{widget.percent}}</span></p>
+            <div class="status {{widget.class}}">{{widget.status}}</div>
+        </div>
+      </a>      
+    </div>
+
+    <!-- string widget -->
     <div ng-switch-when="string">
       <h2>{{widget.displayName}}</h2>
       <p class="generic-number">{{widget.value}}</p>
@@ -53,6 +65,7 @@
 
     <!-- default widget -->
     <div ng-switch-when="default">
+      ok
       <h2>{{widget.displayName}}</h2>
       <p class="generic-number">{{widget.value}}</p>
       <p class="generic-timestamp">{{widget.timestamp}}</p>
