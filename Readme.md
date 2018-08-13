@@ -99,7 +99,7 @@ The widgets can display data from the following datasources:
 | [JSON Endpoint](./src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
 | [Application insights](./src/plugins/sources/appinsights)| Info from app insights | 
 | [Azure service bus](./src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
-| [TeamCity](./src/plugins/sources/azureservicebus) | Returns TeamCity build information in a odashboard build message compatible with build widget |
+| [TeamCity](./src/plugins/sources/teamcity) | Returns TeamCity build information in a odashboard build message compatible with build widget |
 | [Google analytics](./src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
 | [RabbitMQ](./src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
