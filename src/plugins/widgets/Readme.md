@@ -9,6 +9,7 @@ The plugin currently supports these widgets:
 * [Number](number)
 * [Timestamp](timestamp)
 * [Queue](queue)
+* [Build](build)
 * [Pie chart](piechart)
 * [Line chart](linechart)
 
