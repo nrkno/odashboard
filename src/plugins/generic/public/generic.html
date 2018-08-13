@@ -46,14 +46,24 @@
 
     <!-- build widget -->
     <div ng-switch-when="build">
-      <a href={{widget.url}} target="_blank">
-        <div class="buildWidget">
-            <h2>{{widget.name}}</h2>
-            <p>Started: <span class="buildTime">{{widget.started}}</span></p>
-            <p><span class="duration">Duration: </span><span class="buildDuration">{{widget.duration}} {{widget.percent}}</span></p>
-            <div class="status {{widget.class}}">{{widget.status}}</div>
-        </div>
-      </a>      
+      <div ng-switch="widget.displayStyle">
+          <div ng-switch-when="small">
+              <div class="buildWidget smallBuild">
+                  <h2>{{widget.name}}</h2>
+                  <p><span class="buildTime">{{widget.started}}</span></p>
+                  <p><span class="duration"></span><span class="buildDuration">{{widget.duration}} {{widget.percent}}</span></p>
+                  <div class="status {{widget.class}}">{{widget.status}}</div>
+              </div>
+          </div>
+          <div ng-switch-default>
+              <div class="buildWidget">
+                  <h2>{{widget.name}}</h2>
+                  <p>Started: <span class="buildTime">{{widget.started}}</span></p>
+                  <p><span class="duration">Duration: </span><span class="buildDuration">{{widget.duration}} {{widget.percent}}</span></p>
+                  <div class="status {{widget.class}}">{{widget.status}}</div>
+              </div>
+          </div>
+      </div>      
     </div>
 
     <!-- string widget -->

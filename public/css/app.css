@@ -185,7 +185,6 @@ iframe {
   and (max-width: 1600px) {
 
     li.rowBlock {
-      min-width: 220px;
       min-height: 220px;
     }
 
