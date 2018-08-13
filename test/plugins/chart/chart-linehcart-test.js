@@ -1,6 +1,8 @@
 var assert = require('assert');
 var sinon = require('sinon');
 
+require('jsdom-global')();
+
 var LineChart = require('../../../src/plugins/chart/linechart');
 var Chart = require('chart.js');
 
