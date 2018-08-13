@@ -76,7 +76,6 @@ Below you find current list of available plugins. The generic plugin lets you co
 | Plugin | Description |
 |--------|-------------|
 |[Generic](./src/plugins/generic)|Generic plugin for combining data sources and widgets. This might be all you need! |
-|[TeamCity](./src/plugins/teamcity)|Display TeamCity build information
 |[IFrame](./src/plugins/iframe)|Embed an external web resource in an iframe|
 
 ### Generic plugin
@@ -87,7 +86,8 @@ The generic plugin makes it possible to use a wide range of widgets with a set o
 | [String](./src/plugins/widgets/string) | Show a string |
 | [Number](./src/plugins/widgets/number) | Show a number |
 | [Timestamp](./src/plugins/widgets/timestamp) | Show a timestamp | 
-| [Checkmark](./src/plugins/widgets/checkmark) | Show a checkmark | 
+| [Checkmark](./src/plugins/widgets/checkmark) | Show a checkmark |
+| [Build](./src/plugins/widgets/build) | Show build information from build tool | 
 | [Queue](./src/plugins/widgets/queue) | Show the numbers of messages on a queue (with color coded warning levels) |
 | [Pie chart](./src/plugins/widgets/piechart) | Draws a pie chart |
 | [Line chart](./src/plugins/widgets/linechart) | Draws a line chart |
@@ -99,6 +99,7 @@ The widgets can display data from the following datasources:
 | [JSON Endpoint](./src/plugins/sources/json-endpoint) | Returns JSON formatted data from an url |
 | [Application insights](./src/plugins/sources/appinsights)| Info from app insights | 
 | [Azure service bus](./src/plugins/sources/azureservicebus) | Returns number of messages on an Azure service bus topic |
+| [TeamCity](./src/plugins/sources/azureservicebus) | Returns TeamCity build information in a odashboard build message compatible with build widget |
 | [Google analytics](./src/plugins/sources/google-analytics)| Returns real time data from Google Analytics| 
 | [RabbitMQ](./src/plugins/sources/rabbitmq)| Returns number of messaages on a RabbitMq queue| 
 
