@@ -4,7 +4,7 @@
   "description": "Configurable dashboard with simple plugin architecture",
   "author": "NRK <opensource@nrk.no> (https://www.nrk.no/)",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "bin": {
     "odashboard": "bin/odashboard.js"
   },
