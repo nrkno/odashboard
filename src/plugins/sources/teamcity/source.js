@@ -25,13 +25,15 @@ var TeamCitySource = function() {
     var gettingRunningBuilds = teamCityRequest(datasource, buildPath, runningLocators);
     var gettingBuilds = teamCityRequest(datasource, buildPath, allBuildsLocators);
   
+    
     Promise.all([gettingRunningBuilds, gettingBuilds]).then(function (results) {
       var runningBuilds = JSON.parse(results[0]);
-      var builds = JSON.parse(results[1]);
+      var builds = JSON.parse(results[1]);      
       var lastBuilds = findLastBuilds(runningBuilds, builds);
-  
+    
       requestDetailedBuildData(datasource, lastBuilds)
         .then(function (data) {
+          
           var odashboardBuildMsg = transformToOdashoardBuildMsg(data);
           callback(odashboardBuildMsg);
         })
@@ -81,8 +83,7 @@ var TeamCitySource = function() {
       allBuilds = builds.build;
     }
   
-    var buildTypeIds = _.uniq(allBuilds, function (v) { return v.buildTypeId; }).map(function (v) { return v.buildTypeId; });
-  
+    var buildTypeIds = _.uniqBy(allBuilds, function (v) { return v.buildTypeId; }).map(function (v) { return v.buildTypeId; });
     latestBuilds = [];
     _.each(buildTypeIds, function (buildTypeId) {
       var thisBuilds = _.filter(allBuilds, function (v) { return v.buildTypeId == buildTypeId; });

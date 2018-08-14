@@ -31,6 +31,7 @@
     "httpntlm": "^1.6.1",
     "jsdom-global": "^3.0.2",
     "lodash": "^4.16.4",
+    "lookup-dns-cache": "^2.1.0",
     "moment": "^2.15.1",
     "request": "~2.83.0",
     "serve-favicon": "^2.3.0",

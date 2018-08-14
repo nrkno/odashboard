@@ -43,7 +43,7 @@ function findLastBuilds(runningBuilds, builds) {
     allBuilds = builds.build;
   }
 
-  var buildTypeIds = _.uniq(allBuilds, function (v) { return v.buildTypeId; }).map(function (v) { return v.buildTypeId; });
+  var buildTypeIds = _.uniqBy(allBuilds, function (v) { return v.buildTypeId; }).map(function (v) { return v.buildTypeId; });
 
   latestBuilds = [];
   _.each(buildTypeIds, function (buildTypeId) {

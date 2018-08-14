@@ -1,6 +1,7 @@
 var request = require('request'),
   ntlm = require('httpntlm'),
   util = require('util');
+const {lookup} = require('lookup-dns-cache');
 
 function get(url, auth, headers, timeout) {
   if(auth === undefined || auth === 'none') {
@@ -25,7 +26,8 @@ function getWithApiKey(url, headers, timeout, apiKey, headerName) {
     request({
       url: url,
       timeout: timeout,
-      headers: headers
+      headers: headers,
+      lookup: lookup
     }, function(error, response, body) {
       if (error) {
         if (error.code === 'ETIMEDOUT') {
@@ -48,7 +50,8 @@ function getNoAuth(url, headers, timeout) {
     request({
       url: url,
       timeout: timeout,
-      headers: headers
+      headers: headers,
+      lookup: lookup
     }, function (error, response, body) {
 
       if (error || (response.statusCode < 200 || response.statusCode > 300)) {
@@ -110,7 +113,8 @@ function getBasicAuth(url, headers, timeout, username, password) {
         'pass': password,
         'sendImmediately': false
       },
-      headers: headers
+      headers: headers,
+      lookup: lookup
     }, function(error, response, body) {
       if (error) {
         if (error.code === 'ETIMEDOUT') {
