@@ -20,7 +20,7 @@ var BuildWidget = function(config) {
   };
 
   function getDisplayStyle(config) {
-    if (config.options.displayStyle !== undefined) {
+    if (config.options && config.options.displayStyle !== undefined) {
       return config.options.displayStyle;
     } else {
       return 'standard';
@@ -28,7 +28,7 @@ var BuildWidget = function(config) {
   }
 
   function getWidth(config) {
-    if (config.options.displayStyle === 'small') {
+    if (config.options && config.options.displayStyle === 'small') {
       return '10%';
     } else {
       return config.width;

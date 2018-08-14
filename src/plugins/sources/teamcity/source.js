@@ -33,7 +33,6 @@ var TeamCitySource = function() {
       requestDetailedBuildData(datasource, lastBuilds)
         .then(function (data) {
           var odashboardBuildMsg = transformToOdashoardBuildMsg(data);
-          console.log(odashboardBuildMsg);
           callback(odashboardBuildMsg);
         })
         .catch(function (error) {
