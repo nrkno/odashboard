@@ -49,7 +49,7 @@ var BuildWidget = function(config) {
 
   function updateSmallWidget(build) {
     if (build.state == 'running') {
-      widget.status = '';
+      widget.status = '...';
       widget.class = 'inProgress';
       widget.percent = '(' + build.percent + '%)';
     } else {
