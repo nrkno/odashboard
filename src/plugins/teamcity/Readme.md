@@ -1,4 +1,6 @@
-﻿TeamCity plugin
+*DEPRECATED*. Use the [generic](../generic) plugin with the [teamcity](../sources/teamcity/) source and the [build](../widgets/build) widget instead.
+
+TeamCity plugin
 ====
 The TeamCity plugin can create widgets that display build information from a build configuration in TeamCity. The plugin use Basic Auth to authenticate a user.
 
