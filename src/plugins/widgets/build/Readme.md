@@ -1,6 +1,6 @@
 # Build widget
 
-The Build widget is compatible with generic sources that supply odashboard build-messages. Currently only the teamcity-source. Jenkis source will soon be available. It displays build status.
+The Build widget is compatible with generic sources that supply odashboard build-messages. Currently only the [teamcity-source](../../sources/teamcity). Jenkis source will soon be available. It displays build status.
 
 You can also specify a small widget by defining `options.displayStyle: 'small'`.
 
