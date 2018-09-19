@@ -53,6 +53,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/test', function(req, res) {
+  res.append('Content-Type', 'application/json')
   res.send(JSON.stringify({
     astring: 'Hello world' + Math.round(Math.random() * 100),
     number: Math.round(Math.random() * 100),

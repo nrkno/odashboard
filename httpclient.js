@@ -22,12 +22,16 @@ function get(url, auth, headers, timeout) {
 
 function getWithApiKey(url, headers, timeout, apiKey, headerName) {
   return new Promise(function (resolve, reject) {
+    var lu = lookup;
+    if (url.indexOf('http://localhost') > -1) {
+      lu = undefined;
+    }
     headers[headerName] = apiKey;
     request({
       url: url,
       timeout: timeout,
       headers: headers,
-      lookup: lookup
+      lookup: lu
     }, function(error, response, body) {
       if (error) {
         if (error.code === 'ETIMEDOUT') {
@@ -47,11 +51,15 @@ function getWithApiKey(url, headers, timeout, apiKey, headerName) {
 
 function getNoAuth(url, headers, timeout) {
   return new Promise(function (resolve, reject) {
+    var lu = lookup;
+    if (url.indexOf('http://localhost') > -1) {
+      lu = undefined;
+    }
     request({
       url: url,
       timeout: timeout,
       headers: headers,
-      lookup: lookup
+      lookup: lu
     }, function (error, response, body) {
 
       if (error || (response.statusCode < 200 || response.statusCode > 300)) {
@@ -105,6 +113,10 @@ function getNtlm(url, username, password, domain, workstation) {
 
 function getBasicAuth(url, headers, timeout, username, password) {
   return new Promise(function (resolve, reject) {
+    var lu = lookup;
+    if (url.indexOf('http://localhost') > -1) {
+      lu = undefined;
+    }
     request({
       url: url,
       timeout: timeout,
@@ -114,7 +126,7 @@ function getBasicAuth(url, headers, timeout, username, password) {
         'sendImmediately': false
       },
       headers: headers,
-      lookup: lookup
+      lookup: lu
     }, function(error, response, body) {
       if (error) {
         if (error.code === 'ETIMEDOUT') {
