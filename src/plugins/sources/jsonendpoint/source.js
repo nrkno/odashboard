@@ -15,7 +15,7 @@ var JsonEndpointSource = function() {
 
   source.refresh = function(datasource, callback) {
     var eventId = datasource.plugin + '.' + datasource.id;
-    httpclient.get(datasource.config.url, datasource.auth, {}, datasource.timeout)
+    httpclient.get(datasource.config.url, datasource.auth, {'Accept': 'application/json'}, datasource.timeout)
       .then(function (result) {
         if (callback && typeof(callback) === 'function') {
           callback(JSON.parse(result.body));

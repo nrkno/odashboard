@@ -51,5 +51,8 @@ For all generic widgets you need to specify the kind of widget to use with the *
   plugin: 'generic',
   widgetType: 'queue',
   displayName: 'Something',
-  fieldName: 'foo'
+  fieldName: 'foo',
+  transform: 'return json.count'
 ```
+
+`transform` lets you specify a javascript transform for the return value from the GET-request. It takes the return value as an input variable named `json`. Leave the `fieldName` out if you want to use the value directly.

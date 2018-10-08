@@ -89,8 +89,8 @@ var GenericPlugin = (function () {
   };
 
   function getTransform(transform) {
-    if (transform && typeof(transform) === 'function') {
-      return transform;
+    if (typeof transform != 'undefined' && transform !== '') {
+      return new Function('json', transform);
     }
 
     return _.identity;
@@ -98,6 +98,7 @@ var GenericPlugin = (function () {
 
   module.createWidget = function (config, socket) {
     var widget = this.createWidgetInstance(config, Chart);
+    console.log(widget.displayName + ' : ' + config.transform);
     widget.transform = getTransform(config.transform);
     setupListener(config, socket, widget);
     return widget;
