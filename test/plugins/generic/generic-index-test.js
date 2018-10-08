@@ -149,6 +149,30 @@ describe('Generic Plugin', function() {
     });
   });
 
+  it('should return valid checkmark widget with transform', function() {
+    var config = {
+      plugin: 'generic',
+      widgetType: 'checkmark',
+      datasourceId: 'MyDatasource',
+      displayName: 'Something',
+      fieldName: 'foo',
+      transform: 'return json.count === 3'
+    };
+
+    let mockSocket = {
+      on: function (a, b) {}
+    };
+
+    let widget = GenericPlugin.createWidget(config, mockSocket);
+    assert(widget.widgetType === 'checkmark');
+    assert(widget.plugin === 'generic');
+    assert(widget.datasourceId === config.datasourceId);
+    assert(widget.fieldName === config.fieldName);
+    assert(widget.update !== undefined);
+    assert(widget.transform !== undefined);
+    assert(widget.transform(JSON.parse('{"count": 3}')));
+  });
+
   describe('parseMsg', function() {
     
 
