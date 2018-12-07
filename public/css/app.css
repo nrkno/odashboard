@@ -151,7 +151,7 @@ iframe {
   width: 100%;
   height: 100%;
   z-index:1;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='500px' width='500px'><text x='10' y='10' fill='white' font-size='11'>❄</text><text x='250' y='250' fill='lightgrey' font-size='17'>*</text></svg>");
+  background-image: url("/img/snowflake3.png");
   animation: 
     snowx1 1.6s alternate infinite ease-in-out,
     snowy1 9s linear infinite;
@@ -177,7 +177,7 @@ iframe {
   width: 100%;
   height: 100%;
   z-index:1;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='600px' width='600px'><text x='40' y='45' fill='white' font-size='25'>❄</text><text x='320' y='290' fill='rgb(205,205,205)' font-size='15'>❄</text></svg>");
+  background-image: url("/img/snowflake2.png");
   animation: 
     snowx2 1.3s alternate infinite ease-in-out,
     snowy2 10s linear infinite;
@@ -203,7 +203,7 @@ iframe {
   width: 100%;
   height: 100%;
   z-index:1;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='700px' width='700px'><text x='40' y='45' fill='white' font-size='30'>.</text><text x='340' y='320' fill='rgb(205,205,205)' font-size='15'>*</text></svg>");
+  background-image: url("/img/snowflake1.png");
   animation: 
     snowx3 1.5s alternate infinite ease-in-out,
     snowy3 11s linear infinite;
