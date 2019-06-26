@@ -31,7 +31,6 @@ var AzureServiceBusPlugin = (function () {
 
   function setupListener(widget, socket) {
     var listenEvent = widget.plugin + '.' + widget.datasourceId;
-    console.log('listening for ' + listenEvent);
     socket.on(listenEvent, function (msg) {
       module.parseMsg(msg, widget);
     });

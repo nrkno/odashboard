@@ -98,7 +98,7 @@ var GenericPlugin = (function () {
 
   module.createWidget = function (config, socket) {
     var widget = this.createWidgetInstance(config, Chart);
-    console.log(widget.displayName + ' : ' + config.transform);
+    console.log(`Creating generic widget of type '${widget.widgetType}' with datasource '${widget.datasourceId}'.`);
     widget.transform = getTransform(config.transform);
     setupListener(config, socket, widget);
     return widget;

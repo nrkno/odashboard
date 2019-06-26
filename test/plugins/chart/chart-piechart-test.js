@@ -26,7 +26,7 @@ describe('PieChart plugin', function() {
     sandbox;
 
   beforeEach(function() {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     instance = PieChart(function() {
       return chartStub;
     });

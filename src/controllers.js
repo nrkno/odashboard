@@ -2,53 +2,55 @@ var app = require('./app');
 var config = require('../config/appconfig.js');
 var _ = require('lodash');
 
-var myController = app.controller('PluginController', function($rootScope, $scope, $interval, $timeout, $http, $location, $sce, socket) {
+var myController = app.controller('PluginController',
+  ['$rootScope', '$scope', '$interval', '$timeout', '$http', '$location', '$sce', 'socket',
+    function($rootScope, $scope, $interval, $timeout, $http, $location, $sce, socket) {
   
-  $http({
-    method: 'GET',
-    url: '/config/widgetconfig.js'
-  }).then(function successCallback(response) {
-    var widgetConfig = response.data;
-    $rootScope.title = widgetConfig.title;
-    var transformedConfig = transformConfig(widgetConfig);
-    $scope.tabs = parseRows(widgetConfig, $interval, $http, socket);
-    $scope.hasTabs = function () { return $scope.tabs.length > 1; };
-    if (widgetConfig.snow) {
-      var snowNode = document.createElement('div');
-      snowNode.setAttribute('id', 'snow');
-      document.body.appendChild(snowNode);
-    }
+      $http({
+        method: 'GET',
+        url: '/config/widgetconfig.js'
+      }).then(function successCallback(response) {
+        var widgetConfig = response.data;
+        $rootScope.title = widgetConfig.title;
+        var transformedConfig = transformConfig(widgetConfig);
+        $scope.tabs = parseRows(widgetConfig, $interval, $http, socket);
+        $scope.hasTabs = function () { return $scope.tabs.length > 1; };
+        if (widgetConfig.snow) {
+          var snowNode = document.createElement('div');
+          snowNode.setAttribute('id', 'snow');
+          document.body.appendChild(snowNode);
+        }
 
-    // Tab handling
-    var tabCycle;
-    $scope.isCycling = false;
-    $scope.tabIndex = 0;
-    $scope.hasTabs = function () { return $scope.tabs.length > 1; };
-    $scope.nextTab = function () { $scope.tabIndex = ($scope.tabIndex + 1) % $scope.tabs.length; };
-    $scope.prevTab = function () { $scope.tabIndex = ($scope.tabIndex - 1) % $scope.tabs.length; };
-    $scope.pauseTabCycle = function () {
-      if (!angular.isDefined(tabCycle)) return;
-      $interval.cancel(tabCycle);
-      $scope.isCycling = false;
-      tabCycle = undefined;
-    };
-    $scope.startTabCycle = function () {
-      if (angular.isDefined(tabCycle)) return;
-      $scope.isCycling = true;
-      tabCycle = $interval(function() {
-        $scope.nextTab();
-      }, config.tabCycleInterval);
-    };
+        // Tab handling
+        var tabCycle;
+        $scope.isCycling = false;
+        $scope.tabIndex = 0;
+        $scope.hasTabs = function () { return $scope.tabs.length > 1; };
+        $scope.nextTab = function () { $scope.tabIndex = ($scope.tabIndex + 1) % $scope.tabs.length; };
+        $scope.prevTab = function () { $scope.tabIndex = ($scope.tabIndex - 1) % $scope.tabs.length; };
+        $scope.pauseTabCycle = function () {
+          if (!angular.isDefined(tabCycle)) return;
+          $interval.cancel(tabCycle);
+          $scope.isCycling = false;
+          tabCycle = undefined;
+        };
+        $scope.startTabCycle = function () {
+          if (angular.isDefined(tabCycle)) return;
+          $scope.isCycling = true;
+          tabCycle = $interval(function() {
+            $scope.nextTab();
+          }, config.tabCycleInterval);
+        };
 
-    if(config.tabCycleAutoStart) {
-      $scope.startTabCycle();
-    }
-  }, function errorCallback(response) {
-    console.log('Could not find widget config');
-  });
+        if(config.tabCycleAutoStart) {
+          $scope.startTabCycle();
+        }
+      }, function errorCallback(response) {
+        console.log('Could not find widget config');
+      });
 
-  $scope.trustAsResourceUrl = $sce.trustAsResourceUrl;
-});
+      $scope.trustAsResourceUrl = $sce.trustAsResourceUrl;
+    }]);
 
 var pluginModules = {};
 

@@ -29,7 +29,7 @@ describe('LineChart widget', function() {
     sandbox;
 
   beforeEach(function() {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     instance = LineChart(function () {
       return chartStub;
     });

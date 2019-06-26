@@ -25,7 +25,7 @@ describe('LineChart plugin', function() {
     stub;
 
   beforeEach(function() {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
 
   before(function() {
